@@ -10,9 +10,12 @@
 		60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4527D7503700F1B845 /* AppDelegate.swift */; };
 		60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4727D7503700F1B845 /* SceneDelegate.swift */; };
 		60142F4A27D7503700F1B845 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4927D7503700F1B845 /* ViewController.swift */; };
-		60142F4D27D7503700F1B845 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60142F4B27D7503700F1B845 /* Main.storyboard */; };
 		60142F4F27D7503900F1B845 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60142F4E27D7503900F1B845 /* Assets.xcassets */; };
 		60142F5227D7503900F1B845 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60142F5027D7503900F1B845 /* LaunchScreen.storyboard */; };
+		60142FA527DD0F4800F1B845 /* LeagueSpartan-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA227DD0EF200F1B845 /* LeagueSpartan-Regular.ttf */; };
+		60142FA627DD0F4E00F1B845 /* LeagueSpartan-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA327DD0EFC00F1B845 /* LeagueSpartan-Bold.ttf */; };
+		60142FA727DD0F5100F1B845 /* LeagueSpartan-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */; };
+		60142FA927DD171F00F1B845 /* LeagueSpartan-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,10 +23,13 @@
 		60142F4527D7503700F1B845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60142F4727D7503700F1B845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		60142F4927D7503700F1B845 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		60142F4C27D7503700F1B845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		60142F4E27D7503900F1B845 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60142F5127D7503900F1B845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60142F5327D7503900F1B845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		60142FA227DD0EF200F1B845 /* LeagueSpartan-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Regular.ttf"; sourceTree = "<group>"; };
+		60142FA327DD0EFC00F1B845 /* LeagueSpartan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Bold.ttf"; sourceTree = "<group>"; };
+		60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-ExtraLight.ttf"; sourceTree = "<group>"; };
+		60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Light.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +62,26 @@
 		60142F4427D7503700F1B845 /* Werdd */ = {
 			isa = PBXGroup;
 			children = (
+				60142FA127DD0EDD00F1B845 /* Fonts */,
 				60142F4527D7503700F1B845 /* AppDelegate.swift */,
 				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
 				60142F4927D7503700F1B845 /* ViewController.swift */,
-				60142F4B27D7503700F1B845 /* Main.storyboard */,
 				60142F4E27D7503900F1B845 /* Assets.xcassets */,
 				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
 				60142F5327D7503900F1B845 /* Info.plist */,
 			);
 			path = Werdd;
+			sourceTree = "<group>";
+		};
+		60142FA127DD0EDD00F1B845 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				60142FA227DD0EF200F1B845 /* LeagueSpartan-Regular.ttf */,
+				60142FA327DD0EFC00F1B845 /* LeagueSpartan-Bold.ttf */,
+				60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */,
+				60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,9 +142,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60142FA627DD0F4E00F1B845 /* LeagueSpartan-Bold.ttf in Resources */,
+				60142FA727DD0F5100F1B845 /* LeagueSpartan-ExtraLight.ttf in Resources */,
+				60142FA527DD0F4800F1B845 /* LeagueSpartan-Regular.ttf in Resources */,
 				60142F5227D7503900F1B845 /* LaunchScreen.storyboard in Resources */,
+				60142FA927DD171F00F1B845 /* LeagueSpartan-Light.ttf in Resources */,
 				60142F4F27D7503900F1B845 /* Assets.xcassets in Resources */,
-				60142F4D27D7503700F1B845 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +167,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		60142F4B27D7503700F1B845 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				60142F4C27D7503700F1B845 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		60142F5027D7503900F1B845 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -294,7 +306,6 @@
 				INFOPLIST_FILE = Werdd/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -322,7 +333,6 @@
 				INFOPLIST_FILE = Werdd/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
