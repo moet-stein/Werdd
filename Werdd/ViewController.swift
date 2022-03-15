@@ -107,6 +107,29 @@ class ViewController: UIViewController {
         return label
     }()
     
+    let buttonWrapper: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .systemCyan
+        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        view.widthAnchor.constraint(equalToConstant: 280).isActive = true
+        return view
+    }()
+    
+    
+    let randomWordButton: UIButton = {
+      let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold, scale: .medium)
+        let randomImage = UIImage(systemName: "arrow.clockwise.circle",withConfiguration: config)
+        button.tintColor =  UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        button.setImage(randomImage, for: .normal)
+//        button.widthAnchor.constraint(equalToConstant: 275).isActive = true
+        button.contentHorizontalAlignment = .right
+        button.addTarget(self, action: #selector(printHello), for: .touchUpInside)
+        return button
+    }()
+    
     
 
     override func viewDidLoad() {
@@ -125,6 +148,9 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func printHello(sender: UIButton!) {
+        print("Hello")
+    }
     
     func setUpUI() {
         createOutsideStackView()
@@ -156,12 +182,23 @@ class ViewController: UIViewController {
             cardInsideStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
             cardInsideStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10),
             cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
-            cardInsideStackView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.5),
-//            cardInsideStackView.widthAnchor.constraint(equalTo: cardView.widthAnchor),
+//            cardInsideStackView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.6)
+            cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
-        
+    
         cardInsideStackView.addArrangedSubview(horizontalStackView)
         cardInsideStackView.addArrangedSubview(definitionLabel)
+        cardInsideStackView.addArrangedSubview(buttonWrapper)
+        
+        buttonWrapper.addSubview(randomWordButton)
+        NSLayoutConstraint.activate([
+            randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),
+//            randomWordButton.leadingAnchor.constraint(equalTo: buttonWrapper.leadingAnchor),
+            randomWordButton.trailingAnchor.constraint(equalTo: buttonWrapper.trailingAnchor),
+            randomWordButton.bottomAnchor.constraint(equalTo: buttonWrapper.bottomAnchor),
+            randomWordButton.heightAnchor.constraint(equalTo: buttonWrapper.heightAnchor)
+        ])
+
     }
     
     func createWordHorizontalStackView() {
