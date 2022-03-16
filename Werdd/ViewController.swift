@@ -8,6 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let words = Words().words
+    
+    var word = ""
+    var category = ""
+    var definition = ""
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -28,6 +33,7 @@ class ViewController: UIViewController {
     
     let titleLabel: UILabel = {
         let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Werdd."
         label.textAlignment = .left
         label.widthAnchor.constraint(equalToConstant: 300).isActive = true
@@ -111,7 +117,7 @@ class ViewController: UIViewController {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
 //        view.backgroundColor = .systemCyan
-        view.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.widthAnchor.constraint(equalToConstant: 280).isActive = true
         return view
     }()
@@ -124,9 +130,8 @@ class ViewController: UIViewController {
         let randomImage = UIImage(systemName: "arrow.clockwise.circle",withConfiguration: config)
         button.tintColor =  UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
         button.setImage(randomImage, for: .normal)
-//        button.widthAnchor.constraint(equalToConstant: 275).isActive = true
         button.contentHorizontalAlignment = .right
-        button.addTarget(self, action: #selector(printHello), for: .touchUpInside)
+        button.addTarget(self, action:#selector(refreshCard), for: .touchUpInside)
         return button
     }()
     
@@ -148,8 +153,15 @@ class ViewController: UIViewController {
         
     }
     
-    @objc func printHello(sender: UIButton!) {
-        print("Hello")
+    @objc func refreshCard() {
+        let randomInt = Int.random(in: 0..<words.count)
+        word = words[randomInt].word
+        wordLabel.text = word
+        category = words[randomInt].category
+        categoryLabel.text = category
+        definition = words[randomInt].definition
+        definitionLabel.text = definition
+        
     }
     
     func setUpUI() {
@@ -161,7 +173,7 @@ class ViewController: UIViewController {
         scrollView.addSubview(outerVerticalStackView)
         
         NSLayoutConstraint.activate([
-            outerVerticalStackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 60),
+            outerVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             outerVerticalStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             outerVerticalStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             outerVerticalStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.3),
@@ -195,8 +207,7 @@ class ViewController: UIViewController {
             randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),
 //            randomWordButton.leadingAnchor.constraint(equalTo: buttonWrapper.leadingAnchor),
             randomWordButton.trailingAnchor.constraint(equalTo: buttonWrapper.trailingAnchor),
-            randomWordButton.bottomAnchor.constraint(equalTo: buttonWrapper.bottomAnchor),
-            randomWordButton.heightAnchor.constraint(equalTo: buttonWrapper.heightAnchor)
+//            randomWordButton.heightAnchor.constraint(equalTo: buttonWrapper.heightAnchor)
         ])
 
     }
