@@ -1,18 +1,40 @@
 //
-//  ViewController.swift
+//  ContentView.swift
 //  Werdd
 //
-//  Created by Moe Steinmueller on 08.03.22.
+//  Created by Moe Steinmueller on 16.03.22.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class ContentView: UIView {
+    
     let words = Words().words
     
     var word = ""
     var category = ""
     var definition = ""
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(scrollView)
+        
+        NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+        
+        setUpUI()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -134,24 +156,7 @@ class ViewController: UIViewController {
         button.addTarget(self, action:#selector(refreshCard), for: .touchUpInside)
         return button
     }()
-    
-    
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.addSubview(scrollView)
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-        
-        setUpUI()
-        
-    }
     
     @objc func refreshCard() {
         let randomInt = Int.random(in: 0..<words.count)
@@ -173,11 +178,11 @@ class ViewController: UIViewController {
         scrollView.addSubview(outerVerticalStackView)
         
         NSLayoutConstraint.activate([
-            outerVerticalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            outerVerticalStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
             outerVerticalStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             outerVerticalStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             outerVerticalStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.3),
-            outerVerticalStackView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            outerVerticalStackView.widthAnchor.constraint(equalTo: widthAnchor),
             outerVerticalStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 40)
         ])
         
@@ -194,7 +199,6 @@ class ViewController: UIViewController {
             cardInsideStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
             cardInsideStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10),
             cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
-//            cardInsideStackView.heightAnchor.constraint(equalTo: cardView.heightAnchor, multiplier: 0.6)
             cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
     
@@ -205,9 +209,7 @@ class ViewController: UIViewController {
         buttonWrapper.addSubview(randomWordButton)
         NSLayoutConstraint.activate([
             randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),
-//            randomWordButton.leadingAnchor.constraint(equalTo: buttonWrapper.leadingAnchor),
             randomWordButton.trailingAnchor.constraint(equalTo: buttonWrapper.trailingAnchor),
-//            randomWordButton.heightAnchor.constraint(equalTo: buttonWrapper.heightAnchor)
         ])
 
     }
@@ -216,6 +218,5 @@ class ViewController: UIViewController {
         horizontalStackView.addArrangedSubview(wordLabel)
         horizontalStackView.addArrangedSubview(categoryLabel)
     }
+
 }
-
-
