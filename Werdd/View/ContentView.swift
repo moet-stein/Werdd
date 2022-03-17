@@ -14,7 +14,7 @@ class ContentView: UIView {
     var word = ""
     var category = ""
     var definition = ""
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -48,8 +48,7 @@ class ContentView: UIView {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.alignment = .center
-//        stackView.distribution = .fillProportionally
-        stackView.spacing = 10
+        stackView.distribution = .fillProportionally
         return stackView
     }()
     
@@ -61,7 +60,7 @@ class ContentView: UIView {
         label.widthAnchor.constraint(equalToConstant: 300).isActive = true
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
         label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
-//        label.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        //        label.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return label
     }()
     
@@ -69,10 +68,6 @@ class ContentView: UIView {
         let roundedView = UIView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
-        roundedView.layer.shadowColor = UIColor.gray.cgColor
-        roundedView.layer.shadowOpacity = 0.6
-        roundedView.layer.shadowOffset = .zero
-        roundedView.layer.shadowRadius = 20
         roundedView.widthAnchor.constraint(equalToConstant: 300).isActive = true
         roundedView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         roundedView.layer.cornerRadius = 20
@@ -85,7 +80,7 @@ class ContentView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-//        stackView.spacing = 5
+        //        stackView.spacing = 5
         return stackView
     }()
     
@@ -138,25 +133,24 @@ class ContentView: UIView {
     let buttonWrapper: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-//        view.backgroundColor = .systemCyan
+        //        view.backgroundColor = .systemCyan
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.widthAnchor.constraint(equalToConstant: 280).isActive = true
         return view
     }()
     
     
-    let randomWordButton: UIButton = {
-      let button = UIButton()
+    lazy var randomWordButton: UIButton = {
+        let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold, scale: .medium)
         let randomImage = UIImage(systemName: "arrow.clockwise.circle",withConfiguration: config)
         button.tintColor =  UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
         button.setImage(randomImage, for: .normal)
-        button.contentHorizontalAlignment = .right
         button.addTarget(self, action:#selector(refreshCard), for: .touchUpInside)
         return button
     }()
-
+    
     
     @objc func refreshCard() {
         let randomInt = Int.random(in: 0..<words.count)
@@ -169,12 +163,12 @@ class ContentView: UIView {
         
     }
     
-    func setUpUI() {
+    private func setUpUI() {
         createOutsideStackView()
         createCardInsideView()
     }
     
-    func createOutsideStackView() {
+    private func createOutsideStackView() {
         scrollView.addSubview(outerVerticalStackView)
         
         NSLayoutConstraint.activate([
@@ -190,7 +184,7 @@ class ContentView: UIView {
         outerVerticalStackView.addArrangedSubview(cardView)
     }
     
-    func createCardInsideView() {
+    private func createCardInsideView() {
         createWordHorizontalStackView()
         
         cardView.addSubview(cardInsideStackView)
@@ -201,7 +195,7 @@ class ContentView: UIView {
             cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
             cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
-    
+        
         cardInsideStackView.addArrangedSubview(horizontalStackView)
         cardInsideStackView.addArrangedSubview(definitionLabel)
         cardInsideStackView.addArrangedSubview(buttonWrapper)
@@ -211,12 +205,12 @@ class ContentView: UIView {
             randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),
             randomWordButton.trailingAnchor.constraint(equalTo: buttonWrapper.trailingAnchor),
         ])
-
+        
     }
     
-    func createWordHorizontalStackView() {
+    private func createWordHorizontalStackView() {
         horizontalStackView.addArrangedSubview(wordLabel)
         horizontalStackView.addArrangedSubview(categoryLabel)
     }
-
+    
 }
