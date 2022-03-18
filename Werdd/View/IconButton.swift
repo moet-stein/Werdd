@@ -9,12 +9,12 @@ import UIKit
 
 class IconButton: UIButton {
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layer.cornerRadius = bounds.size.height / 2
-        clipsToBounds = true
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        
+//        layer.cornerRadius = bounds.size.height / 2
+//        clipsToBounds = true
+//    }
 
     //designated initializer
     override init(frame: CGRect) {
