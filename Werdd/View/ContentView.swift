@@ -140,13 +140,9 @@ class ContentView: UIView {
     }()
     
     
-    lazy var randomWordButton: UIButton = {
-        let button = UIButton()
+    lazy var randomWordButton: IconButton = {
+        let button = IconButton(size: 25, systemName: "arrow.clockwise.circle", tintColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00))
         button.translatesAutoresizingMaskIntoConstraints = false
-        let config = UIImage.SymbolConfiguration(pointSize: 25, weight: .bold, scale: .medium)
-        let randomImage = UIImage(systemName: "arrow.clockwise.circle",withConfiguration: config)
-        button.tintColor =  UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
-        button.setImage(randomImage, for: .normal)
         button.addTarget(self, action:#selector(refreshCard), for: .touchUpInside)
         return button
     }()

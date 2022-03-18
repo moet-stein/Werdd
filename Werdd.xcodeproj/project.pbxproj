@@ -19,6 +19,7 @@
 		605C805D27E1EC54002EB0BA /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Words.swift */; };
 		605C805F27E1EDD2002EB0BA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805E27E1EDD2002EB0BA /* Word.swift */; };
 		605C808827E21EF8002EB0BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C808727E21EF8002EB0BA /* ContentView.swift */; };
+		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		605C805C27E1EC54002EB0BA /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		605C805E27E1EDD2002EB0BA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		605C808727E21EF8002EB0BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			children = (
 				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
 				605C808727E21EF8002EB0BA /* ContentView.swift */,
+				6068CAD627E4C96600DC30E3 /* IconButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				60142F4A27D7503700F1B845 /* ViewController.swift in Sources */,
 				605C805D27E1EC54002EB0BA /* Words.swift in Sources */,
+				6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */,
 				605C808827E21EF8002EB0BA /* ContentView.swift in Sources */,
 				60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */,
 				60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */,
