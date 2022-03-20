@@ -24,7 +24,7 @@ class ContentView: UIView {
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
         
         setUpUI()
@@ -43,14 +43,14 @@ class ContentView: UIView {
         return scrollView
     }()
     
-    let outerVerticalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.alignment = .center
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
+//    let outerVerticalStackView: UIStackView = {
+//        let stackView = UIStackView()
+//        stackView.translatesAutoresizingMaskIntoConstraints = false
+//        stackView.axis = .vertical
+//        stackView.alignment = .center
+//        stackView.distribution = .fillProportionally
+//        return stackView
+//    }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
@@ -68,8 +68,8 @@ class ContentView: UIView {
         let roundedView = UIView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
-        roundedView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        roundedView.heightAnchor.constraint(equalToConstant: 180).isActive = true
+//        roundedView.widthAnchor.constraint(equalToConstant: 300).isActive = true
+//        roundedView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         roundedView.layer.cornerRadius = 20
         return roundedView
     }()
@@ -147,6 +147,14 @@ class ContentView: UIView {
         return button
     }()
     
+    // MARK: - TableView
+    
+    let wordsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     
     @objc func refreshCard() {
         let randomInt = Int.random(in: 0..<words.count)
@@ -156,34 +164,37 @@ class ContentView: UIView {
         categoryLabel.text = category
         definition = words[randomInt].definition
         definitionLabel.text = definition
-        
     }
     
     private func setUpUI() {
-        createOutsideStackView()
+        createOuterComponents()
         createCardInsideView()
     }
     
-    private func createOutsideStackView() {
-        scrollView.addSubview(outerVerticalStackView)
+    private func createOuterComponents() {
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(cardView)
         
         NSLayoutConstraint.activate([
-            outerVerticalStackView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
-            outerVerticalStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            outerVerticalStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            outerVerticalStackView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, multiplier: 0.3),
-            outerVerticalStackView.widthAnchor.constraint(equalTo: widthAnchor),
-            outerVerticalStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: 40)
+            titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
+            titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
+            titleLabel.heightAnchor.constraint(equalToConstant: 45),
+            
+            cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+            cardView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
+            cardView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
+            cardView.heightAnchor.constraint(equalToConstant: 180)
         ])
-        
-        outerVerticalStackView.addArrangedSubview(titleLabel)
-        outerVerticalStackView.addArrangedSubview(cardView)
+
     }
     
     private func createCardInsideView() {
         createWordHorizontalStackView()
         
         cardView.addSubview(cardInsideStackView)
+       
         
         NSLayoutConstraint.activate([
             cardInsideStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
@@ -195,7 +206,7 @@ class ContentView: UIView {
         cardInsideStackView.addArrangedSubview(horizontalStackView)
         cardInsideStackView.addArrangedSubview(definitionLabel)
         cardInsideStackView.addArrangedSubview(buttonWrapper)
-        
+
         buttonWrapper.addSubview(randomWordButton)
         NSLayoutConstraint.activate([
             randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),

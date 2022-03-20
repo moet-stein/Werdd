@@ -11,7 +11,7 @@ class IconButton: UIButton {
     
 //    override func layoutSubviews() {
 //        super.layoutSubviews()
-//        
+//
 //        layer.cornerRadius = bounds.size.height / 2
 //        clipsToBounds = true
 //    }
@@ -30,8 +30,8 @@ class IconButton: UIButton {
         self.init(frame: .zero)
         
         let config = UIImage.SymbolConfiguration(pointSize: size, weight: .bold, scale: .medium)
-        let randomImage = UIImage(systemName: systemName,withConfiguration: config)
-        self.tintColor =  tintColor
+        let randomImage = UIImage(systemName: systemName, withConfiguration: config)
+        self.tintColor = tintColor
         self.setImage(randomImage, for: .normal)
     }
 
