@@ -9,7 +9,7 @@ import UIKit
 
 class ContentView: UIView {
     
-    let words = Words().words
+    let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     var word = ""
     var category = ""
@@ -29,6 +29,9 @@ class ContentView: UIView {
         
         setUpUI()
         
+        wordsTableView.delegate = self
+        wordsTableView.dataSource = self
+        
     }
     
     required init?(coder: NSCoder) {
@@ -40,27 +43,17 @@ class ContentView: UIView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(red: 0.83, green: 0.89, blue: 0.80, alpha: 1.00)
+//        scrollView.contentSize = frame.size
         return scrollView
     }()
-    
-//    let outerVerticalStackView: UIStackView = {
-//        let stackView = UIStackView()
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.axis = .vertical
-//        stackView.alignment = .center
-//        stackView.distribution = .fillProportionally
-//        return stackView
-//    }()
     
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Werdd."
         label.textAlignment = .left
-        label.widthAnchor.constraint(equalToConstant: 300).isActive = true
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
         label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
-        //        label.heightAnchor.constraint(equalToConstant: 60).isActive = true
         return label
     }()
     
@@ -68,8 +61,6 @@ class ContentView: UIView {
         let roundedView = UIView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
-//        roundedView.widthAnchor.constraint(equalToConstant: 300).isActive = true
-//        roundedView.heightAnchor.constraint(equalToConstant: 180).isActive = true
         roundedView.layer.cornerRadius = 20
         return roundedView
     }()
@@ -80,7 +71,6 @@ class ContentView: UIView {
         stackView.axis = .vertical
         stackView.alignment = .leading
         stackView.distribution = .fillProportionally
-        //        stackView.spacing = 5
         return stackView
     }()
     
@@ -133,7 +123,6 @@ class ContentView: UIView {
     let buttonWrapper: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        //        view.backgroundColor = .systemCyan
         view.heightAnchor.constraint(equalToConstant: 30).isActive = true
         view.widthAnchor.constraint(equalToConstant: 280).isActive = true
         return view
@@ -152,8 +141,11 @@ class ContentView: UIView {
     let wordsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.layer.cornerRadius = 20
         return tableView
     }()
+
     
     
     @objc func refreshCard() {
@@ -174,20 +166,26 @@ class ContentView: UIView {
     private func createOuterComponents() {
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(cardView)
+        scrollView.addSubview(wordsTableView)
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 30),
             titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
             titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
             titleLabel.heightAnchor.constraint(equalToConstant: 45),
             
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            cardView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-            cardView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-            cardView.heightAnchor.constraint(equalToConstant: 180)
+            cardView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 8),
+            cardView.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -8),
+            cardView.heightAnchor.constraint(equalToConstant: 180),
+            
+            wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
+            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            wordsTableView.heightAnchor.constraint(equalToConstant: 700),
+            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
-
     }
     
     private func createCardInsideView() {
@@ -221,3 +219,23 @@ class ContentView: UIView {
     }
     
 }
+
+
+
+extension ContentView : UITableViewDelegate,  UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return words.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        var content = cell.defaultContentConfiguration()
+        content.text = words[indexPath.row].word
+        content.secondaryText = words[indexPath.row].definition
+        cell.contentConfiguration = content
+        return cell
+    }
+    
+    
+}
+
