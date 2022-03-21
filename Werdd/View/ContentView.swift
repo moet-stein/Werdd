@@ -43,7 +43,6 @@ class ContentView: UIView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(red: 0.83, green: 0.89, blue: 0.80, alpha: 1.00)
-//        scrollView.contentSize = frame.size
         return scrollView
     }()
     
@@ -196,8 +195,8 @@ class ContentView: UIView {
         
         NSLayoutConstraint.activate([
             cardInsideStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
-            cardInsideStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 10),
-            cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
+            cardInsideStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
+            cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
             cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
         
@@ -233,6 +232,7 @@ extension ContentView : UITableViewDelegate,  UITableViewDataSource {
         content.text = words[indexPath.row].word
         content.secondaryText = words[indexPath.row].definition
         cell.contentConfiguration = content
+        cell.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
         return cell
     }
     
