@@ -42,7 +42,7 @@ class ContentView: UIView {
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = UIColor(red: 0.83, green: 0.89, blue: 0.80, alpha: 1.00)
+        scrollView.backgroundColor = UIColor(named: "LightGreen")
         return scrollView
     }()
     
@@ -52,14 +52,14 @@ class ContentView: UIView {
         label.text = "Werdd."
         label.textAlignment = .left
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
-        label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        label.textColor = UIColor(named: "DarkGreen")
         return label
     }()
     
     let cardView: UIView = {
         let roundedView = UIView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
-        roundedView.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
+        roundedView.backgroundColor = UIColor(named: "ViewLightYellow")
         roundedView.layer.cornerRadius = 20
         return roundedView
     }()
@@ -88,7 +88,7 @@ class ContentView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 30)
-        label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.preferredMaxLayoutWidth = 180
@@ -100,7 +100,7 @@ class ContentView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-ExtraLight", size: 20)
-        label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        label.textColor = UIColor(named: "DarkGreen")
         label.text = "noun"
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
@@ -112,7 +112,7 @@ class ContentView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "craeting a sequence of instructions to enable the computer to do something"
         label.font = UIFont(name: "LeagueSpartan-Light", size: 17)
-        label.textColor = UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byTruncatingTail
         label.numberOfLines = 0
         label.textAlignment = .left
@@ -232,7 +232,7 @@ extension ContentView : UITableViewDelegate,  UITableViewDataSource {
         content.text = words[indexPath.row].word
         content.secondaryText = words[indexPath.row].definition
         cell.contentConfiguration = content
-        cell.backgroundColor = UIColor(red: 0.96, green: 0.93, blue: 0.86, alpha: 1.00)
+        cell.backgroundColor = UIColor(named: "ViewLightYellow")
         return cell
     }
     
