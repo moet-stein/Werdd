@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4527D7503700F1B845 /* AppDelegate.swift */; };
 		60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4727D7503700F1B845 /* SceneDelegate.swift */; };
-		60142F4A27D7503700F1B845 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4927D7503700F1B845 /* ViewController.swift */; };
+		60142F4A27D7503700F1B845 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60142F4927D7503700F1B845 /* HomeViewController.swift */; };
 		60142F4F27D7503900F1B845 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 60142F4E27D7503900F1B845 /* Assets.xcassets */; };
 		60142F5227D7503900F1B845 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 60142F5027D7503900F1B845 /* LaunchScreen.storyboard */; };
 		60142FA527DD0F4800F1B845 /* LeagueSpartan-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA227DD0EF200F1B845 /* LeagueSpartan-Regular.ttf */; };
@@ -18,7 +18,6 @@
 		60142FA927DD171F00F1B845 /* LeagueSpartan-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */; };
 		605C805D27E1EC54002EB0BA /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Words.swift */; };
 		605C805F27E1EDD2002EB0BA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805E27E1EDD2002EB0BA /* Word.swift */; };
-		605C808827E21EF8002EB0BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C808727E21EF8002EB0BA /* ContentView.swift */; };
 		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +25,7 @@
 		60142F4227D7503700F1B845 /* Werdd.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Werdd.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		60142F4527D7503700F1B845 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		60142F4727D7503700F1B845 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		60142F4927D7503700F1B845 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		60142F4927D7503700F1B845 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		60142F4E27D7503900F1B845 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		60142F5127D7503900F1B845 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		60142F5327D7503900F1B845 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -36,7 +35,6 @@
 		60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Light.ttf"; sourceTree = "<group>"; };
 		605C805C27E1EC54002EB0BA /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		605C805E27E1EDD2002EB0BA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		605C808727E21EF8002EB0BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,7 +71,7 @@
 				605C805B27E1EC37002EB0BA /* Model */,
 				605C808627E21ED3002EB0BA /* View */,
 				605C808927E21F0F002EB0BA /* Controller */,
-				60142FA127DD0EDD00F1B845 /* Fonts */,
+				60142FA127DD0EDD00F1B845 /* LeagueSpartan */,
 				60142F4527D7503700F1B845 /* AppDelegate.swift */,
 				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
 				60142F4E27D7503900F1B845 /* Assets.xcassets */,
@@ -82,7 +80,7 @@
 			path = Werdd;
 			sourceTree = "<group>";
 		};
-		60142FA127DD0EDD00F1B845 /* Fonts */ = {
+		60142FA127DD0EDD00F1B845 /* LeagueSpartan */ = {
 			isa = PBXGroup;
 			children = (
 				60142FA227DD0EF200F1B845 /* LeagueSpartan-Regular.ttf */,
@@ -90,7 +88,7 @@
 				60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */,
 				60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */,
 			);
-			path = Fonts;
+			path = LeagueSpartan;
 			sourceTree = "<group>";
 		};
 		605C805B27E1EC37002EB0BA /* Model */ = {
@@ -106,7 +104,6 @@
 			isa = PBXGroup;
 			children = (
 				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
-				605C808727E21EF8002EB0BA /* ContentView.swift */,
 				6068CAD627E4C96600DC30E3 /* IconButton.swift */,
 			);
 			path = View;
@@ -115,7 +112,7 @@
 		605C808927E21F0F002EB0BA /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				60142F4927D7503700F1B845 /* ViewController.swift */,
+				60142F4927D7503700F1B845 /* HomeViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,10 +191,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				60142F4A27D7503700F1B845 /* ViewController.swift in Sources */,
+				60142F4A27D7503700F1B845 /* HomeViewController.swift in Sources */,
 				605C805D27E1EC54002EB0BA /* Words.swift in Sources */,
 				6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */,
-				605C808827E21EF8002EB0BA /* ContentView.swift in Sources */,
 				60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */,
 				60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */,
 				605C805F27E1EDD2002EB0BA /* Word.swift in Sources */,
