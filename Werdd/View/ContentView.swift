@@ -29,7 +29,7 @@ class ContentView: UIView {
         
         setUpUI()
         
-        wordsTableView.delegate = self
+//        wordsTableView.delegate = self
         wordsTableView.dataSource = self
         
     }
@@ -142,6 +142,7 @@ class ContentView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.layer.cornerRadius = 20
+        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         return tableView
     }()
 
@@ -169,7 +170,7 @@ class ContentView: UIView {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 30),
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 45),
             titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
             titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
             titleLabel.heightAnchor.constraint(equalToConstant: 45),
@@ -182,7 +183,7 @@ class ContentView: UIView {
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
             wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            wordsTableView.heightAnchor.constraint(equalToConstant: 700),
+            wordsTableView.heightAnchor.constraint(equalToConstant: 520),
             wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
@@ -221,13 +222,17 @@ class ContentView: UIView {
 
 
 
-extension ContentView : UITableViewDelegate,  UITableViewDataSource {
+extension ContentView : UITableViewDataSource{
+    //datasource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return words.count
     }
-    
+    //datasource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+            return UITableViewCell()
+        }
         var content = cell.defaultContentConfiguration()
         content.text = words[indexPath.row].word
         content.secondaryText = words[indexPath.row].definition
@@ -239,3 +244,6 @@ extension ContentView : UITableViewDelegate,  UITableViewDataSource {
     
 }
 
+extension ContentView : UITableViewDelegate {
+
+}
