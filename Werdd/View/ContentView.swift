@@ -170,10 +170,10 @@ class ContentView: UIView {
         
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 45),
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
             titleLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
-            titleLabel.heightAnchor.constraint(equalToConstant: 45),
+            titleLabel.heightAnchor.constraint(equalToConstant: 35),
             
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             cardView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor, constant: 8),
@@ -229,12 +229,26 @@ extension ContentView : UITableViewDataSource{
     }
     //datasource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
             return UITableViewCell()
         }
         var content = cell.defaultContentConfiguration()
         content.text = words[indexPath.row].word
+        
+        if let font = UIFont(name: "LeagueSpartan-Bold", size: 22) {
+            content.textProperties.font = font
+        }
+        
+        if let fontColor = UIColor(named: "DarkGreen") {
+            content.textProperties.color = fontColor
+            content.secondaryTextProperties.color = fontColor
+        }
+        
+        if let secondFont = UIFont(name: "LeagueSpartan-ExtraLight", size: 17) {
+            content.secondaryTextProperties.font = secondFont
+        }
+
         content.secondaryText = words[indexPath.row].definition
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
