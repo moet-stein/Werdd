@@ -11,10 +11,6 @@ class HomeViewController: UIViewController {
     
     let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
-    var word = ""
-    var category = ""
-    var definition = ""
-    
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -105,9 +101,12 @@ class HomeViewController: UIViewController {
     
     
     lazy var randomWordButton: IconButton = {
-        let button = IconButton(size: 25, systemName: "arrow.clockwise.circle", tintColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00))
+        let button = IconButton(
+            size: 25,
+            systemName: "arrow.clockwise.circle",
+            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00),
+            completion: refreshCard)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action:#selector(refreshCard), for: .touchUpInside)
         return button
     }()
     
@@ -121,33 +120,18 @@ class HomeViewController: UIViewController {
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         return tableView
     }()
-
     
-    
-    @objc func refreshCard() {
-        let randomInt = Int.random(in: 0..<words.count)
-        word = words[randomInt].word
-        wordLabel.text = word
-        category = words[randomInt].category
-        categoryLabel.text = category
-        definition = words[randomInt].definition
-        definitionLabel.text = definition
+    func refreshCard() {
+        let randomWord = words.randomElement()
+        wordLabel.text = randomWord?.word
+        categoryLabel.text = randomWord?.category
+        definitionLabel.text = randomWord?.definition
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(scrollView)
-        
-        NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
-        
+
         setUpUI()
-        
         //        wordsTableView.delegate = self
         wordsTableView.dataSource = self
     }
@@ -158,11 +142,17 @@ class HomeViewController: UIViewController {
     }
     
     private func createOuterComponents() {
+        view.addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(cardView)
         scrollView.addSubview(wordsTableView)
         
         NSLayoutConstraint.activate([
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
             titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 30),
@@ -183,33 +173,24 @@ class HomeViewController: UIViewController {
     }
     
     private func createCardInsideView() {
-        createWordHorizontalStackView()
+        horizontalStackView.addArrangedSubview(wordLabel)
+        horizontalStackView.addArrangedSubview(categoryLabel)
         
         cardView.addSubview(cardInsideStackView)
-       
+        cardInsideStackView.addArrangedSubview(horizontalStackView)
+        cardInsideStackView.addArrangedSubview(definitionLabel)
+        cardInsideStackView.addArrangedSubview(buttonWrapper)
+        buttonWrapper.addSubview(randomWordButton)
         
         NSLayoutConstraint.activate([
             cardInsideStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
             cardInsideStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             cardInsideStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
-            cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
-        ])
-        
-        cardInsideStackView.addArrangedSubview(horizontalStackView)
-        cardInsideStackView.addArrangedSubview(definitionLabel)
-        cardInsideStackView.addArrangedSubview(buttonWrapper)
-
-        buttonWrapper.addSubview(randomWordButton)
-        NSLayoutConstraint.activate([
+            cardInsideStackView.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10),
+            
             randomWordButton.topAnchor.constraint(equalTo: buttonWrapper.topAnchor),
             randomWordButton.trailingAnchor.constraint(equalTo: buttonWrapper.trailingAnchor),
         ])
-        
-    }
-    
-    private func createWordHorizontalStackView() {
-        horizontalStackView.addArrangedSubview(wordLabel)
-        horizontalStackView.addArrangedSubview(categoryLabel)
     }
 }
 
