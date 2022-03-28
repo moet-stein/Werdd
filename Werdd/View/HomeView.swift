@@ -107,6 +107,7 @@ class HomeView: UIView {
         let randomWord = words.randomElement()
         wordLabel.text = randomWord?.word
         categoryLabel.text = randomWord?.category
+        horizontalStackView.zoomIn(duration: 0.3)
         definitionLabel.text = randomWord?.definition
     }
     
