@@ -18,7 +18,6 @@
 		60142FA927DD171F00F1B845 /* LeagueSpartan-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */; };
 		60537CD327F1B66100917B50 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60537CD227F1B66100917B50 /* HomeView.swift */; };
 		605C805D27E1EC54002EB0BA /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Words.swift */; };
-		605C805F27E1EDD2002EB0BA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805E27E1EDD2002EB0BA /* Word.swift */; };
 		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -36,7 +35,6 @@
 		60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Light.ttf"; sourceTree = "<group>"; };
 		60537CD227F1B66100917B50 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		605C805C27E1EC54002EB0BA /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
-		605C805E27E1EDD2002EB0BA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				605C805C27E1EC54002EB0BA /* Words.swift */,
-				605C805E27E1EDD2002EB0BA /* Word.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -200,7 +197,6 @@
 				6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */,
 				60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */,
 				60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */,
-				605C805F27E1EDD2002EB0BA /* Word.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -84,7 +84,7 @@ class HomeView: UIView {
     
     lazy var randomWordButton: IconButton = {
         let button = IconButton(
-            size: 25,
+            size: 35,
             systemName: "arrow.clockwise.circle",
             iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00),
             completion: refreshCard)
@@ -107,8 +107,10 @@ class HomeView: UIView {
         let randomWord = words.randomElement()
         wordLabel.text = randomWord?.word
         categoryLabel.text = randomWord?.category
-        horizontalStackView.zoomIn(duration: 0.3)
+        horizontalStackView.zoomIn(duration: 0.5)
+        
         definitionLabel.text = randomWord?.definition
+        definitionLabel.zoomIn(duration: 0.5)
     }
     
     init() {
@@ -116,8 +118,9 @@ class HomeView: UIView {
         
         super.init(frame: .zero)
         setUpUI()
-        //        wordsTableView.delegate = self
+        
         wordsTableView.dataSource = self
+        wordsTableView.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -179,8 +182,7 @@ class HomeView: UIView {
             definitionLabel.leadingAnchor.constraint(equalTo: horizontalStackView.leadingAnchor),
             definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
             
-            
-            randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
+            randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
             randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
     }
@@ -203,6 +205,7 @@ extension HomeView : UITableViewDataSource {
         var content = cell.defaultContentConfiguration()
         content.text = words[indexPath.row].word
         
+        
         if let font = UIFont(name: "LeagueSpartan-Bold", size: 22) {
             content.textProperties.font = font
         }
@@ -219,12 +222,14 @@ extension HomeView : UITableViewDataSource {
         content.secondaryText = words[indexPath.row].definition
         cell.contentConfiguration = content
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
+        
+
         return cell
     }
-    
-    
 }
 
-extension HomeViewController : UITableViewDelegate {
-
+extension HomeView : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("\(words[indexPath.row].word)")
+    }
 }
