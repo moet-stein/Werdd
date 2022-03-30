@@ -114,13 +114,14 @@ class HomeView: UIView {
     }
     
     init() {
-//        self.presentable = presentable
+        //        self.presentable = presentable
         
         super.init(frame: .zero)
         setUpUI()
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
+        wordsTableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
     }
     
     required init?(coder: NSCoder) {
@@ -155,7 +156,7 @@ class HomeView: UIView {
             cardView.widthAnchor.constraint(equalToConstant: 350),
             cardView.heightAnchor.constraint(equalToConstant: 180),
             
-           
+            
             wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
             wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -186,7 +187,7 @@ class HomeView: UIView {
             randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
     }
-
+    
 }
 
 
@@ -199,37 +200,27 @@ extension HomeView : UITableViewDataSource {
     //datasource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
-            return UITableViewCell()
+        //        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
+        //            return UITableViewCell()
+        //        }
+        tableView.separatorStyle = .none
+        if let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell {
+//            cell.textLabel?.text = words[indexPath.row].word
+            let wordForRow = words[indexPath.row]
+            cell.setupCellContent(image: wordForRow.category, word: wordForRow.word, definition: wordForRow.definition)
+            cell.backgroundColor = UIColor(named: "ViewLightYellow")
+            return cell
         }
-        var content = cell.defaultContentConfiguration()
-        content.text = words[indexPath.row].word
-        
-        
-        if let font = UIFont(name: "LeagueSpartan-Bold", size: 22) {
-            content.textProperties.font = font
-        }
-        
-        if let fontColor = UIColor(named: "DarkGreen") {
-            content.textProperties.color = fontColor
-            content.secondaryTextProperties.color = fontColor
-        }
-        
-        if let secondFont = UIFont(name: "LeagueSpartan-ExtraLight", size: 17) {
-            content.secondaryTextProperties.font = secondFont
-        }
-
-        content.secondaryText = words[indexPath.row].definition
-        cell.contentConfiguration = content
-        cell.backgroundColor = UIColor(named: "ViewLightYellow")
-        
-
-        return cell
+        fatalError("could not dequeueReusableCell")
     }
 }
 
 extension HomeView : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(words[indexPath.row].word)")
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
 }
