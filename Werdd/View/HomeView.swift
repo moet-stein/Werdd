@@ -36,14 +36,6 @@ class HomeView: UIView {
     }()
     
     // MARK: - Components Inside the car
-    let horizontalStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .horizontal
-        stackView.spacing = 10
-        stackView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        return stackView
-    }()
     
     let wordLabel: UILabel = {
         let label = UILabel()
@@ -54,25 +46,19 @@ class HomeView: UIView {
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
         label.preferredMaxLayoutWidth = 180
-        label.text = "Programming"
         return label
     }()
     
-    let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "LeagueSpartan-ExtraLight", size: 20)
-        label.textColor = UIColor(named: "DarkGreen")
-        label.text = "noun"
-        label.lineBreakMode = .byWordWrapping
-        label.numberOfLines = 0
-        return label
+    
+    let categoryImageView: CategoryImage = {
+        let imageView = CategoryImage(size: 36)
+        imageView.addBorder()
+        return imageView
     }()
     
     let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "craeting a sequence of instructions to enable the computer to do something"
         label.font = UIFont(name: "LeagueSpartan-Light", size: 19)
         label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byTruncatingTail
@@ -106,9 +92,9 @@ class HomeView: UIView {
     func refreshCard() {
         let randomWord = words.randomElement()
         wordLabel.text = randomWord?.word
-        categoryLabel.text = randomWord?.category
-        horizontalStackView.zoomIn(duration: 0.5)
-        
+        categoryImageView.image = UIImage(named: randomWord?.category ?? "noun")
+        wordLabel.zoomIn(duration: 0.5)
+        categoryImageView.zoomIn(duration: 0.5)
         definitionLabel.text = randomWord?.definition
         definitionLabel.zoomIn(duration: 0.5)
     }
@@ -118,6 +104,7 @@ class HomeView: UIView {
         
         super.init(frame: .zero)
         setUpUI()
+        refreshCard()
         
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
@@ -167,21 +154,21 @@ class HomeView: UIView {
     }
     
     private func createCardInsideView() {
-        horizontalStackView.addArrangedSubview(wordLabel)
-        horizontalStackView.addArrangedSubview(categoryLabel)
-        
-        cardView.addSubview(horizontalStackView)
+        cardView.addSubview(wordLabel)
+        cardView.addSubview(categoryImageView)
         cardView.addSubview(definitionLabel)
         cardView.addSubview(randomWordButton)
         
         NSLayoutConstraint.activate([
-            horizontalStackView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 10),
-            horizontalStackView.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
-            horizontalStackView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
+            wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             
-            definitionLabel.topAnchor.constraint(equalTo: horizontalStackView.bottomAnchor, constant: 10),
-            definitionLabel.leadingAnchor.constraint(equalTo: horizontalStackView.leadingAnchor),
-            definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor),
+            categoryImageView.centerYAnchor.constraint(equalTo: wordLabel.centerYAnchor),
+            categoryImageView.leadingAnchor.constraint(equalTo: wordLabel.trailingAnchor, constant: 20),
+            
+            definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
+            definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
+            definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
             
             randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
             randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
@@ -221,6 +208,6 @@ extension HomeView : UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80
+        return 100
     }
 }

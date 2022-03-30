@@ -18,21 +18,15 @@ class WordsTableViewCell: UITableViewCell {
         return view
     }()
     
-    let categoryImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-        imageView.widthAnchor.constraint(equalToConstant: 30).isActive = true
-        imageView.layer.cornerRadius = 30 / 2
-        imageView.clipsToBounds = true
+    let categoryImage: CategoryImage = {
+        let imageView = CategoryImage(size: 36)
         return imageView
     }()
     
     let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "LeagueSpartan-Bold", size: 18)
+        label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
         label.textColor = UIColor(named: "DarkGreen")
         return label
     }()
@@ -40,10 +34,10 @@ class WordsTableViewCell: UITableViewCell {
     let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont(name: "LeagueSpartan-Light", size: 15)
+        label.font = UIFont(name: "LeagueSpartan-Light", size: 18)
         label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 2
+        label.numberOfLines = 3
         return label
     }()
     
@@ -60,7 +54,7 @@ class WordsTableViewCell: UITableViewCell {
             roundedView.centerXAnchor.constraint(equalTo: centerXAnchor),
             roundedView.centerYAnchor.constraint(equalTo: centerYAnchor),
             roundedView.widthAnchor.constraint(equalToConstant: 350),
-            roundedView.heightAnchor.constraint(equalToConstant: 70)
+            roundedView.heightAnchor.constraint(equalToConstant: 90)
         ])
         
         roundedView.addSubview(wordLabel)
