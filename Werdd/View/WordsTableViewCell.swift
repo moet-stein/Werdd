@@ -36,31 +36,31 @@ class WordsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Light", size: 18)
         label.textColor = UIColor(named: "DarkGreen")
-        label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 3
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         return label
     }()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         setUpUI()
     }
     
     private func setUpUI() {
         addSubview(roundedView)
-        NSLayoutConstraint.activate([
-            roundedView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            roundedView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            roundedView.widthAnchor.constraint(equalToConstant: 350),
-            roundedView.heightAnchor.constraint(equalToConstant: 90)
-        ])
-        
         roundedView.addSubview(wordLabel)
         roundedView.addSubview(definitionLabel)
         roundedView.addSubview(categoryImage)
+        
         NSLayoutConstraint.activate([
+            roundedView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            roundedView.centerYAnchor.constraint(equalTo: centerYAnchor),
+//            roundedView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            roundedView.widthAnchor.constraint(equalToConstant: 350),
+            roundedView.heightAnchor.constraint(equalToConstant: 90),
+//            roundedView.bottomAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 10),
+            
             wordLabel.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor, constant: 20),
             wordLabel.widthAnchor.constraint(equalToConstant: 200),
@@ -72,6 +72,7 @@ class WordsTableViewCell: UITableViewCell {
             categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),
             categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -20),
         ])
+        
     }
     
     
