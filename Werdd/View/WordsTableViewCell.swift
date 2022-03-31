@@ -48,25 +48,27 @@ class WordsTableViewCell: UITableViewCell {
     }
     
     private func setUpUI() {
-        addSubview(roundedView)
+        contentView.addSubview(roundedView)
         roundedView.addSubview(wordLabel)
         roundedView.addSubview(definitionLabel)
         roundedView.addSubview(categoryImage)
         
         NSLayoutConstraint.activate([
-            roundedView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            roundedView.centerYAnchor.constraint(equalTo: centerYAnchor),
-//            roundedView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            roundedView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+//            roundedView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             roundedView.widthAnchor.constraint(equalToConstant: 350),
-            roundedView.heightAnchor.constraint(equalToConstant: 90),
-//            roundedView.bottomAnchor.constraint(equalTo: definitionLabel.bottomAnchor, constant: 10),
+//            roundedView.heightAnchor.constraint(equalToConstant: 90),
+            roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
             wordLabel.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor, constant: 20),
+            wordLabel.heightAnchor.constraint(equalToConstant: 20),
             wordLabel.widthAnchor.constraint(equalToConstant: 200),
             
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 3),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
+            definitionLabel.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -5),
             definitionLabel.widthAnchor.constraint(equalToConstant: 250),
             
             categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),

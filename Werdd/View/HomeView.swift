@@ -109,6 +109,7 @@ class HomeView: UIView {
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
         wordsTableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+
     }
     
     required init?(coder: NSCoder) {
@@ -208,6 +209,6 @@ extension HomeView : UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return UITableView.automaticDimension
     }
 }
