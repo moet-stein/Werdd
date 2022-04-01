@@ -28,6 +28,7 @@ class WordsTableViewCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
         label.textColor = UIColor(named: "DarkGreen")
+        label.heightAnchor.constraint(equalToConstant: 20).isActive = true
         return label
     }()
     
@@ -55,15 +56,12 @@ class WordsTableViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             roundedView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-//            roundedView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             roundedView.widthAnchor.constraint(equalToConstant: 350),
-//            roundedView.heightAnchor.constraint(equalToConstant: 90),
             roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
             wordLabel.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor, constant: 20),
-            wordLabel.heightAnchor.constraint(equalToConstant: 20),
             wordLabel.widthAnchor.constraint(equalToConstant: 200),
             
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 3),

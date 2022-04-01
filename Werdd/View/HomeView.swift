@@ -109,6 +109,10 @@ class HomeView: UIView {
         wordsTableView.dataSource = self
         wordsTableView.delegate = self
         wordsTableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+        
+        wordsTableView.estimatedRowHeight = 100
+        wordsTableView.rowHeight = UITableView.automaticDimension
+        
 
     }
     
@@ -208,7 +212,7 @@ extension HomeView : UITableViewDelegate {
         print("\(words[indexPath.row].word)")
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
 }
