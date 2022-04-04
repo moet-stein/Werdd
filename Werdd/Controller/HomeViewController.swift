@@ -14,6 +14,11 @@ class HomeViewController: UIViewController {
     private var contentView: HomeView!
     private var wordsTableView: UITableView!
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+    }
+    
     override func loadView() {
         contentView = HomeView()
         view = contentView
@@ -21,11 +26,16 @@ class HomeViewController: UIViewController {
         wordsTableView = contentView.wordsTableView
         wordsTableView.delegate = self
         wordsTableView.dataSource = self
-        wordsTableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
         
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
 }
 
 
@@ -36,24 +46,26 @@ extension HomeViewController : UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        //        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
-        //            return UITableViewCell()
-        //        }
-        tableView.separatorStyle = .none
-        if let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell {
-            let wordForRow = words[indexPath.row]
-            cell.setupCellContent(image: wordForRow.category, word: wordForRow.word, definition: wordForRow.definition)
-            cell.backgroundColor = UIColor(named: "ViewLightYellow")
-            return cell
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
+            return UITableViewCell()
         }
-        fatalError("could not dequeueReusableCell")
+        
+        let wordForRow = words[indexPath.row]
+        cell.setupCellContent(image: wordForRow.category, word: wordForRow.word, definition: wordForRow.definition)
+        cell.backgroundColor = UIColor(named: "ViewLightYellow")
+        tableView.separatorStyle = .none
+        
+        return cell
+        
     }
 }
 
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("\(words[indexPath.row].word)")
+        let selectedWord = words[indexPath.row].word
+        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

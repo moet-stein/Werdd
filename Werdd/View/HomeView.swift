@@ -86,6 +86,7 @@ class HomeView: UIView {
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.layer.cornerRadius = 20
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
+        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
         return tableView
     }()
     
@@ -130,7 +131,7 @@ class HomeView: UIView {
             scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 50),
+            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
             titleLabel.widthAnchor.constraint(equalToConstant: 350),
             titleLabel.heightAnchor.constraint(equalToConstant: 60),
             

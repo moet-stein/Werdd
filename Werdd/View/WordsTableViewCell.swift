@@ -10,7 +10,7 @@ import UIKit
 class WordsTableViewCell: UITableViewCell {
     static let identifier = "WordsTableViewCell"
     
-    let roundedView: UIView = {
+    private let roundedView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 20
@@ -18,12 +18,12 @@ class WordsTableViewCell: UITableViewCell {
         return view
     }()
     
-    let categoryImage: CategoryImage = {
+    private let categoryImage: CategoryImage = {
         let imageView = CategoryImage(size: 36)
         return imageView
     }()
     
-    let wordLabel: UILabel = {
+    private let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
@@ -32,7 +32,7 @@ class WordsTableViewCell: UITableViewCell {
         return label
     }()
     
-    let definitionLabel: UILabel = {
+    private let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Light", size: 18)
@@ -72,7 +72,6 @@ class WordsTableViewCell: UITableViewCell {
             categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),
             categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -20),
         ])
-        
     }
     
     
@@ -81,9 +80,6 @@ class WordsTableViewCell: UITableViewCell {
         wordLabel.text = word
         definitionLabel.text = definition
     }
-    
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
