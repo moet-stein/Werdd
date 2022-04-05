@@ -14,7 +14,7 @@ class DetailsView: UIView {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
-        label.font = UIFont(name: "LeagueSpartan-Bold", size: 30)
+        label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
         label.textColor = UIColor(named: "DarkGreen")
         return label
     }()
@@ -25,7 +25,6 @@ class DetailsView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.spacing = 30
-        view.backgroundColor = .white
         return view
     }()
     
