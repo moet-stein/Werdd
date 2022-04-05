@@ -42,6 +42,7 @@ class DetailsView: UIView {
             bgColorName: "DarkGreen",
             cardHeight: 100,
             bottomLabelText: "Synonyms")
+        view.insertWords(words: "glad, cheerful")
         return view
     }()
     
@@ -50,6 +51,8 @@ class DetailsView: UIView {
             bgColorName: "SoftBrown",
             cardHeight: 100,
             bottomLabelText: "Antonyms")
+        
+        view.insertWords(words: "unhappy, sad")
         return view
     }()
     

@@ -45,7 +45,24 @@ class DetailsCardView: UIView {
         ])
     }
     
-    func insertWords(words: [String]) {
+    func insertWords(words: String) {
+        let label: UILabel = {
+            let label = UILabel()
+            label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = words
+            label.textColor = .white
+            label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
+            label.lineBreakMode = .byWordWrapping
+            label.numberOfLines = 0
+            return label
+        }()
+        addSubview(label)
+        
+        NSLayoutConstraint.activate([
+            label.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            label.widthAnchor.constraint(equalToConstant: 270),
+        ])
         
     }
     
