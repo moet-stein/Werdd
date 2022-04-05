@@ -16,6 +16,11 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let index = self.wordsTableView.indexPathForSelectedRow{
+            self.wordsTableView.deselectRow(at: index, animated: true)
+        }
+        
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     
@@ -44,7 +49,7 @@ extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return words.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
@@ -67,8 +72,8 @@ extension HomeViewController : UITableViewDelegate {
         let selectedWord = words[indexPath.row].word
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-//    }
+    
+    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    //        return UITableView.automaticDimension
+    //    }
 }
