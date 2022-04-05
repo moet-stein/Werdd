@@ -9,14 +9,14 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     private var contentView: DetailsView!
-    private var selectedWord: String
+    private var selectedWord: WordDetail
 
     override func loadView() {
         contentView = DetailsView(selectedWord: selectedWord)
         view = contentView
     }
     
-    init(selectedWord: String) {
+    init(selectedWord: WordDetail) {
         self.selectedWord = selectedWord
         super.init(nibName: nil, bundle: nil)
     }
