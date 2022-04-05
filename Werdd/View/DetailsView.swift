@@ -61,12 +61,34 @@ class DetailsView: UIView {
         return view
     }()
     
+    // MARK: - DefinitionCard inside
+    private let categoryLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
+        label.textColor = UIColor(named: "DarkGreen")
+        return label
+    }()
+    
+    private let definitionLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
+        label.textColor = UIColor(named: "DarkGreen")
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    
+    
     init(selectedWord: WordDetail) {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         
         backgroundColor = UIColor(named: "ViewLightYellow")
         setUpUI()
+        setUpDefinitionCard()
     }
     
     required init?(coder: NSCoder) {
@@ -93,5 +115,24 @@ class DetailsView: UIView {
         outerStackView.addArrangedSubview(synonymsCard)
         outerStackView.addArrangedSubview(antonymsCard)
         outerStackView.addArrangedSubview(usageCard)
+    }
+    
+    private func setUpDefinitionCard() {
+        categoryLabel.text = selectedWord.category
+        definitionLabel.text = selectedWord.definition
+        
+        definitionCard.addSubview(categoryLabel)
+        definitionCard.addSubview(definitionLabel)
+        
+        NSLayoutConstraint.activate([
+            categoryLabel.topAnchor.constraint(equalTo: definitionCard.topAnchor, constant: 15),
+            categoryLabel.leadingAnchor.constraint(equalTo: definitionCard.leadingAnchor, constant: 20),
+            categoryLabel.widthAnchor.constraint(equalToConstant: 100),
+            
+            definitionLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
+            definitionLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
+            definitionLabel.widthAnchor.constraint(equalToConstant: 270),
+            
+        ])
     }
 }
