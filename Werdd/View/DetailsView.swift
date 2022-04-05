@@ -58,6 +58,8 @@ class DetailsView: UIView {
             bgColorName: "MatchaGreen",
             cardHeight: 180,
             bottomLabelText: "Example Usage")
+        
+        view.insertUsages(usages: ["a happy smile", "spent many happy days on the beach", "a happy marriage"])
         return view
     }()
     

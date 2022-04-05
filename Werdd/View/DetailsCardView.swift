@@ -40,9 +40,46 @@ class DetailsCardView: UIView {
         
         addSubview(bottomLabel)
         NSLayoutConstraint.activate([
-            bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
+    }
+    
+    func insertWords(words: [String]) {
+        
+    }
+    
+    func insertUsages(usages:[String]) {
+        let verticalStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.translatesAutoresizingMaskIntoConstraints = false
+            stackView.axis = .vertical
+            stackView.spacing = 10
+            stackView.distribution = .fillProportionally
+            return stackView
+        }()
+        
+        addSubview(verticalStackView)
+        
+        NSLayoutConstraint.activate([
+            verticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            verticalStackView.widthAnchor.constraint(equalToConstant: 270),
+        ])
+        
+        for usage in usages {
+            let label: UILabel = {
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.text = usage
+                label.textColor = .white
+                label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
+                label.lineBreakMode = .byWordWrapping
+                label.numberOfLines = 0
+                return label
+            }()
+            verticalStackView.addArrangedSubview(label)
+        }
     }
     
 }
