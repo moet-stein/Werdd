@@ -10,6 +10,13 @@ import UIKit
 class DetailsView: UIView {
     private var selectedWord: WordDetail
     
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.backgroundColor = UIColor(named: "ViewLightYellow")
+        return scrollView
+    }()
+    
     private let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -90,7 +97,7 @@ class DetailsView: UIView {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         
-        backgroundColor = UIColor(named: "ViewLightYellow")
+        setScrollView()
         setUpUI()
         setUpDefinitionCard()
     }
@@ -99,20 +106,30 @@ class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setUpUI() {
-        wordLabel.text = selectedWord.word
-        addSubview(wordLabel)
-        addSubview(outerStackView)
+    private func setScrollView() {
+        addSubview(scrollView)
         
         NSLayoutConstraint.activate([
-            wordLabel.topAnchor.constraint(equalTo: topAnchor, constant: 100),
-            wordLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: topAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
+        ])
+    }
+    
+    private func setUpUI() {
+        wordLabel.text = selectedWord.word
+        scrollView.addSubview(wordLabel)
+        scrollView.addSubview(outerStackView)
+        
+        NSLayoutConstraint.activate([
+            wordLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            wordLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             wordLabel.widthAnchor.constraint(equalToConstant: 200),
             
-            outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
-            outerStackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            outerStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            outerStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -70)
+            outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor),
+            outerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            outerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -70)
         ])
         
         outerStackView.addArrangedSubview(definitionCard)

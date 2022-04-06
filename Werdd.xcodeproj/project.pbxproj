@@ -115,8 +115,8 @@
 				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
 				60537CD227F1B66100917B50 /* HomeView.swift */,
 				6051048B27FB362300AB9DEC /* DetailsView.swift */,
-				6068CAD627E4C96600DC30E3 /* IconButton.swift */,
 				6051042C27F4572500AB9DEC /* WordsTableViewCell.swift */,
+				6068CAD627E4C96600DC30E3 /* IconButton.swift */,
 				6051042E27F47C4500AB9DEC /* CategoryImage.swift */,
 				6051048D27FC3F1400AB9DEC /* DetailsCardView.swift */,
 			);
