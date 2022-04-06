@@ -7,8 +7,8 @@
 
 import UIKit
 
-class WordsTableViewCell: UITableViewCell {
-    static let identifier = "WordsTableViewCell"
+class WordsCollectionViewCell: UICollectionViewCell {
+    static let identifier = "WordsCollectionViewCell"
     
     private let roundedView: UIView = {
         let view = UIView()
@@ -18,10 +18,10 @@ class WordsTableViewCell: UITableViewCell {
         return view
     }()
     
-    private let categoryImage: CategoryImage = {
-        let imageView = CategoryImage(size: 36)
-        return imageView
-    }()
+//    private let categoryImage: CategoryImage = {
+//        let imageView = CategoryImage(size: 36)
+//        return imageView
+//    }()
     
     private let wordLabel: UILabel = {
         let label = UILabel()
@@ -43,8 +43,8 @@ class WordsTableViewCell: UITableViewCell {
     }()
     
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setUpUI()
     }
     
@@ -52,31 +52,33 @@ class WordsTableViewCell: UITableViewCell {
         contentView.addSubview(roundedView)
         roundedView.addSubview(wordLabel)
         roundedView.addSubview(definitionLabel)
-        roundedView.addSubview(categoryImage)
+//        roundedView.addSubview(categoryImage)
         
         NSLayoutConstraint.activate([
             roundedView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            roundedView.widthAnchor.constraint(equalToConstant: 350),
+            roundedView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            roundedView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//            roundedView.widthAnchor.constraint(equalToConstant: 350),
             roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
             wordLabel.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 15),
-            wordLabel.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor, constant: 20),
-            wordLabel.widthAnchor.constraint(equalToConstant: 200),
+            wordLabel.leadingAnchor.constraint(equalTo: roundedView.leadingAnchor, constant: 5),
+            wordLabel.widthAnchor.constraint(equalToConstant: 150),
             
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 3),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
             definitionLabel.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -5),
-            definitionLabel.widthAnchor.constraint(equalToConstant: 250),
-            
-            categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),
-            categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -20),
+            definitionLabel.widthAnchor.constraint(equalToConstant: 150),
+//
+//            categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),
+//            categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -20),
         ])
     }
     
     
     func setupCellContent(image: String, word: String, definition: String) {
-        categoryImage.image = UIImage(named: image)
+//        categoryImage.image = UIImage(named: image)
         wordLabel.text = word
         definitionLabel.text = definition
     }

@@ -12,14 +12,14 @@ class HomeViewController: UIViewController {
     private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     private var contentView: HomeView!
-    private var wordsTableView: UITableView!
+    private var wordsCollectionView: UICollectionView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let index = self.wordsTableView.indexPathForSelectedRow{
-            self.wordsTableView.deselectRow(at: index, animated: true)
-        }
+//        if let index = self.wordsCollectionView.indexPathsForSelectedItems{
+//            self.wordsCollectionView.deselectItem(at: index, animated: true)
+//        }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -28,12 +28,12 @@ class HomeViewController: UIViewController {
         contentView = HomeView()
         view = contentView
         
-        wordsTableView = contentView.wordsTableView
-        wordsTableView.delegate = self
-        wordsTableView.dataSource = self
-        
-        wordsTableView.estimatedRowHeight = 100
-        wordsTableView.rowHeight = UITableView.automaticDimension
+        wordsCollectionView = contentView.wordsCollectionView
+        wordsCollectionView.delegate = self
+        wordsCollectionView.dataSource = self
+
+//        wordsCollectionView.estimatedRowHeight = 100
+//        wordsCollectionView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,35 +45,30 @@ class HomeViewController: UIViewController {
 
 
 
-extension HomeViewController : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension HomeViewController : UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return words.count
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
-            return UITableViewCell()
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordsCollectionViewCell.identifier, for: indexPath) as? WordsCollectionViewCell else {
+            return UICollectionViewCell()
         }
         
         let wordForRow = words[indexPath.row]
         cell.setupCellContent(image: wordForRow.category, word: wordForRow.word, definition: wordForRow.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
-        tableView.separatorStyle = .none
         
         return cell
-        
     }
 }
 
-extension HomeViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+extension HomeViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\(words[indexPath.row].word)")
         let selectedWord = words[indexPath.row]
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
     
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        return UITableView.automaticDimension
-    //    }
 }

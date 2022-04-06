@@ -80,14 +80,21 @@ class HomeView: UIView {
     
     // MARK: - TableView
     
-    let wordsTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.layer.cornerRadius = 20
-        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
-        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
-        return tableView
+    lazy var wordsCollectionView: UICollectionView = {
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.itemSize = CGSize(width: 180, height: 200)
+        
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        collectionView.layer.cornerRadius = 20
+        collectionView.backgroundColor = UIColor(named: "ViewLightYellow")
+        collectionView.register(WordsCollectionViewCell.self, forCellWithReuseIdentifier: WordsCollectionViewCell.identifier)
+
+        return collectionView
     }()
     
     private func refreshCard() {
@@ -122,7 +129,7 @@ class HomeView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(cardView)
-        scrollView.addSubview(wordsTableView)
+        scrollView.addSubview(wordsCollectionView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -141,12 +148,12 @@ class HomeView: UIView {
             cardView.heightAnchor.constraint(equalToConstant: 180),
             
             
-            wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
-            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
-            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            wordsCollectionView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            wordsCollectionView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
+            wordsCollectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            wordsCollectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            wordsCollectionView.heightAnchor.constraint(equalToConstant: 500),
+            wordsCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
     }
     
