@@ -129,7 +129,7 @@ class DetailsView: UIView {
             
             outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor),
             outerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            outerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -70)
+            outerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])
         
         outerStackView.addArrangedSubview(definitionCard)

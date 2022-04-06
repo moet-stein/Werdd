@@ -14,6 +14,18 @@ class DetailsViewController: UIViewController {
     override func loadView() {
         contentView = DetailsView(selectedWord: selectedWord)
         view = contentView
+        
+//        navigationItem.title = selectedWord.word
+//        navigationController?.navigationBar.barTintColor = UIColor(named: "LightGreen")
+//        
+//
+//        let attributes = [
+//            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen"),
+////            NSAttributedString.Key.font: UIFont(name: "LeagueSpartan-Bold", size: 28),
+//        ]
+//        navigationController?.navigationBar.prefersLargeTitles = true
+//
+//        navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
     
     init(selectedWord: WordDetail) {
@@ -24,5 +36,7 @@ class DetailsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    
     
 }

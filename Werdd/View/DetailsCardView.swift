@@ -8,6 +8,9 @@
 import UIKit
 
 class DetailsCardView: UIView {
+    var bgColorName: String
+    var cardHeight: CGFloat
+    var bottomLabelText: String
     
     private let bottomLabel: UILabel = {
         let label = UILabel()
@@ -17,16 +20,13 @@ class DetailsCardView: UIView {
         return label
     }()
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setUpUI()
-    }
     
-    convenience init(bgColorName: String, cardHeight: CGFloat, bottomLabelText: String) {
-        self.init(frame: .zero)
-        backgroundColor = UIColor(named: bgColorName)
-        heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
-        bottomLabel.text = bottomLabelText
+    init(bgColorName: String, cardHeight: CGFloat, bottomLabelText: String, frame: CGRect = .zero) {
+        self.bgColorName = bgColorName
+        self.cardHeight = cardHeight
+        self.bottomLabelText = bottomLabelText
+        super.init(frame: frame)
+        self.setUpUI()
     }
     
     required init?(coder: NSCoder) {
@@ -35,11 +35,17 @@ class DetailsCardView: UIView {
     
     private func setUpUI() {
         translatesAutoresizingMaskIntoConstraints = false
+        
+        backgroundColor = UIColor(named: bgColorName)
+        heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
+        bottomLabel.text = bottomLabelText
+        
         layer.cornerRadius = 20
         widthAnchor.constraint(equalToConstant: 300).isActive = true
         
         addSubview(bottomLabel)
         NSLayoutConstraint.activate([
+            heightAnchor.constraint(equalToConstant: cardHeight),
             bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
