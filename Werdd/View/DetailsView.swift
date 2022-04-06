@@ -22,7 +22,7 @@ class DetailsView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
-        label.textColor = UIColor(named: "DarkGreen")
+        label.textColor = UIColor(named: "SoftBrown")
         return label
     }()
     
