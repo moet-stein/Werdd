@@ -14,12 +14,11 @@ class HomeViewController: UIViewController {
     private var contentView: HomeView!
     private var wordsCollectionView: UICollectionView!
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        if let index = self.wordsCollectionView.indexPathsForSelectedItems{
-//            self.wordsCollectionView.deselectItem(at: index, animated: true)
-//        }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }

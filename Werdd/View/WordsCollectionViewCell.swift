@@ -69,7 +69,7 @@ class WordsCollectionViewCell: UICollectionViewCell {
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
             definitionLabel.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -5),
             definitionLabel.widthAnchor.constraint(equalToConstant: 150),
-
+            
             categoryImage.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 5),
             categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -5),
         ])
@@ -84,6 +84,12 @@ class WordsCollectionViewCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
+        let targetSize = CGSize(width: layoutAttributes.frame.width, height: 0)
+        layoutAttributes.frame.size = contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .required, verticalFittingPriority: .fittingSizeLevel)
+        return layoutAttributes
     }
     
 }

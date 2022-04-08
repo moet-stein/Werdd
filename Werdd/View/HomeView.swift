@@ -84,12 +84,13 @@ class HomeView: UIView {
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        layout.itemSize = CGSize(width: 180, height: 200)
+        layout.itemSize = CGSize(width: 175, height: 200)
         
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
+
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
-
+        
         collectionView.layer.cornerRadius = 20
         collectionView.backgroundColor = UIColor(named: "ViewLightYellow")
         collectionView.register(WordsCollectionViewCell.self, forCellWithReuseIdentifier: WordsCollectionViewCell.identifier)
