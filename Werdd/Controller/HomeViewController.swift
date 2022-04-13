@@ -118,11 +118,18 @@ extension HomeViewController: UISearchBarDelegate {
             print("Invalid URL")
             return
         }
-        print(wordsURL)
+        
+        let apiKey = Bundle.main.object(forInfoDictionaryKey: "WORDSAPI_KEY") as? String
+        
+        guard let key = apiKey, !key.isEmpty else {
+            print("API key does not exist")
+            return
+        }
+        
         var urlRequest = URLRequest(url: wordsURL)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
-        urlRequest.setValue(MyWordsAPIKey, forHTTPHeaderField: "X-RapidAPI-Key")
+        urlRequest.setValue(key, forHTTPHeaderField: "X-RapidAPI-Key")
                 
 
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in
