@@ -46,7 +46,6 @@ class HomeViewController: UIViewController {
         searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
         searchBar.delegate = self
         wordsTableView.tableHeaderView = searchBar
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -85,10 +84,6 @@ extension HomeViewController : UITableViewDelegate {
         let selectedWord = words[indexPath.row]
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
-    
-    //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    //        return UITableView.automaticDimension
-    //    }
 }
 
 
@@ -110,6 +105,37 @@ extension HomeViewController: UISearchBarDelegate {
     
     }
     
-    
-}
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+        if let searchedWord = searchBar.searchTextField.text  {
+            fetchInputWord(input: searchedWord.lowercased())
+        }
+        
+    }
 
+    func fetchInputWord(input: String) {
+        guard let wordsURL = URL(string: "https://wordsapiv1.p.rapidapi.com/words/\(input)") else {
+            print("Invalid URL")
+            return
+        }
+        print(wordsURL)
+        var urlRequest = URLRequest(url: wordsURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
+        urlRequest.setValue(MyWordsAPIKey, forHTTPHeaderField: "X-RapidAPI-Key")
+                
+
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+            
+            do {
+                let words = try JSONDecoder().decode(Word.self, from: data)
+                print(words)
+            } catch {
+                print("Failed to convert \(error.localizedDescription)")
+            }
+        }.resume()
+    }
+}

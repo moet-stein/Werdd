@@ -77,3 +77,17 @@ class Adverb: WordDetail {
         self.definition = definition
     }
 }
+
+struct Word: Codable {
+    var word: String
+    var results: [Result]
+    var frequency: Double?
+}
+
+struct Result: Codable {
+    var definition: String
+    var partOfSpeech: String
+    var synonyms: [String]?
+    var antonyms: [String]?
+    var examples: [String]?
+}
