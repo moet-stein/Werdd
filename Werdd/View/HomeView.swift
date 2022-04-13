@@ -146,7 +146,8 @@ class HomeView: UIView {
             wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             wordsTableView.heightAnchor.constraint(equalToConstant: 500),
-            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
         ])
     }
     

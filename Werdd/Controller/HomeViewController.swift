@@ -14,6 +14,8 @@ class HomeViewController: UIViewController {
     private var contentView: HomeView!
     private var wordsTableView: UITableView!
     
+    private let searchBar:UISearchBar = UISearchBar()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -34,13 +36,24 @@ class HomeViewController: UIViewController {
         
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
+        
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+        searchBar.delegate = self
+        wordsTableView.tableHeaderView = searchBar
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
-    
+
 }
 
 
@@ -77,3 +90,26 @@ extension HomeViewController : UITableViewDelegate {
     //        return UITableView.automaticDimension
     //    }
 }
+
+
+extension HomeViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.setShowsCancelButton(false, animated: true)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.endEditing(true)
+        searchBar.setShowsCancelButton(false, animated: true)
+    
+    }
+    
+    
+}
+
