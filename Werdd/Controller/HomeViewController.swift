@@ -9,6 +9,8 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
+    var wordManager = WordManager()
+    
     private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     private var contentView: HomeView!
@@ -33,12 +35,14 @@ class HomeViewController: UIViewController {
     }
     
     override func loadView() {
+        wordManager.delegate = self
         contentView = HomeView()
         view = contentView
         
         wordLabel = contentView.wordLabel
         categoryImageView = contentView.categoryImageView
         definitionLabel = contentView.definitionLabel
+        categoryImageView.isHidden = true
         
         randomWordButton = contentView.randomWordButton
         
@@ -59,7 +63,7 @@ class HomeViewController: UIViewController {
         searchBar.delegate = self
         wordsTableView.tableHeaderView = searchBar
         
-        fetchRandomWord()
+        wordManager.fetchRandomWord()
         addRandomButtonTarget()
     }
     
@@ -69,18 +73,23 @@ class HomeViewController: UIViewController {
     }
     
     private func addRandomButtonTarget() {
-        randomWordButton.addTarget(self, action: #selector(fetchRandomWord), for: .touchUpInside)
+        randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
     }
     
     private func refreshCard(word: Word) {
         let word = word
         wordLabel.text = word.word
         if let category = word.results?[0].partOfSpeech {
+            categoryImageView.isHidden = false
             categoryImageView.image = UIImage(named: category)
+        } else {
+            categoryImageView.isHidden = true
         }
         
         if let definition =  word.results?[0].definition {
             definitionLabel.text = definition
+        } else {
+            definitionLabel.text = ""
         }
         
         wordLabel.zoomIn(duration: 0.5)
@@ -88,35 +97,8 @@ class HomeViewController: UIViewController {
         definitionLabel.zoomIn(duration: 0.5)
     }
 
-    @objc func fetchRandomWord() {
-        guard let wordsURL = URL(string: "https://wordsapiv1.p.rapidapi.com/words/?random=true") else {
-            print("Invalid URL")
-            return
-        }
-        
-        let apiKey = WORDSAPI_KEY
-        
-        var urlRequest = URLRequest(url: wordsURL)
-        urlRequest.httpMethod = "GET"
-        urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
-        urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
-                
-
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-    
-            do {
-                let word = try JSONDecoder().decode(Word.self, from: data)
-                DispatchQueue.main.async {
-                    self.refreshCard(word: word)
-                }
-                print(word)
-            } catch {
-                print("Failed to convert \(error.localizedDescription)")
-            }
-        }.resume()
+    @objc func randomWordButtonTapped() {
+        wordManager.fetchRandomWord()
     }
 }
 
@@ -173,36 +155,28 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         if let searchedWord = searchBar.searchTextField.text  {
-            fetchInputWord(input: searchedWord.lowercased())
+            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
         }
         
     }
 
-    func fetchInputWord(input: String) {
-        guard let wordsURL = URL(string: "https://wordsapiv1.p.rapidapi.com/words/\(input)") else {
-            print("Invalid URL")
-            return
-        }
-        
-        let apiKey = WORDSAPI_KEY
-        
-        var urlRequest = URLRequest(url: wordsURL)
-        urlRequest.httpMethod = "GET"
-        urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
-        urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
-                
+}
 
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            guard let data = data, error == nil else {
-                return
-            }
-            
-            do {
-                let words = try JSONDecoder().decode(Word.self, from: data)
-                print(words)
-            } catch {
-                print("Failed to convert \(error.localizedDescription)")
-            }
-        }.resume()
+extension HomeViewController: WordManegerDelegate {
+    
+    func didUpdateWord(_ wordManager: WordManager, word: Word) {
+        DispatchQueue.main.async {
+            self.refreshCard(word: word)
+        print("refreshing card")
+        }
     }
+    
+    func didUpdateTableView(_ wordManager: WordManager, word: Word) {
+        print("update tableview")
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
+    }
+    
 }
