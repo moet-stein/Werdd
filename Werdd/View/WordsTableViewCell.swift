@@ -75,10 +75,22 @@ class WordsTableViewCell: UITableViewCell {
     }
     
     
-    func setupCellContent(image: String, word: String, definition: String) {
-        categoryImage.image = UIImage(named: image)
+    func setupCellContent(image: String?, word: String, definition: String?) {
+        if let partOfSpeech = image {
+            categoryImage.isHidden = false
+            categoryImage.image = UIImage(named: partOfSpeech)
+        } else {
+            categoryImage.isHidden = true
+        }
+        
         wordLabel.text = word
-        definitionLabel.text = definition
+        
+        if let definition = definition {
+            definitionLabel.text = definition
+        } else {
+            definitionLabel.text = ""
+        }
+        
     }
     
     required init?(coder: NSCoder) {

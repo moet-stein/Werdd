@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     private var contentView: DetailsView!
-    private var selectedWord: WordDetail
+    private var selectedWord: SingleResult
 
     override func loadView() {
         contentView = DetailsView(selectedWord: selectedWord)
@@ -17,7 +17,7 @@ class DetailsViewController: UIViewController {
         
 //        navigationItem.title = selectedWord.word
 //        navigationController?.navigationBar.barTintColor = UIColor(named: "LightGreen")
-//        
+//
 //
 //        let attributes = [
 //            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen"),
@@ -28,7 +28,7 @@ class DetailsViewController: UIViewController {
 //        navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
     }
     
-    init(selectedWord: WordDetail) {
+    init(selectedWord: SingleResult) {
         self.selectedWord = selectedWord
         super.init(nibName: nil, bundle: nil)
     }

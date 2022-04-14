@@ -51,28 +51,31 @@ class DetailsCardView: UIView {
         ])
     }
     
-    func insertWords(words: String) {
-        let label: UILabel = {
-            let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
-            label.text = words
-            label.textColor = .white
-            label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
-            label.lineBreakMode = .byWordWrapping
-            label.numberOfLines = 0
-            return label
-        }()
-        addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: topAnchor, constant: 20),
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            label.widthAnchor.constraint(equalToConstant: 270),
-        ])
+    func insertWords(words: [String]?) {
+        if let words = words {
+            let combinedWords = words.joined(separator: ", ")
+            let label: UILabel = {
+                let label = UILabel()
+                label.translatesAutoresizingMaskIntoConstraints = false
+                label.text = combinedWords
+                label.textColor = .white
+                label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
+                label.lineBreakMode = .byWordWrapping
+                label.numberOfLines = 0
+                return label
+            }()
+            addSubview(label)
+            
+            NSLayoutConstraint.activate([
+                label.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+                label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+                label.widthAnchor.constraint(equalToConstant: 270),
+            ])
+        }
         
     }
     
-    func insertUsages(usages:[String]) {
+    func insertUsages(usages:[String]?) {
         let verticalStackView: UIStackView = {
             let stackView = UIStackView()
             stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,18 +93,20 @@ class DetailsCardView: UIView {
             verticalStackView.widthAnchor.constraint(equalToConstant: 270),
         ])
         
-        for usage in usages {
-            let label: UILabel = {
-                let label = UILabel()
-                label.translatesAutoresizingMaskIntoConstraints = false
-                label.text = usage
-                label.textColor = .white
-                label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
-                label.lineBreakMode = .byWordWrapping
-                label.numberOfLines = 0
-                return label
-            }()
-            verticalStackView.addArrangedSubview(label)
+        if let usages = usages {
+            for usage in usages {
+                let label: UILabel = {
+                    let label = UILabel()
+                    label.translatesAutoresizingMaskIntoConstraints = false
+                    label.text = usage
+                    label.textColor = .white
+                    label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
+                    label.lineBreakMode = .byWordWrapping
+                    label.numberOfLines = 0
+                    return label
+                }()
+                verticalStackView.addArrangedSubview(label)
+            }
         }
     }
     

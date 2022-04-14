@@ -9,7 +9,7 @@ import UIKit
 
 class HomeView: UIView {
     
-    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
+//    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     let scrollView: UIScrollView = {
         let scrollView = UIScrollView()

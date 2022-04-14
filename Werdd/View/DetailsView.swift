@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsView: UIView {
-    private var selectedWord: WordDetail
+    private var selectedWord: SingleResult
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -48,7 +48,7 @@ class DetailsView: UIView {
             bgColorName: "DarkGreen",
             cardHeight: 100,
             bottomLabelText: "Synonyms")
-        view.insertWords(words: "glad, cheerful")
+//        view.insertWords(words: "glad, cheerful")
         return view
     }()
     
@@ -58,7 +58,7 @@ class DetailsView: UIView {
             cardHeight: 100,
             bottomLabelText: "Antonyms")
         
-        view.insertWords(words: "unhappy, sad")
+//        view.insertWords(words: "unhappy, sad")
         return view
     }()
     
@@ -68,7 +68,7 @@ class DetailsView: UIView {
             cardHeight: 180,
             bottomLabelText: "Example Usage")
         
-        view.insertUsages(usages: ["a happy smile", "spent many happy days on the beach", "a happy marriage"])
+//        view.insertUsages(usages: ["a happy smile", "spent many happy days on the beach", "a happy marriage"])
         return view
     }()
     
@@ -93,13 +93,14 @@ class DetailsView: UIView {
     
     
     
-    init(selectedWord: WordDetail) {
+    init(selectedWord: SingleResult) {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         
         setScrollView()
         setUpUI()
         setUpDefinitionCard()
+        setUpContent()
     }
     
     required init?(coder: NSCoder) {
@@ -139,9 +140,6 @@ class DetailsView: UIView {
     }
     
     private func setUpDefinitionCard() {
-        categoryLabel.text = selectedWord.category
-        definitionLabel.text = selectedWord.definition
-        
         definitionCard.addSubview(categoryLabel)
         definitionCard.addSubview(definitionLabel)
         
@@ -155,5 +153,15 @@ class DetailsView: UIView {
             definitionLabel.widthAnchor.constraint(equalToConstant: 270),
             
         ])
+    }
+    
+    private func setUpContent() {
+        categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
+        definitionLabel.text = selectedWord.result?.definition ?? ""
+        
+        antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
+        synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
+        usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+        
     }
 }

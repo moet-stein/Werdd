@@ -11,7 +11,7 @@ class HomeViewController: UIViewController {
     
     var wordManager = WordManager()
     
-    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
+    private var words = [SingleResult]()
     
     private var contentView: HomeView!
     
@@ -23,6 +23,7 @@ class HomeViewController: UIViewController {
     private var wordsTableView: UITableView!
     
     private let searchBar:UISearchBar = UISearchBar()
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -36,6 +37,7 @@ class HomeViewController: UIViewController {
     
     override func loadView() {
         wordManager.delegate = self
+        
         contentView = HomeView()
         view = contentView
         
@@ -64,6 +66,7 @@ class HomeViewController: UIViewController {
         wordsTableView.tableHeaderView = searchBar
         
         wordManager.fetchRandomWord()
+        wordManager.fetchInputWord(inputWord: "grateful")
         addRandomButtonTarget()
     }
     
@@ -89,7 +92,7 @@ class HomeViewController: UIViewController {
         if let definition =  word.results?[0].definition {
             definitionLabel.text = definition
         } else {
-            definitionLabel.text = ""
+            definitionLabel.text = "No definition found for this word"
         }
         
         wordLabel.zoomIn(duration: 0.5)
@@ -116,7 +119,7 @@ extension HomeViewController : UITableViewDataSource {
         }
         
         let wordForRow = words[indexPath.row]
-        cell.setupCellContent(image: wordForRow.category, word: wordForRow.word, definition: wordForRow.definition)
+        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.separatorStyle = .none
         
@@ -167,12 +170,21 @@ extension HomeViewController: WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word) {
         DispatchQueue.main.async {
             self.refreshCard(word: word)
-        print("refreshing card")
         }
     }
     
     func didUpdateTableView(_ wordManager: WordManager, word: Word) {
-        print("update tableview")
+        words = [SingleResult]()
+        DispatchQueue.main.async {
+            if let results = word.results {
+                for result in results {
+                    self.words.append(SingleResult(word: word.word, result: result))
+                }
+            }  else {
+                self.words.append(SingleResult(word: word.word, result: nil))
+            }
+            self.wordsTableView.reloadData()
+        }
     }
     
     func didFailWithError(error: Error) {

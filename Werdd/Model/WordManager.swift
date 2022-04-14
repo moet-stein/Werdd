@@ -58,23 +58,4 @@ struct WordManager {
         }
         
     }
-    
-    
-    func parseJSON(_ wordData: Data) -> Word? {
-        let decoder = JSONDecoder()
-        do {
-            let decodedDdata = try decoder.decode(Word.self, from: wordData)
-            let word = decodedDdata.word
-            let results = decodedDdata.results
-            let frequency = decodedDdata.frequency
-            
-            let wordData = Word(word: word, results: results, frequency: frequency)
-            return wordData
-            
-        } catch {
-            self.delegate?.didFailWithError(error: error)
-            return nil
-        }
-    }
-    
 }
