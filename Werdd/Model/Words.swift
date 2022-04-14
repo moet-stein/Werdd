@@ -80,13 +80,13 @@ class Adverb: WordDetail {
 
 struct Word: Codable {
     var word: String
-    var results: [Result]
+    var results: [Result]?
     var frequency: Double?
 }
 
 struct Result: Codable {
-    var definition: String
-    var partOfSpeech: String
+    var definition: String?
+    var partOfSpeech: String?
     var synonyms: [String]?
     var antonyms: [String]?
     var examples: [String]?

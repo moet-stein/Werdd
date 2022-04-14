@@ -12,6 +12,12 @@ class HomeViewController: UIViewController {
     private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     private var contentView: HomeView!
+    
+    private var wordLabel: UILabel!
+    private var categoryImageView: CategoryImage!
+    private var definitionLabel: UILabel!
+    
+    private var randomWordButton: IconButton!
     private var wordsTableView: UITableView!
     
     private let searchBar:UISearchBar = UISearchBar()
@@ -30,6 +36,12 @@ class HomeViewController: UIViewController {
         contentView = HomeView()
         view = contentView
         
+        wordLabel = contentView.wordLabel
+        categoryImageView = contentView.categoryImageView
+        definitionLabel = contentView.definitionLabel
+        
+        randomWordButton = contentView.randomWordButton
+        
         wordsTableView = contentView.wordsTableView
         wordsTableView.delegate = self
         wordsTableView.dataSource = self
@@ -46,13 +58,66 @@ class HomeViewController: UIViewController {
         searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
         searchBar.delegate = self
         wordsTableView.tableHeaderView = searchBar
+        
+        fetchRandomWord()
+        addRandomButtonTarget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
+    
+    private func addRandomButtonTarget() {
+        randomWordButton.addTarget(self, action: #selector(fetchRandomWord), for: .touchUpInside)
+    }
+    
+    private func refreshCard(word: Word) {
+        let word = word
+        wordLabel.text = word.word
+        if let category = word.results?[0].partOfSpeech {
+            categoryImageView.image = UIImage(named: category)
+        }
+        
+        if let definition =  word.results?[0].definition {
+            definitionLabel.text = definition
+        }
+        
+        wordLabel.zoomIn(duration: 0.5)
+        categoryImageView.zoomIn(duration: 0.5)
+        definitionLabel.zoomIn(duration: 0.5)
+    }
 
+    @objc func fetchRandomWord() {
+        guard let wordsURL = URL(string: "https://wordsapiv1.p.rapidapi.com/words/?random=true") else {
+            print("Invalid URL")
+            return
+        }
+        
+        let apiKey = WORDSAPI_KEY
+        
+        var urlRequest = URLRequest(url: wordsURL)
+        urlRequest.httpMethod = "GET"
+        urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
+        urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
+                
+
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
+            guard let data = data, error == nil else {
+                return
+            }
+    
+            do {
+                let word = try JSONDecoder().decode(Word.self, from: data)
+                DispatchQueue.main.async {
+                    self.refreshCard(word: word)
+                }
+                print(word)
+            } catch {
+                print("Failed to convert \(error.localizedDescription)")
+            }
+        }.resume()
+    }
 }
 
 

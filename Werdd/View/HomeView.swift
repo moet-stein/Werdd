@@ -8,6 +8,7 @@
 import UIKit
 
 class HomeView: UIView {
+    
     private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
     let scrollView: UIScrollView = {
@@ -72,8 +73,8 @@ class HomeView: UIView {
         let button = IconButton(
             size: 35,
             systemName: "arrow.clockwise.circle",
-            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00),
-            completion: refreshCard)
+            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        )
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -90,22 +91,10 @@ class HomeView: UIView {
         return tableView
     }()
     
-    private func refreshCard() {
-        let randomWord = words.randomElement()
-        wordLabel.text = randomWord?.word
-        categoryImageView.image = UIImage(named: randomWord?.category ?? "noun")
-        wordLabel.zoomIn(duration: 0.5)
-        categoryImageView.zoomIn(duration: 0.5)
-        definitionLabel.text = randomWord?.definition
-        definitionLabel.zoomIn(duration: 0.5)
-    }
     
     init() {
-        //        self.presentable = presentable
-        
         super.init(frame: .zero)
         setUpUI()
-        refreshCard()
     }
     
     required init?(coder: NSCoder) {
