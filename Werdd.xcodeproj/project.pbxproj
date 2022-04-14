@@ -21,6 +21,7 @@
 		6051048A27FB34DF00AB9DEC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051048927FB34DF00AB9DEC /* DetailsViewController.swift */; };
 		6051048C27FB362300AB9DEC /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051048B27FB362300AB9DEC /* DetailsView.swift */; };
 		6051048E27FC3F1400AB9DEC /* DetailsCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051048D27FC3F1400AB9DEC /* DetailsCardView.swift */; };
+		605104B728081E1100AB9DEC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605104B628081E1100AB9DEC /* Constants.swift */; };
 		60537CD327F1B66100917B50 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60537CD227F1B66100917B50 /* HomeView.swift */; };
 		605C805D27E1EC54002EB0BA /* Words.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Words.swift */; };
 		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
@@ -43,7 +44,7 @@
 		6051048927FB34DF00AB9DEC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		6051048B27FB362300AB9DEC /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
 		6051048D27FC3F1400AB9DEC /* DetailsCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCardView.swift; sourceTree = "<group>"; };
-		605104B52807197900AB9DEC /* Secrets.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Secrets.xcconfig; sourceTree = "<group>"; };
+		605104B628081E1100AB9DEC /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		60537CD227F1B66100917B50 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		605C805C27E1EC54002EB0BA /* Words.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Words.swift; sourceTree = "<group>"; };
 		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
@@ -87,7 +88,7 @@
 				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
 				60142F4E27D7503900F1B845 /* Assets.xcassets */,
 				60142F5327D7503900F1B845 /* Info.plist */,
-				605104B52807197900AB9DEC /* Secrets.xcconfig */,
+				605104B628081E1100AB9DEC /* Constants.swift */,
 			);
 			path = Werdd;
 			sourceTree = "<group>";
@@ -219,6 +220,7 @@
 				60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */,
 				6051048E27FC3F1400AB9DEC /* DetailsCardView.swift in Sources */,
 				6051042F27F47C4500AB9DEC /* CategoryImage.swift in Sources */,
+				605104B728081E1100AB9DEC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,7 +240,6 @@
 /* Begin XCBuildConfiguration section */
 		60142F5427D7503900F1B845 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 605104B52807197900AB9DEC /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -300,7 +301,6 @@
 		};
 		60142F5527D7503900F1B845 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 605104B52807197900AB9DEC /* Secrets.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;

@@ -119,17 +119,12 @@ extension HomeViewController: UISearchBarDelegate {
             return
         }
         
-        let apiKey = Bundle.main.object(forInfoDictionaryKey: "WORDSAPI_KEY") as? String
-        
-        guard let key = apiKey, !key.isEmpty else {
-            print("API key does not exist")
-            return
-        }
+        let apiKey = WORDSAPI_KEY
         
         var urlRequest = URLRequest(url: wordsURL)
         urlRequest.httpMethod = "GET"
         urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
-        urlRequest.setValue(key, forHTTPHeaderField: "X-RapidAPI-Key")
+        urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
                 
 
         URLSession.shared.dataTask(with: urlRequest) { data, response, error in

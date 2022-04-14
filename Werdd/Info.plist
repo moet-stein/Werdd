@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>WORDSAPI_KEY</key>
-	<string>598e7abf2cmsh26c4f18bc6f13f9p1b8309jsnd187f9d0f4cc</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>LeagueSpartan-ExtraLight.ttf</string>
