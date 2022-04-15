@@ -15,6 +15,9 @@ class HomeViewController: UIViewController {
     
     private var contentView: HomeView!
     
+    private var cardSpinner: UIActivityIndicatorView!
+    private var tableViewSpinner: UIActivityIndicatorView!
+    
     private var wordLabel: UILabel!
     private var categoryImageView: CategoryImage!
     private var definitionLabel: UILabel!
@@ -41,6 +44,9 @@ class HomeViewController: UIViewController {
         contentView = HomeView()
         view = contentView
         
+        cardSpinner = contentView.cardSpinner
+        tableViewSpinner = contentView.tableViewSpinner
+        
         wordLabel = contentView.wordLabel
         categoryImageView = contentView.categoryImageView
         definitionLabel = contentView.definitionLabel
@@ -63,10 +69,11 @@ class HomeViewController: UIViewController {
         searchBar.layer.borderWidth = 1
         searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
         searchBar.delegate = self
+        
         wordsTableView.tableHeaderView = searchBar
         
-        wordManager.fetchRandomWord()
-        wordManager.fetchInputWord(inputWord: "grateful")
+        wordManager.fetchRandomWord(spinner: cardSpinner)
+        wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
         addRandomButtonTarget()
     }
     
@@ -101,7 +108,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc func randomWordButtonTapped() {
-        wordManager.fetchRandomWord()
+        wordManager.fetchRandomWord(spinner: cardSpinner)
     }
 }
 
@@ -158,7 +165,7 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         if let searchedWord = searchBar.searchTextField.text  {
-            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
+            wordManager.fetchInputWord(inputWord: searchedWord.lowercased(), spinner: tableViewSpinner)
         }
         
     }
@@ -170,6 +177,7 @@ extension HomeViewController: WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word) {
         DispatchQueue.main.async {
             self.refreshCard(word: word)
+            self.cardSpinner.stopAnimating()
         }
     }
     
@@ -184,6 +192,7 @@ extension HomeViewController: WordManegerDelegate {
                 self.words.append(SingleResult(word: word.word, result: nil))
             }
             self.wordsTableView.reloadData()
+            self.tableViewSpinner.stopAnimating()
         }
     }
     

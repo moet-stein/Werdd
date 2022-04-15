@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 protocol WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word)
     func didUpdateTableView(_ wordManager: WordManager, word: Word)
@@ -16,20 +17,20 @@ protocol WordManegerDelegate {
 struct WordManager {    
     var delegate: WordManegerDelegate?
     
-    func fetchInputWord(inputWord: String) {
+    func fetchInputWord(inputWord: String, spinner: UIActivityIndicatorView) {
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(inputWord)"
         
-        performRequest(with: urlString, random: false)
+        performRequest(with: urlString, random: false, spinner: spinner)
     }
     
-    func fetchRandomWord() {
+    func fetchRandomWord(spinner: UIActivityIndicatorView) {
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/?random=true"
         
-        performRequest(with: urlString, random: true)
+        performRequest(with: urlString, random: true, spinner: spinner)
     }
 
     
-    func performRequest(with urlString: String, random: Bool) {
+    func performRequest(with urlString: String, random: Bool, spinner: UIActivityIndicatorView) {
         if let url = URL(string: urlString) {
             
             let apiKey = WORDSAPI_KEY
@@ -39,7 +40,9 @@ struct WordManager {
             urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
             urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
             
-
+            
+            spinner.startAnimating()
+            
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 guard let data = data, error == nil else {
                     return
@@ -55,6 +58,7 @@ struct WordManager {
                     print("Failed to convert \(error.localizedDescription)")
                 }
             }.resume()
+            
         }
         
     }

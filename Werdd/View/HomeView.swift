@@ -36,6 +36,12 @@ class HomeView: UIView {
         return roundedView
     }()
     
+    let cardSpinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     // MARK: - Components Inside the car
     
     let wordLabel: UILabel = {
@@ -91,6 +97,12 @@ class HomeView: UIView {
         return tableView
     }()
     
+    let tableViewSpinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
     
     init() {
         super.init(frame: .zero)
@@ -113,6 +125,9 @@ class HomeView: UIView {
         scrollView.addSubview(cardView)
         scrollView.addSubview(wordsTableView)
         
+        cardView.addSubview(cardSpinner)
+        wordsTableView.addSubview(tableViewSpinner)
+        
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -129,6 +144,8 @@ class HomeView: UIView {
             cardView.widthAnchor.constraint(equalToConstant: 350),
             cardView.heightAnchor.constraint(equalToConstant: 180),
             
+            cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            cardSpinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
             
             wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
@@ -136,6 +153,9 @@ class HomeView: UIView {
             wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             wordsTableView.heightAnchor.constraint(equalToConstant: 500),
             wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
+            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor)
             
         ])
     }
