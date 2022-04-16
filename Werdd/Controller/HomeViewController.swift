@@ -108,6 +108,7 @@ class HomeViewController: UIViewController {
     }
 
     @objc func randomWordButtonTapped() {
+        randomWordButton.isUserInteractionEnabled = false
         wordManager.fetchRandomWord(spinner: cardSpinner)
     }
 }
@@ -164,6 +165,7 @@ extension HomeViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+        wordsTableView.isUserInteractionEnabled = false
         if let searchedWord = searchBar.searchTextField.text  {
             wordManager.fetchInputWord(inputWord: searchedWord.lowercased(), spinner: tableViewSpinner)
         }
@@ -178,6 +180,7 @@ extension HomeViewController: WordManegerDelegate {
         DispatchQueue.main.async {
             self.refreshCard(word: word)
             self.cardSpinner.stopAnimating()
+            self.randomWordButton.isUserInteractionEnabled = true
         }
     }
     
@@ -193,6 +196,7 @@ extension HomeViewController: WordManegerDelegate {
             }
             self.wordsTableView.reloadData()
             self.tableViewSpinner.stopAnimating()
+            self.wordsTableView.isUserInteractionEnabled = true
         }
     }
     

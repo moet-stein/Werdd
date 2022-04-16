@@ -40,7 +40,6 @@ struct WordManager {
             urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
             urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
             
-            
             spinner.startAnimating()
             
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
