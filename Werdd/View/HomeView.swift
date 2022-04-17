@@ -52,7 +52,6 @@ class HomeView: UIView {
         label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byWordWrapping
         label.numberOfLines = 0
-        label.preferredMaxLayoutWidth = 180
         return label
     }()
     
@@ -192,6 +191,7 @@ class HomeView: UIView {
         NSLayoutConstraint.activate([
             wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
+            wordLabel.widthAnchor.constraint(equalToConstant: 250),
             
             categoryImageView.centerYAnchor.constraint(equalTo: wordLabel.centerYAnchor),
             categoryImageView.leadingAnchor.constraint(equalTo: wordLabel.trailingAnchor, constant: 20),

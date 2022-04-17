@@ -7,6 +7,9 @@
 
 import Foundation
 import UIKit
+
+
+
 protocol WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word)
     func didUpdateTableView(_ wordManager: WordManager, word: Word)
@@ -14,7 +17,8 @@ protocol WordManegerDelegate {
 }
 
 
-struct WordManager {    
+struct WordManager {
+    
     var delegate: WordManegerDelegate?
     
     func fetchInputWord(inputWord: String, spinner: UIActivityIndicatorView) {
