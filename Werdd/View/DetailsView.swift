@@ -126,9 +126,9 @@ class DetailsView: UIView {
         NSLayoutConstraint.activate([
             wordLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
             wordLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            wordLabel.widthAnchor.constraint(equalToConstant: 200),
+            wordLabel.widthAnchor.constraint(equalToConstant: 300),
             
-            outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor),
+            outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 10),
             outerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             outerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
         ])

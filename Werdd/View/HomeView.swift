@@ -68,7 +68,7 @@ class HomeView: UIView {
         label.font = UIFont(name: "LeagueSpartan-Light", size: 19)
         label.textColor = UIColor(named: "DarkGreen")
         label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 0
+        label.numberOfLines = 4
         label.textAlignment = .left
         return label
     }()
