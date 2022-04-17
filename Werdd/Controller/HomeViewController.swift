@@ -26,6 +26,8 @@ class HomeViewController: UIViewController {
     private var wordsTableView: UITableView!
     
     private let searchBar:UISearchBar = UISearchBar()
+    
+    private var noWordFoundInTableView: NoWordFoundView!
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,6 +73,8 @@ class HomeViewController: UIViewController {
         searchBar.delegate = self
         
         wordsTableView.tableHeaderView = searchBar
+        
+        noWordFoundInTableView = contentView.noWordFoundInTableView
         
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
@@ -138,7 +142,6 @@ extension HomeViewController : UITableViewDataSource {
 
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("\(words[indexPath.row].word)")
         let selectedWord = words[indexPath.row]
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
@@ -194,13 +197,29 @@ extension HomeViewController: WordManegerDelegate {
             }  else {
                 self.words.append(SingleResult(word: word.word, result: nil))
             }
+            if !self.noWordFoundInTableView.isHidden {
+                self.noWordFoundInTableView.isHidden = true
+            }
             self.wordsTableView.reloadData()
             self.tableViewSpinner.stopAnimating()
             self.wordsTableView.isUserInteractionEnabled = true
         }
     }
     
-    func didFailWithError(error: Error) {
+    func didFailWithError(error: Error, random: Bool) {
+        DispatchQueue.main.async {
+            if random {
+                self.cardSpinner.stopAnimating()
+                self.randomWordButton.isUserInteractionEnabled = true
+            } else {
+                self.words = []
+                self.wordsTableView.reloadData()
+                self.noWordFoundInTableView.isHidden = false
+                self.tableViewSpinner.stopAnimating()
+                self.wordsTableView.isUserInteractionEnabled = true
+            }
+            
+        }
         print(error)
     }
     

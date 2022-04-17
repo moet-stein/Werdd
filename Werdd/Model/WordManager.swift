@@ -10,7 +10,7 @@ import UIKit
 protocol WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word)
     func didUpdateTableView(_ wordManager: WordManager, word: Word)
-    func didFailWithError(error: Error)
+    func didFailWithError(error: Error, random: Bool)
 }
 
 
@@ -54,6 +54,7 @@ struct WordManager {
                     
                     print(word)
                 } catch {
+                    random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
                     print("Failed to convert \(error.localizedDescription)")
                 }
             }.resume()

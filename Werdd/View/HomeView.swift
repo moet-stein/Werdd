@@ -103,6 +103,11 @@ class HomeView: UIView {
         return spinner
     }()
     
+    let noWordFoundInTableView: NoWordFoundView = {
+       let view = NoWordFoundView(labelText: "No Word Found")
+        view.isHidden = true
+        return view
+    }()
     
     init() {
         super.init(frame: .zero)
@@ -127,6 +132,7 @@ class HomeView: UIView {
         
         cardView.addSubview(cardSpinner)
         wordsTableView.addSubview(tableViewSpinner)
+        wordsTableView.addSubview(noWordFoundInTableView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -155,7 +161,12 @@ class HomeView: UIView {
             wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor)
+            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
+            
+            noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
+            noWordFoundInTableView.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
+            noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
+            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 150)
             
         ])
     }
