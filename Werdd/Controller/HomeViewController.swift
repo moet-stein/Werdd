@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     private let searchBar:UISearchBar = UISearchBar()
     
     private var noWordFoundInTableView: NoWordFoundView!
+    private var noWordFoundInRandomCard: NoWordFoundView!
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -75,6 +76,7 @@ class HomeViewController: UIViewController {
         wordsTableView.tableHeaderView = searchBar
         
         noWordFoundInTableView = contentView.noWordFoundInTableView
+        noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
         
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
@@ -181,6 +183,13 @@ extension HomeViewController: WordManegerDelegate {
     
     func didUpdateWord(_ wordManager: WordManager, word: Word) {
         DispatchQueue.main.async {
+            self.wordLabel.isHidden = false
+            self.definitionLabel.isHidden = false
+            self.categoryImageView.isHidden = false
+            if !self.noWordFoundInRandomCard.isHidden {
+                self.noWordFoundInRandomCard.isHidden = true
+            }
+
             self.refreshCard(word: word)
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
@@ -209,6 +218,10 @@ extension HomeViewController: WordManegerDelegate {
     func didFailWithError(error: Error, random: Bool) {
         DispatchQueue.main.async {
             if random {
+                self.wordLabel.isHidden = true
+                self.definitionLabel.isHidden = true
+                self.categoryImageView.isHidden = true
+                self.noWordFoundInRandomCard.isHidden = false
                 self.cardSpinner.stopAnimating()
                 self.randomWordButton.isUserInteractionEnabled = true
             } else {

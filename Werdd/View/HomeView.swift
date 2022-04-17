@@ -85,6 +85,12 @@ class HomeView: UIView {
         return button
     }()
     
+    let noWordFoundInRandomCard: NoWordFoundView = {
+        let view = NoWordFoundView(labelText: "No Random Word Generated")
+        view.isHidden = true
+        return view
+    }()
+    
     // MARK: - TableView
     
     let wordsTableView: UITableView = {
@@ -104,7 +110,7 @@ class HomeView: UIView {
     }()
     
     let noWordFoundInTableView: NoWordFoundView = {
-       let view = NoWordFoundView(labelText: "No Word Found")
+        let view = NoWordFoundView(labelText: "No Word Found")
         view.isHidden = true
         return view
     }()
@@ -131,6 +137,7 @@ class HomeView: UIView {
         scrollView.addSubview(wordsTableView)
         
         cardView.addSubview(cardSpinner)
+        cardView.addSubview(noWordFoundInRandomCard)
         wordsTableView.addSubview(tableViewSpinner)
         wordsTableView.addSubview(noWordFoundInTableView)
         
@@ -153,6 +160,11 @@ class HomeView: UIView {
             cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
             cardSpinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
             
+            noWordFoundInRandomCard.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
+            noWordFoundInRandomCard.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
+            noWordFoundInRandomCard.widthAnchor.constraint(equalToConstant: 250),
+            noWordFoundInRandomCard.heightAnchor.constraint(equalToConstant: 100),
+            
             wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
             wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -164,9 +176,9 @@ class HomeView: UIView {
             tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
             
             noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-            noWordFoundInTableView.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
+            noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
             noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
-            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 150)
+            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100)
             
         ])
     }

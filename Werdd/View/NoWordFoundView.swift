@@ -17,6 +17,8 @@ class NoWordFoundView: UIView {
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
         label.textColor = UIColor(named: "SoftBrown")
         label.textAlignment = .center
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
 
