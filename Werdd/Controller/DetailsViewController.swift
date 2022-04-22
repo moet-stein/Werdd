@@ -10,22 +10,28 @@ import UIKit
 class DetailsViewController: UIViewController {
     private var contentView: DetailsView!
     private var selectedWord: SingleResult
-
+    
+    private var favoriteButton: IconButton!
+    
     override func loadView() {
         contentView = DetailsView(selectedWord: selectedWord)
         view = contentView
         
-//        navigationItem.title = selectedWord.word
-//        navigationController?.navigationBar.barTintColor = UIColor(named: "LightGreen")
-//
-//
-//        let attributes = [
-//            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen"),
-////            NSAttributedString.Key.font: UIFont(name: "LeagueSpartan-Bold", size: 28),
-//        ]
-//        navigationController?.navigationBar.prefersLargeTitles = true
-//
-//        navigationController?.navigationBar.titleTextAttributes = attributes as [NSAttributedString.Key : Any]
+        favoriteButton = contentView.favoriteButton
+        addButtonTarget()
+    }
+    
+    private func addButtonTarget() {
+        favoriteButton.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
+    }
+    
+    @objc func favoriteTapped(sender: UIButton) {
+        let button = sender as! IconButton
+        
+        sender.isSelected = !sender.isSelected
+        
+        button.toggleFavorite()
+        
     }
     
     init(selectedWord: SingleResult) {

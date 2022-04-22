@@ -25,7 +25,7 @@ class IconButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpUI() {
+    private func setUpUI() {
         let config = UIImage.SymbolConfiguration(pointSize: size, weight: .bold, scale: .medium)
         let randomImage = UIImage(systemName: systemName, withConfiguration: config)
         tintColor = iconColor
@@ -35,6 +35,19 @@ class IconButton: UIButton {
     
     @objc func buttonPressed() {
         rotate()
+    }
+    
+    func toggleFavorite() {
+        let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .small)
+        if isSelected {
+            let heartSF = UIImage(systemName: "heart.fill", withConfiguration: config)
+            setImage(heartSF, for: .selected)
+            print("isselected")
+        } else {
+            let heartSF = UIImage(systemName: "heart", withConfiguration: config)
+            setImage(heartSF, for: .normal)
+            print("isNOTselected")
+        }
     }
     
 }
