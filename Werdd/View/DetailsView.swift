@@ -17,6 +17,13 @@ class DetailsView: UIView {
         return scrollView
     }()
     
+    private let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(named: "ViewLightYellow")
+        return view
+    }()
+    
     private let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -24,6 +31,12 @@ class DetailsView: UIView {
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
         label.textColor = UIColor(named: "DarkGreen")
         return label
+    }()
+    
+    let favoriteButton: IconButton = {
+       let button = IconButton(size: 40, systemName: "heart", iconColor: UIColor(red: 0.86, green: 0.42, blue: 0.59, alpha: 1.00))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     private let outerStackView: UIStackView = {
@@ -97,7 +110,6 @@ class DetailsView: UIView {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         
-        setScrollView()
         setUpUI()
         setUpDefinitionCard()
         setUpContent()
@@ -107,30 +119,41 @@ class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setScrollView() {
+    
+    private func setUpUI() {
         addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(wordLabel)
+        contentView.addSubview(favoriteButton)
+        contentView.addSubview(outerStackView)
+        
+        let scrollFrameGuide = scrollView.frameLayoutGuide
+        let scrollContentGuide = scrollView.contentLayoutGuide
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
-    }
-    
-    private func setUpUI() {
-        wordLabel.text = selectedWord.word
-        scrollView.addSubview(wordLabel)
-        scrollView.addSubview(outerStackView)
-        
-        NSLayoutConstraint.activate([
-            wordLabel.topAnchor.constraint(equalTo: scrollView.topAnchor),
-            wordLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollContentGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollContentGuide.trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollContentGuide.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollContentGuide.bottomAnchor),
+            
+            contentView.leadingAnchor.constraint(equalTo: scrollFrameGuide.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollFrameGuide.trailingAnchor),
+            
+            favoriteButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
+            
+            wordLabel.topAnchor.constraint(equalTo: favoriteButton.bottomAnchor),
+            wordLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             wordLabel.widthAnchor.constraint(equalToConstant: 300),
             
             outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 10),
-            outerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            outerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor)
+            outerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            outerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
         
         outerStackView.addArrangedSubview(definitionCard)
@@ -156,6 +179,7 @@ class DetailsView: UIView {
     }
     
     private func setUpContent() {
+        wordLabel.text = selectedWord.word
         categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
         definitionLabel.text = selectedWord.result?.definition ?? ""
         
