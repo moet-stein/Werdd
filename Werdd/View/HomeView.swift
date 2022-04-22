@@ -11,14 +11,14 @@ class HomeView: UIView {
     
 //    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
     
-    let scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "LightGreen")
         return scrollView
     }()
     
-    let titleLabel: UILabel = {
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Werdd."
@@ -28,7 +28,16 @@ class HomeView: UIView {
         return label
     }()
     
-    let cardView: UIView = {
+    let viewFavoritesButton: IconButton = {
+       let button = IconButton(
+        size: 40,
+        systemName: "heart.text.square.fill",
+        iconColor: UIColor(red: 0.86, green: 0.42, blue: 0.59, alpha: 1.00))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private let cardView: UIView = {
         let roundedView = UIView()
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(named: "ViewLightYellow")
@@ -132,6 +141,7 @@ class HomeView: UIView {
     private func createOuterComponents() {
         addSubview(scrollView)
         scrollView.addSubview(titleLabel)
+        scrollView.addSubview(viewFavoritesButton)
         scrollView.addSubview(cardView)
         scrollView.addSubview(wordsTableView)
         
@@ -150,6 +160,9 @@ class HomeView: UIView {
             titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
             titleLabel.widthAnchor.constraint(equalToConstant: 350),
             titleLabel.heightAnchor.constraint(equalToConstant: 60),
+            
+            viewFavoritesButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
+            viewFavoritesButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
             
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             cardView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
