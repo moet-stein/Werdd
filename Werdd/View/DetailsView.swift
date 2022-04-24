@@ -30,6 +30,8 @@ class DetailsView: UIView {
         label.textAlignment = .center
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 40)
         label.textColor = UIColor(named: "DarkGreen")
+        label.numberOfLines = 0
+        label.lineBreakMode = .byWordWrapping
         return label
     }()
     
@@ -48,10 +50,10 @@ class DetailsView: UIView {
         return view
     }()
     
-    private let definitionCard: DetailsCardView = {
+    let definitionCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "LightGreen",
-            cardHeight: 150,
+            cardHeight: 180,
             bottomLabelText: "Definition")
         return view
     }()
@@ -59,7 +61,7 @@ class DetailsView: UIView {
     let synonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "DarkGreen",
-            cardHeight: 100,
+            cardHeight: 120,
             bottomLabelText: "Synonyms")
         return view
     }()
@@ -67,7 +69,7 @@ class DetailsView: UIView {
     let antonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "SoftBrown",
-            cardHeight: 100,
+            cardHeight: 120,
             bottomLabelText: "Antonyms")
         return view
     }()

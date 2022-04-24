@@ -82,6 +82,15 @@ class DetailsViewController: UIViewController {
             favoriteButton.toggleFavorite()
         }
         
+        if let wordText = wordLabel.text {
+            if wordText.count > 14 {
+                wordLabel.heightAnchor.constraint(equalToConstant: 90).isActive = true
+            } else {
+                wordLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+            }
+        }
+
+        
         
     }
     
