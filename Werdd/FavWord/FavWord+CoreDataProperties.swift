@@ -22,6 +22,7 @@ extension FavWord {
     @NSManaged public var antonyms: [String]?
     @NSManaged public var examples: [String]?
     @NSManaged public var definition: String?
+    @NSManaged public var uuid: UUID
 
 }
 

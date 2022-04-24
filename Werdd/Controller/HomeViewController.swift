@@ -145,7 +145,7 @@ extension HomeViewController : UITableViewDataSource {
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = words[indexPath.row]
-        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
+        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: selectedWord), animated: true)
     }
 }
 

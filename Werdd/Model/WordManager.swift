@@ -28,7 +28,7 @@ struct WordManager {
     }
     
     func fetchRandomWord(spinner: UIActivityIndicatorView) {
-        let urlString = "https://wordsapiv1.p.rapidapi.com/words/?random=true"
+        let urlString = "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions"
         
         performRequest(with: urlString, random: true, spinner: spinner)
     }
