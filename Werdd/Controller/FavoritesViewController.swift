@@ -16,7 +16,13 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.title = "FAVORITES"
+        self.navigationItem.title = "FAVORITES"
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen")!,
+            NSAttributedString.Key.font: UIFont(name: "LeagueSpartan-Bold", size: 28)!
+        ]
+
+        self.navigationController?.navigationBar.titleTextAttributes = attrs
         
         DataManager.fetchFavWords { favs in
             if let favs = favs {
