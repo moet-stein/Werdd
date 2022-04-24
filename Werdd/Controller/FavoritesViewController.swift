@@ -23,6 +23,7 @@ class FavoritesViewController: UIViewController {
         ]
 
         self.navigationController?.navigationBar.titleTextAttributes = attrs
+        self.navigationController?.navigationBar.backItem?.title = "Home"
         
         DataManager.fetchFavWords { favs in
             if let favs = favs {
