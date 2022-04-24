@@ -11,7 +11,7 @@ class DetailsViewController: UIViewController {
     private var passedFavWord: FavWord?
     
     private var contentView: DetailsView!
-    private var selectedWord: SingleResult
+    private var selectedWord: SingleResult?
     
     private var favoriteButton: IconButton!
     
@@ -29,7 +29,7 @@ class DetailsViewController: UIViewController {
         checkFavInCoreData()
     }
     
-    init(passedFavWord: FavWord?, selectedWord: SingleResult) {
+    init(passedFavWord: FavWord?, selectedWord: SingleResult?) {
         self.passedFavWord = passedFavWord
         self.selectedWord = selectedWord
         super.init(nibName: nil, bundle: nil)
@@ -62,21 +62,27 @@ class DetailsViewController: UIViewController {
         
         button.toggleFavorite()
         
-        if sender.isSelected {
-            let word = selectedWord.word
-            let definition = selectedWord.result?.definition
-            let partOfSpeech = selectedWord.result?.partOfSpeech
-            let synonyms = selectedWord.result?.synonyms
-            let antonyms = selectedWord.result?.antonyms
-            let examples = selectedWord.result?.examples
-            
-            DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
-            justCreated = true
-        } else {
-            if justCreated {
-                DataManager.deleteFavWord(usingID: favWordID)
+        if let selectedWord = selectedWord {
+            if sender.isSelected {
+                let word = selectedWord.word
+                let definition = selectedWord.result?.definition
+                let partOfSpeech = selectedWord.result?.partOfSpeech
+                let synonyms = selectedWord.result?.synonyms
+                let antonyms = selectedWord.result?.antonyms
+                let examples = selectedWord.result?.examples
+                
+                DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
+                justCreated = true
+            } else {
+                if justCreated {
+                    DataManager.deleteFavWord(usingID: favWordID)
+                }
+    //            DataManager.deleteFavWord(word: selectedWord)
             }
-//            DataManager.deleteFavWord(word: selectedWord)
+        }
+        
+        if let passedFavWord = passedFavWord {
+            print("favWord Passed")
         }
         
     }

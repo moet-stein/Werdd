@@ -55,8 +55,6 @@ struct WordManager {
                     let word = try JSONDecoder().decode(Word.self, from: data)
                     
                     random ? self.delegate?.didUpdateWord(self, word: word) : self.delegate?.didUpdateTableView(self, word: word)
-                    
-                    print(word)
                 } catch {
                     random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
                     print("Failed to convert \(error.localizedDescription)")

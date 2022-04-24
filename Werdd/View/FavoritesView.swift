@@ -19,6 +19,28 @@ class FavoritesView: UIView {
         return label
     }()
     
+    let favsTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.layer.cornerRadius = 20
+        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
+        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+        return tableView
+    }()
+    
+    let favSpinner: UIActivityIndicatorView = {
+        let spinner = UIActivityIndicatorView(style: .large)
+        spinner.translatesAutoresizingMaskIntoConstraints = false
+        return spinner
+    }()
+    
+    let noFavFoundView: NoWordFoundView = {
+        let view = NoWordFoundView(labelText: "No FavWords Found")
+        view.isHidden = true
+        return view
+    }()
+    
     init() {
 //        self.selectedWord = selectedWord
         super.init(frame: .zero)
@@ -31,11 +53,13 @@ class FavoritesView: UIView {
     }
     
     private func setUpUI() {
-        addSubview(label)
+        addSubview(favsTableView)
         
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: centerYAnchor)
+            favsTableView.topAnchor.constraint(equalTo: topAnchor),
+            favsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            favsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            favsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
 

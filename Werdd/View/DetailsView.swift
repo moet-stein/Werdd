@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsView: UIView {
-    private var selectedWord: SingleResult
+    private var selectedWord: SingleResult?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -106,7 +106,7 @@ class DetailsView: UIView {
     
     
     
-    init(selectedWord: SingleResult) {
+    init(selectedWord: SingleResult?) {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         
@@ -179,13 +179,17 @@ class DetailsView: UIView {
     }
     
     private func setUpContent() {
-        wordLabel.text = selectedWord.word
-        categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
-        definitionLabel.text = selectedWord.result?.definition ?? ""
         
-        antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
-        synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
-        usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+        if let selectedWord = selectedWord {
+            wordLabel.text = selectedWord.word
+            categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
+            definitionLabel.text = selectedWord.result?.definition ?? ""
+            
+            antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
+            synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
+            usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+        }
+        
         
     }
 }

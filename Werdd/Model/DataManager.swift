@@ -36,8 +36,15 @@ class DataManager {
     }
     
     // MARK: - READ
-    static func fetchFavWords() {
-    
+    static func fetchFavWords(completion: ([FavWord]?) -> Void) {
+        do {
+            let favWords = try managedObjectContext.fetch(FavWord.createFetchRequest())
+            completion(favWords)
+        } catch {
+            print("Fetch FavWords failed")
+        }
+        
+        completion(nil)
     }
     
     static func fetchFavWord(usingId id: UUID, completion: (FavWord?) -> Void) {
@@ -76,7 +83,7 @@ class DataManager {
     
     // MARK: - DELETE
     static func deleteFavWord(usingID id: UUID) {
-        let fetchRequest: NSFetchRequest<FavWord> = FavWord.fetchRequest()
+        let fetchRequest: NSFetchRequest<FavWord> = FavWord.createFetchRequest()
         fetchRequest.predicate = NSPredicate(format: "uuid == %@", id as CVarArg)
         
         if let result = try? managedObjectContext.fetch(fetchRequest) {
@@ -91,8 +98,4 @@ class DataManager {
             print("Could not update. \(error), \(error.userInfo)")
         }
     }
-    
-    
-    
-    
 }

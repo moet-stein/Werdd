@@ -12,7 +12,7 @@ import CoreData
 
 extension FavWord {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<FavWord> {
+    @nonobjc public class func createFetchRequest() -> NSFetchRequest<FavWord> {
         return NSFetchRequest<FavWord>(entityName: "FavWord")
     }
 
