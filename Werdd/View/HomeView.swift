@@ -90,6 +90,7 @@ class HomeView: UIView {
             iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
         )
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.rotateButton()
         return button
     }()
     

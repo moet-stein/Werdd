@@ -15,6 +15,8 @@ class HomeViewController: UIViewController {
     
     private var contentView: HomeView!
     
+    private var viewFavoritesButton: IconButton!
+    
     private var cardSpinner: UIActivityIndicatorView!
     private var tableViewSpinner: UIActivityIndicatorView!
     
@@ -46,6 +48,8 @@ class HomeViewController: UIViewController {
         
         contentView = HomeView()
         view = contentView
+        
+        viewFavoritesButton = contentView.viewFavoritesButton
         
         cardSpinner = contentView.cardSpinner
         tableViewSpinner = contentView.tableViewSpinner
@@ -81,6 +85,7 @@ class HomeViewController: UIViewController {
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
         addRandomButtonTarget()
+        addFavoritesButtonTarget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -90,6 +95,10 @@ class HomeViewController: UIViewController {
     
     private func addRandomButtonTarget() {
         randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
+    }
+    
+    private func addFavoritesButtonTarget() {
+        viewFavoritesButton.addTarget(self, action: #selector(viewFavoritesButtonTapped), for: .touchUpInside)
     }
     
     private func refreshCard(word: Word) {
@@ -116,6 +125,10 @@ class HomeViewController: UIViewController {
     @objc func randomWordButtonTapped() {
         randomWordButton.isUserInteractionEnabled = false
         wordManager.fetchRandomWord(spinner: cardSpinner)
+    }
+    
+    @objc func viewFavoritesButtonTapped() {
+        navigationController?.pushViewController(FavoritesViewController(), animated: true)
     }
 }
 

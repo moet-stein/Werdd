@@ -30,12 +30,8 @@ class IconButton: UIButton {
         let randomImage = UIImage(systemName: systemName, withConfiguration: config)
         tintColor = iconColor
         setImage(randomImage, for: .normal)
-        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
     }
     
-    @objc func buttonPressed() {
-        rotate()
-    }
     
     func toggleFavorite() {
         let config = UIImage.SymbolConfiguration(pointSize: 50, weight: .bold, scale: .small)
@@ -48,6 +44,14 @@ class IconButton: UIButton {
             setImage(heartSF, for: .normal)
             print("isNOTselected")
         }
+    }
+    
+    func rotateButton() {
+        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    }
+    
+    @objc func buttonPressed() {
+        rotate()
     }
     
 }
