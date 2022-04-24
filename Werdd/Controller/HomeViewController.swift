@@ -228,7 +228,7 @@ extension HomeViewController: WordManegerDelegate {
         }
     }
     
-    func didFailWithError(error: Error, random: Bool) {
+    func didFailWithError(error: Error?, random: Bool) {
         DispatchQueue.main.async {
             if random {
                 self.wordLabel.isHidden = true
@@ -246,7 +246,9 @@ extension HomeViewController: WordManegerDelegate {
             }
             
         }
-        print(error)
+        if let error = error {
+            print(error)
+        }
     }
     
 }

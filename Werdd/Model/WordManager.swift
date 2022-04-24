@@ -13,7 +13,7 @@ import UIKit
 protocol WordManegerDelegate {
     func didUpdateWord(_ wordManager: WordManager, word: Word)
     func didUpdateTableView(_ wordManager: WordManager, word: Word)
-    func didFailWithError(error: Error, random: Bool)
+    func didFailWithError(error: Error?, random: Bool)
 }
 
 
@@ -22,7 +22,9 @@ struct WordManager {
     var delegate: WordManegerDelegate?
     
     func fetchInputWord(inputWord: String, spinner: UIActivityIndicatorView) {
-        let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(inputWord)"
+        let trimmed = inputWord.trimmingCharacters(in: .whitespacesAndNewlines)
+        let convertedUrlQuery = trimmed.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+        let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(convertedUrlQuery)"
         
         performRequest(with: urlString, random: false, spinner: spinner)
     }
@@ -53,7 +55,6 @@ struct WordManager {
                 
                 do {
                     let word = try JSONDecoder().decode(Word.self, from: data)
-                    
                     random ? self.delegate?.didUpdateWord(self, word: word) : self.delegate?.didUpdateTableView(self, word: word)
                 } catch {
                     random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
