@@ -15,7 +15,12 @@ class DetailsViewController: UIViewController {
     
     private var favoriteButton: IconButton!
     
-    
+    private var wordLabel: UILabel!
+    private var definitionLabel: UILabel!
+    private var categoryLabel: UILabel!
+    private var synonymsCard: DetailsCardView!
+    private var antonymsCard: DetailsCardView!
+    private var usageCard: DetailsCardView!
     
     private var favWordID = UUID()
     private var justCreated = false
@@ -25,8 +30,16 @@ class DetailsViewController: UIViewController {
         view = contentView
         
         favoriteButton = contentView.favoriteButton
+        wordLabel = contentView.wordLabel
+        categoryLabel = contentView.categoryLabel
+        definitionLabel = contentView.definitionLabel
+        synonymsCard = contentView.synonymsCard
+        antonymsCard = contentView.antonymsCard
+        usageCard = contentView.usageCard
+        
         addButtonTarget()
         checkFavInCoreData()
+        setUpContent()
     }
     
     init(passedFavWord: FavWord?, selectedWord: SingleResult?) {
@@ -53,6 +66,28 @@ class DetailsViewController: UIViewController {
 //            
 //            
 //        }
+    }
+    
+    private func setUpContent() {
+        if let selectedWord = selectedWord {
+            wordLabel.text = selectedWord.word
+            categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
+            definitionLabel.text = selectedWord.result?.definition ?? ""
+            
+            antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
+            synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
+            usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+        }
+        
+        if let passedFavWord = passedFavWord {
+            wordLabel.text = passedFavWord.word
+            categoryLabel.text = passedFavWord.partOfSpeech ?? ""
+            definitionLabel.text = passedFavWord.definition ?? ""
+            
+            antonymsCard.insertWords(words: passedFavWord.antonyms ?? nil)
+            synonymsCard.insertWords(words: passedFavWord.synonyms ?? nil)
+            usageCard.insertUsages(usages: passedFavWord.examples ?? nil)
+        }
     }
     
     @objc func favoriteTapped(sender: UIButton) {

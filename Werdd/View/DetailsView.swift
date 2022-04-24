@@ -24,7 +24,7 @@ class DetailsView: UIView {
         return view
     }()
     
-    private let wordLabel: UILabel = {
+    let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .center
@@ -56,37 +56,32 @@ class DetailsView: UIView {
         return view
     }()
     
-    private let synonymsCard: DetailsCardView = {
+    let synonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "DarkGreen",
             cardHeight: 100,
             bottomLabelText: "Synonyms")
-//        view.insertWords(words: "glad, cheerful")
         return view
     }()
     
-    private let antonymsCard: DetailsCardView = {
+    let antonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "SoftBrown",
             cardHeight: 100,
             bottomLabelText: "Antonyms")
-        
-//        view.insertWords(words: "unhappy, sad")
         return view
     }()
     
-    private let usageCard: DetailsCardView = {
+    let usageCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "MatchaGreen",
             cardHeight: 180,
             bottomLabelText: "Example Usage")
-        
-//        view.insertUsages(usages: ["a happy smile", "spent many happy days on the beach", "a happy marriage"])
         return view
     }()
     
     // MARK: - DefinitionCard inside
-    private let categoryLabel: UILabel = {
+    let categoryLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 20)
@@ -94,7 +89,7 @@ class DetailsView: UIView {
         return label
     }()
     
-    private let definitionLabel: UILabel = {
+    let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Regular", size: 18)
@@ -112,7 +107,6 @@ class DetailsView: UIView {
         
         setUpUI()
         setUpDefinitionCard()
-        setUpContent()
     }
     
     required init?(coder: NSCoder) {
@@ -176,20 +170,5 @@ class DetailsView: UIView {
             definitionLabel.widthAnchor.constraint(equalToConstant: 270),
             
         ])
-    }
-    
-    private func setUpContent() {
-        
-        if let selectedWord = selectedWord {
-            wordLabel.text = selectedWord.word
-            categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
-            definitionLabel.text = selectedWord.result?.definition ?? ""
-            
-            antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
-            synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
-            usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
-        }
-        
-        
     }
 }
