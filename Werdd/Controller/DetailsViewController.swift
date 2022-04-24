@@ -23,7 +23,6 @@ class DetailsViewController: UIViewController {
     private var usageCard: DetailsCardView!
     
     private var favWordID = UUID()
-    private var justCreated = false
     
     override func loadView() {
         contentView = DetailsView(selectedWord: selectedWord)
@@ -87,14 +86,26 @@ class DetailsViewController: UIViewController {
     }
     
     private func checkWordFavInCoreData(word: String, definition: String?) {
-        DataManager.fetchFavWord(usingWord: word, definition: definition) { word in
-            if word != nil {
-                DispatchQueue.main.async { [weak self] in
-                    self?.favoriteButton.isSelected = true
-                    self?.favoriteButton.toggleFavorite()
+        if let definition = definition {
+            DataManager.fetchFavWord(usingDefinition: definition) { word in
+                if word != nil {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.favoriteButton.isSelected = true
+                        self?.favoriteButton.toggleFavorite()
+                    }
+                }
+            }
+        } else {
+            DataManager.fetchFavWord(usingWord: word) { word in
+                if word != nil {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.favoriteButton.isSelected = true
+                        self?.favoriteButton.toggleFavorite()
+                    }
                 }
             }
         }
+        
     }
     
     @objc func favoriteTapped(sender: UIButton) {
@@ -114,23 +125,25 @@ class DetailsViewController: UIViewController {
                 let examples = selectedWord.result?.examples
                 
                 DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
-                justCreated = true
             } else {
-                if justCreated {
-                    DataManager.deleteFavWord(usingID: favWordID)
-                }
-    //            DataManager.deleteFavWord(word: selectedWord)
+                DataManager.deleteFavWord(usingID: favWordID)
             }
         }
         
         if let passedFavWord = passedFavWord {
-            print("favWord Passed")
+            if sender.isSelected {
+                let word = passedFavWord.word
+                let definition = passedFavWord.definition
+                let partOfSpeech = passedFavWord.partOfSpeech
+                let synonyms = passedFavWord.synonyms
+                let antonyms = passedFavWord.antonyms
+                let examples = passedFavWord.examples
+                
+                DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
+            } else {
+                DataManager.deleteFavWord(word: passedFavWord)
+            }
         }
         
     }
-    
-    
-    
-    
-    
 }

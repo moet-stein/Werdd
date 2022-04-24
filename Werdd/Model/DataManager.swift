@@ -47,9 +47,23 @@ class DataManager {
         completion(nil)
     }
     
-    static func fetchFavWord(usingId id: UUID, completion: (FavWord?) -> Void) {
+//    static func fetchFavWord(usingId id: UUID, completion: (FavWord?) -> Void) {
+//        let fetchRequest = NSFetchRequest<FavWord>(entityName: "FavWord")
+//        fetchRequest.predicate = NSPredicate(format: "uuid == %@", id as CVarArg)
+//
+//        do {
+//            let favWord = try managedObjectContext.fetch(fetchRequest)
+//            completion(favWord.first)
+//        } catch {
+//            print("Could not fetch due to error: \(error.localizedDescription)")
+//        }
+//
+//        completion(nil)
+//    }
+    
+    static func fetchFavWord(usingWord word: String, completion: (FavWord?) -> Void) {
         let fetchRequest = NSFetchRequest<FavWord>(entityName: "FavWord")
-        fetchRequest.predicate = NSPredicate(format: "uuid == %@", id as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "word == %@", word as CVarArg)
         
         do {
             let favWord = try managedObjectContext.fetch(fetchRequest)
@@ -61,9 +75,10 @@ class DataManager {
         completion(nil)
     }
     
-    static func fetchFavWord(usingWord word: String, definition: String?, completion: (FavWord?) -> Void) {
+    
+    static func fetchFavWord(usingDefinition definition: String, completion: (FavWord?) -> Void) {
         let fetchRequest = NSFetchRequest<FavWord>(entityName: "FavWord")
-        fetchRequest.predicate = NSPredicate(format: "word == %@", word as CVarArg)
+        fetchRequest.predicate = NSPredicate(format: "definition == %@", definition as CVarArg)
         
         do {
             let favWord = try managedObjectContext.fetch(fetchRequest)
@@ -89,8 +104,19 @@ class DataManager {
         if let result = try? managedObjectContext.fetch(fetchRequest) {
             for object in result {
                 managedObjectContext.delete(object)
+                print(object)
             }
         }
+        
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            print("Could not update. \(error), \(error.userInfo)")
+        }
+    }
+    
+    static func deleteFavWord(word: FavWord) {
+        managedObjectContext.delete(word)
         
         do {
             try managedObjectContext.save()
