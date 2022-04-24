@@ -11,6 +11,7 @@ class HomeViewController: UIViewController {
     
     var wordManager = WordManager()
     
+    private var fetchedWord = SingleResult(word: "")
     private var words = [SingleResult]()
     
     private var contentView: HomeView!
@@ -25,6 +26,7 @@ class HomeViewController: UIViewController {
     private var definitionLabel: UILabel!
     
     private var randomWordButton: IconButton!
+    private var seeDetailsButton: IconButton!
     private var wordsTableView: UITableView!
     
     private let searchBar:UISearchBar = UISearchBar()
@@ -60,6 +62,7 @@ class HomeViewController: UIViewController {
         categoryImageView.isHidden = true
         
         randomWordButton = contentView.randomWordButton
+        seeDetailsButton = contentView.seeDetailsButton
         
         wordsTableView = contentView.wordsTableView
         wordsTableView.delegate = self
@@ -84,8 +87,7 @@ class HomeViewController: UIViewController {
         
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
-        addRandomButtonTarget()
-        addFavoritesButtonTarget()
+        addButtonsTarget()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -93,25 +95,28 @@ class HomeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
-    private func addRandomButtonTarget() {
+    private func addButtonsTarget() {
         randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
-    }
-    
-    private func addFavoritesButtonTarget() {
         viewFavoritesButton.addTarget(self, action: #selector(viewFavoritesButtonTapped), for: .touchUpInside)
+        seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
     }
     
     private func refreshCard(word: Word) {
         let word = word
         wordLabel.text = word.word
-        if let category = word.results?[0].partOfSpeech {
+        
+        let randomResult = word.results?.randomElement()
+        let singleResult = SingleResult(word: word.word, result: randomResult)
+        fetchedWord = singleResult
+        
+        if let category = singleResult.result?.partOfSpeech {
             categoryImageView.isHidden = false
             categoryImageView.image = UIImage(named: category)
         } else {
             categoryImageView.isHidden = true
         }
         
-        if let definition =  word.results?[0].definition {
+        if let definition =  singleResult.result?.definition {
             definitionLabel.text = definition
         } else {
             definitionLabel.text = "No definition found for this word"
@@ -129,6 +134,10 @@ class HomeViewController: UIViewController {
     
     @objc func viewFavoritesButtonTapped() {
         navigationController?.pushViewController(FavoritesViewController(), animated: true)
+    }
+    
+    @objc func seeDetailsButtonTapped() {
+        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: fetchedWord), animated: true)
     }
 }
 
@@ -202,7 +211,6 @@ extension HomeViewController: WordManegerDelegate {
             if !self.noWordFoundInRandomCard.isHidden {
                 self.noWordFoundInRandomCard.isHidden = true
             }
-
             self.refreshCard(word: word)
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true

@@ -47,17 +47,24 @@ class IconButton: UIButton {
     }
     
     func rotateButton() {
-        addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        addTarget(self, action: #selector(rotatePressed), for: .touchUpInside)
     }
     
-    @objc func buttonPressed() {
+    func zoomInButton() {
+        addTarget(self, action: #selector(zoomInPressed), for: .touchUpInside)
+    }
+    
+    @objc func rotatePressed() {
         rotate()
+    }
+    @objc func zoomInPressed() {
+        zoomIn()
     }
     
 }
 
 extension UIView {
-    func zoomIn(duration: TimeInterval = 0.2) {
+    func zoomIn(duration: TimeInterval = 0.4) {
         self.transform = CGAffineTransform(scaleX: 0.0, y: 0.0)
         UIView.animate(withDuration: duration, delay: 0.0, options: [.curveLinear], animations: { () -> Void in
             self.transform = .identity

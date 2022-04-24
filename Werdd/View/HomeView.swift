@@ -83,7 +83,7 @@ class HomeView: UIView {
     }()
     
     
-    lazy var randomWordButton: IconButton = {
+     let randomWordButton: IconButton = {
         let button = IconButton(
             size: 35,
             systemName: "arrow.clockwise.circle",
@@ -91,6 +91,17 @@ class HomeView: UIView {
         )
         button.translatesAutoresizingMaskIntoConstraints = false
         button.rotateButton()
+        return button
+    }()
+    
+    let seeDetailsButton: IconButton = {
+        let button = IconButton(
+            size: 35,
+            systemName: "eyes",
+            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
+        )
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.zoomInButton()
         return button
     }()
     
@@ -168,7 +179,7 @@ class HomeView: UIView {
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             cardView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
             cardView.widthAnchor.constraint(equalToConstant: 350),
-            cardView.heightAnchor.constraint(equalToConstant: 180),
+            cardView.heightAnchor.constraint(equalToConstant: 200),
             
             cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
             cardSpinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
@@ -201,6 +212,7 @@ class HomeView: UIView {
         cardView.addSubview(categoryImageView)
         cardView.addSubview(definitionLabel)
         cardView.addSubview(randomWordButton)
+        cardView.addSubview(seeDetailsButton)
         
         NSLayoutConstraint.activate([
             wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
@@ -213,6 +225,9 @@ class HomeView: UIView {
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
             definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
+            
+            seeDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
+            seeDetailsButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10),
             
             randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
             randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
