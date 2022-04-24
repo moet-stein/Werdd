@@ -38,7 +38,6 @@ class DetailsViewController: UIViewController {
         usageCard = contentView.usageCard
         
         addButtonTarget()
-        checkFavInCoreData()
         setUpContent()
     }
     
@@ -57,26 +56,18 @@ class DetailsViewController: UIViewController {
         favoriteButton.addTarget(self, action: #selector(favoriteTapped), for: .touchUpInside)
     }
     
-    private func checkFavInCoreData() {
-//        DataManager.fetchFavWord(usingWord: selectedWord.word, definition: selectedWord.result?.definition) { word in
-//            guard let word = word else {
-//                return
-//            }
-//            favWordID = word.uuid
-//            
-//            
-//        }
-    }
-    
     private func setUpContent() {
         if let selectedWord = selectedWord {
             wordLabel.text = selectedWord.word
             categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
-            definitionLabel.text = selectedWord.result?.definition ?? ""
+            let definition = selectedWord.result?.definition ?? ""
+            definitionLabel.text = definition
             
             antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
             synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
             usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+            
+            checkWordFavInCoreData(word: selectedWord.word, definition: definition)
         }
         
         if let passedFavWord = passedFavWord {
@@ -87,6 +78,22 @@ class DetailsViewController: UIViewController {
             antonymsCard.insertWords(words: passedFavWord.antonyms ?? nil)
             synonymsCard.insertWords(words: passedFavWord.synonyms ?? nil)
             usageCard.insertUsages(usages: passedFavWord.examples ?? nil)
+            
+            favoriteButton.isSelected = true
+            favoriteButton.toggleFavorite()
+        }
+        
+        
+    }
+    
+    private func checkWordFavInCoreData(word: String, definition: String?) {
+        DataManager.fetchFavWord(usingWord: word, definition: definition) { word in
+            if word != nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.favoriteButton.isSelected = true
+                    self?.favoriteButton.toggleFavorite()
+                }
+            }
         }
     }
     
