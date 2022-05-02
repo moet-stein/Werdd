@@ -25,6 +25,8 @@ class FavoritesViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = attrs
         self.navigationController?.navigationBar.backItem?.title = "Home"
         
+        self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
         DataManager.fetchFavWords { favs in
             if let favs = favs {
                 favorites = favs
@@ -56,6 +58,16 @@ class FavoritesViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        if (editing) {
+            super.setEditing(true, animated: true)
+            self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
+        } else {
+            super.setEditing(false, animated: true)
+            self.navigationItem.rightBarButtonItem = nil
+        }
+    }
 
 }
 
@@ -76,8 +88,24 @@ extension FavoritesViewController : UITableViewDataSource {
         tableView.separatorStyle = .none
         
         return cell
-        
     }
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            tableView.beginUpdates()
+            let id = favorites[indexPath.row].uuid
+            DataManager.deleteFavWord(usingID: id)
+            favorites.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            tableView.endUpdates()
+        }
+    }
+    
+    
 }
 
 extension FavoritesViewController : UITableViewDelegate {
