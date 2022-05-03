@@ -6,9 +6,10 @@
 //
 
 import UIKit
+import Network
 
 class HomeViewController: UIViewController {
-    
+    let monitor = NWPathMonitor()
     var wordManager = WordManager()
     
     private var fetchedWord = SingleResult(word: "")
@@ -43,9 +44,13 @@ class HomeViewController: UIViewController {
         }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+
     }
     
-    override func loadView() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
         wordManager.delegate = self
         
         contentView = HomeView()
@@ -88,7 +93,33 @@ class HomeViewController: UIViewController {
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
         addButtonsTarget()
+        
+        checkInternetConnection()
     }
+    
+    private func checkInternetConnection() {
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                DispatchQueue.main.async {
+                    self.noWordFoundInTableView.isHidden = true
+                    self.noWordFoundInRandomCard.isHidden = true
+                }
+                print("We're connected!")
+            } else {
+                DispatchQueue.main.async {
+                    self.noWordFoundInTableView.isHidden = false
+                    self.noWordFoundInRandomCard.isHidden = false
+                }
+                print("No connection.")
+            }
+
+            print(path.isExpensive)
+        }
+        
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
+    }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -125,6 +156,14 @@ class HomeViewController: UIViewController {
         wordLabel.zoomIn(duration: 0.5)
         categoryImageView.zoomIn(duration: 0.5)
         definitionLabel.zoomIn(duration: 0.5)
+    }
+    
+    private func noWordFoundViewToggle(noWordFound: Bool) {
+        if noWordFound {
+            
+        } else {
+            
+        }
     }
 
     @objc func randomWordButtonTapped() {

@@ -59,15 +59,15 @@ class FavoritesViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        if (editing) {
-            super.setEditing(true, animated: true)
-            self.navigationItem.rightBarButtonItem = self.rightBarButtonItem
-        } else {
-            super.setEditing(false, animated: true)
-            self.navigationItem.rightBarButtonItem = nil
-        }
-    }
+//    override func setEditing(_ editing: Bool, animated: Bool) {
+//        if (editing) {
+//            super.setEditing(true, animated: true)
+////            self.navigationItem.rightBarButtonItem = self
+//        } else {
+//            super.setEditing(false, animated: true)
+//            self.navigationItem.rightBarButtonItem = self.editButtonItem
+//        }
+//    }
 
 }
 
