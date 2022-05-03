@@ -26,8 +26,6 @@ class FavoritesViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = attrs
         self.navigationController?.navigationBar.backItem?.title = "Home"
         
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
         DataManager.fetchFavWords { favs in
             if let favs = favs {
                 
@@ -56,28 +54,15 @@ class FavoritesViewController: UIViewController {
         favsTableView.dataSource = self
         
         noFavFoundView = contentView.noFavFoundView
-        
-        print(favorites)
     }
     
     init() {
-       
         super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-//    override func setEditing(_ editing: Bool, animated: Bool) {
-//        if (editing) {
-//            super.setEditing(true, animated: true)
-////            self.navigationItem.rightBarButtonItem = self
-//        } else {
-//            super.setEditing(false, animated: true)
-//            self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        }
-//    }
 
 }
 
