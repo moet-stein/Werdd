@@ -13,6 +13,7 @@ class FavoritesViewController: UIViewController {
     private var contentView: FavoritesView!
     
     private var favsTableView: UITableView!
+    private var noFavFoundView: NotFoundWithImageView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -29,6 +30,13 @@ class FavoritesViewController: UIViewController {
         
         DataManager.fetchFavWords { favs in
             if let favs = favs {
+                
+                if favs.isEmpty{
+                    DispatchQueue.main.async {
+                        self.noFavFoundView.isHidden = false
+                    }
+                }
+                
                 favorites = favs
                 
                 DispatchQueue.main.async { [weak self] in
@@ -46,6 +54,8 @@ class FavoritesViewController: UIViewController {
         favsTableView = contentView.favsTableView
         favsTableView.delegate = self
         favsTableView.dataSource = self
+        
+        noFavFoundView = contentView.noFavFoundView
         
         print(favorites)
     }
@@ -102,6 +112,10 @@ extension FavoritesViewController : UITableViewDataSource {
             favorites.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
+            
+            if favorites.count == 0 {
+                noFavFoundView.isHidden = false
+            }
         }
     }
     

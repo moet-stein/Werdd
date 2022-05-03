@@ -37,12 +37,11 @@ class FavoritesView: UIView {
     
     let noFavFoundView: NotFoundWithImageView = {
         let view = NotFoundWithImageView(title: "No Favorites Found", imageName: "NoFavs")
-        view.isHidden = false
+        view.isHidden = true
         return view
     }()
     
     init() {
-//        self.selectedWord = selectedWord
         super.init(frame: .zero)
         backgroundColor = .white
         setUpUI()
