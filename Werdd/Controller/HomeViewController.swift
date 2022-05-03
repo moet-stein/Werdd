@@ -34,6 +34,8 @@ class HomeViewController: UIViewController {
     
     private var noWordFoundInTableView: NoWordFoundView!
     private var noWordFoundInRandomCard: NoWordFoundView!
+    
+    private var noInternetView: UIView!
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +92,8 @@ class HomeViewController: UIViewController {
         noWordFoundInTableView = contentView.noWordFoundInTableView
         noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
         
+        noInternetView = contentView.noInternetView
+        
         wordManager.fetchRandomWord(spinner: cardSpinner)
         wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
         addButtonsTarget()
@@ -98,28 +102,21 @@ class HomeViewController: UIViewController {
     }
     
     private func checkInternetConnection() {
-        monitor.pathUpdateHandler = { path in
+        monitor.pathUpdateHandler = { [weak self] path in
             if path.status == .satisfied {
                 DispatchQueue.main.async {
-                    self.noWordFoundInTableView.isHidden = true
-                    self.noWordFoundInRandomCard.isHidden = true
+                    self?.noInternetView.isHidden = true
                 }
-                print("We're connected!")
             } else {
                 DispatchQueue.main.async {
-                    self.noWordFoundInTableView.isHidden = false
-                    self.noWordFoundInRandomCard.isHidden = false
+                    self?.noInternetView.isHidden = false
                 }
-                print("No connection.")
             }
-
-            print(path.isExpensive)
         }
         
         let queue = DispatchQueue(label: "Monitor")
         monitor.start(queue: queue)
     }
-
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -158,13 +155,6 @@ class HomeViewController: UIViewController {
         definitionLabel.zoomIn(duration: 0.5)
     }
     
-    private func noWordFoundViewToggle(noWordFound: Bool) {
-        if noWordFound {
-            
-        } else {
-            
-        }
-    }
 
     @objc func randomWordButtonTapped() {
         randomWordButton.isUserInteractionEnabled = false

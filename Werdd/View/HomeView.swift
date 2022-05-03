@@ -135,6 +135,11 @@ class HomeView: UIView {
         return view
     }()
     
+    let noInternetView: NotFoundWithImageView = {
+       let view = NotFoundWithImageView(title: "No Internet Connection", imageName: "NoInternet")
+        return view
+    }()
+    
     init() {
         super.init(frame: .zero)
         setUpUI()
@@ -161,6 +166,8 @@ class HomeView: UIView {
         cardView.addSubview(noWordFoundInRandomCard)
         wordsTableView.addSubview(tableViewSpinner)
         wordsTableView.addSubview(noWordFoundInTableView)
+        
+        scrollView.addSubview(noInternetView)
         
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: topAnchor),
@@ -202,7 +209,12 @@ class HomeView: UIView {
             noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
             noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
             noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
-            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100)
+            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100),
+            
+            noInternetView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            noInternetView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            noInternetView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            noInternetView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
         ])
     }

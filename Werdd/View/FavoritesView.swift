@@ -35,9 +35,9 @@ class FavoritesView: UIView {
         return spinner
     }()
     
-    let noFavFoundView: NoWordFoundView = {
-        let view = NoWordFoundView(labelText: "No FavWords Found")
-        view.isHidden = true
+    let noFavFoundView: NotFoundWithImageView = {
+        let view = NotFoundWithImageView(title: "No Favorites Found", imageName: "NoFavs")
+        view.isHidden = false
         return view
     }()
     
@@ -54,12 +54,16 @@ class FavoritesView: UIView {
     
     private func setUpUI() {
         addSubview(favsTableView)
+        addSubview(noFavFoundView)
         
         NSLayoutConstraint.activate([
             favsTableView.topAnchor.constraint(equalTo: topAnchor),
             favsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             favsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            favsTableView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            favsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            
+            noFavFoundView.topAnchor.constraint(equalTo: topAnchor, constant: 150),
+            noFavFoundView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
 
