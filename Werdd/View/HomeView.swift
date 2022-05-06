@@ -140,6 +140,18 @@ class HomeView: UIView {
         return view
     }()
     
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+        return searchBar
+    }()
+    
     init() {
         super.init(frame: .zero)
         setUpUI()

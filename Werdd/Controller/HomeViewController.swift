@@ -33,7 +33,7 @@ class HomeViewController: UIViewController {
     private var seeDetailsButton: IconButton!
     private var wordsTableView: UITableView!
     
-    private let searchBar:UISearchBar = UISearchBar()
+    private var searchBar:UISearchBar!
     
     private var noWordFoundInTableView: NoWordFoundView!
     private var noWordFoundInRandomCard: NoWordFoundView!
@@ -91,15 +91,8 @@ class HomeViewController: UIViewController {
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
         
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = " Search..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
-        searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+        searchBar = contentView.searchBar
         searchBar.delegate = self
-        
         wordsTableView.tableHeaderView = searchBar
         
         noWordFoundInTableView = contentView.noWordFoundInTableView
