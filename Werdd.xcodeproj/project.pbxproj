@@ -130,6 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				60142FA127DD0EDD00F1B845 /* LeagueSpartan */,
+				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
 				605104B628081E1100AB9DEC /* Constants.swift */,
 				60142F4527D7503700F1B845 /* AppDelegate.swift */,
 				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
@@ -162,7 +163,6 @@
 		605C808627E21ED3002EB0BA /* View */ = {
 			isa = PBXGroup;
 			children = (
-				60142F5027D7503900F1B845 /* LaunchScreen.storyboard */,
 				60537CD227F1B66100917B50 /* HomeView.swift */,
 				6051048B27FB362300AB9DEC /* DetailsView.swift */,
 				6051AB3228158CE3002E9CF6 /* FavoritesView.swift */,

@@ -185,7 +185,7 @@ extension HomeViewController : UITableViewDataSource {
         
         let wordForRow = words[indexPath.row]
         cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
-        cell.backgroundColor = UIColor(named: "ViewLightYellow")
+        
         tableView.separatorStyle = .none
         
         return cell
