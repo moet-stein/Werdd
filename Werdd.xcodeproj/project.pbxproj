@@ -16,6 +16,9 @@
 		60142FA627DD0F4E00F1B845 /* LeagueSpartan-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA327DD0EFC00F1B845 /* LeagueSpartan-Bold.ttf */; };
 		60142FA727DD0F5100F1B845 /* LeagueSpartan-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */; };
 		60142FA927DD171F00F1B845 /* LeagueSpartan-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */; };
+		603999652825270F00B6535E /* WordCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 603999642825270F00B6535E /* WordCellViewModel.swift */; };
+		6039996928252AA300B6535E /* FavWordCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039996828252AA300B6535E /* FavWordCellViewModel.swift */; };
+		6039996B28252C6900B6535E /* WordsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6039996A28252C6900B6535E /* WordsViewModel.swift */; };
 		6051042D27F4572500AB9DEC /* WordsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051042C27F4572500AB9DEC /* WordsTableViewCell.swift */; };
 		6051042F27F47C4500AB9DEC /* CategoryImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051042E27F47C4500AB9DEC /* CategoryImage.swift */; };
 		6051048A27FB34DF00AB9DEC /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051048927FB34DF00AB9DEC /* DetailsViewController.swift */; };
@@ -48,6 +51,9 @@
 		60142FA327DD0EFC00F1B845 /* LeagueSpartan-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Bold.ttf"; sourceTree = "<group>"; };
 		60142FA427DD0F2100F1B845 /* LeagueSpartan-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-ExtraLight.ttf"; sourceTree = "<group>"; };
 		60142FA827DD171E00F1B845 /* LeagueSpartan-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LeagueSpartan-Light.ttf"; sourceTree = "<group>"; };
+		603999642825270F00B6535E /* WordCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCellViewModel.swift; sourceTree = "<group>"; };
+		6039996828252AA300B6535E /* FavWordCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavWordCellViewModel.swift; sourceTree = "<group>"; };
+		6039996A28252C6900B6535E /* WordsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsViewModel.swift; sourceTree = "<group>"; };
 		6051042C27F4572500AB9DEC /* WordsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordsTableViewCell.swift; sourceTree = "<group>"; };
 		6051042E27F47C4500AB9DEC /* CategoryImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryImage.swift; sourceTree = "<group>"; };
 		6051048927FB34DF00AB9DEC /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
@@ -122,6 +128,9 @@
 		6039996228251E1C00B6535E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				603999642825270F00B6535E /* WordCellViewModel.swift */,
+				6039996828252AA300B6535E /* FavWordCellViewModel.swift */,
+				6039996A28252C6900B6535E /* WordsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -262,6 +271,7 @@
 			files = (
 				6051AB3328158CE3002E9CF6 /* FavoritesView.swift in Sources */,
 				6051042D27F4572500AB9DEC /* WordsTableViewCell.swift in Sources */,
+				603999652825270F00B6535E /* WordCellViewModel.swift in Sources */,
 				6051AB29281306D8002E9CF6 /* Werdd_Data.xcdatamodeld in Sources */,
 				6051048C27FB362300AB9DEC /* DetailsView.swift in Sources */,
 				6051AB2C28130765002E9CF6 /* FavWord+CoreDataClass.swift in Sources */,
@@ -277,8 +287,10 @@
 				60142F4627D7503700F1B845 /* AppDelegate.swift in Sources */,
 				60142F4827D7503700F1B845 /* SceneDelegate.swift in Sources */,
 				6051AAF7280C4DB9002E9CF6 /* NoWordFoundView.swift in Sources */,
+				6039996B28252C6900B6535E /* WordsViewModel.swift in Sources */,
 				6051048E27FC3F1400AB9DEC /* DetailsCardView.swift in Sources */,
 				6051042F27F47C4500AB9DEC /* CategoryImage.swift in Sources */,
+				6039996928252AA300B6535E /* FavWordCellViewModel.swift in Sources */,
 				605104B728081E1100AB9DEC /* Constants.swift in Sources */,
 				6051AB8128214CE3002E9CF6 /* NotFoundWithImageView.swift in Sources */,
 			);

@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         window.makeKeyAndVisible()
+        
+//        let wordsViewModel = WordsViewModel(words: nil)
         let navigationControlller = UINavigationController(rootViewController: HomeViewController())
         window.rootViewController = navigationControlller
         self.window = window

@@ -12,7 +12,10 @@ class HomeViewController: UIViewController {
     let monitor = NWPathMonitor()
     var wordManager = WordManager()
     
+//    private var viewModel: WordsViewModel?
+    
     private var fetchedWord = SingleResult(word: "")
+    //**//
     private var words = [SingleResult]()
     
     private var contentView: HomeView!
@@ -36,6 +39,16 @@ class HomeViewController: UIViewController {
     private var noWordFoundInRandomCard: NoWordFoundView!
     
     private var noInternetView: UIView!
+    
+//    init(viewModel: WordsViewModel?) {
+////        self.viewModel = viewModel
+//
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,8 +107,12 @@ class HomeViewController: UIViewController {
         
         noInternetView = contentView.noInternetView
         
-        wordManager.fetchRandomWord(spinner: cardSpinner)
-        wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
+        
+        tableViewSpinner.startAnimating()
+        cardSpinner.startAnimating()
+        wordManager.fetchInputWord(inputWord: "grateful")
+        wordManager.fetchRandomWord()
+        
         addButtonsTarget()
         
         checkInternetConnection()
@@ -157,8 +174,9 @@ class HomeViewController: UIViewController {
     
 
     @objc func randomWordButtonTapped() {
+        cardSpinner.startAnimating()
         randomWordButton.isUserInteractionEnabled = false
-        wordManager.fetchRandomWord(spinner: cardSpinner)
+        wordManager.fetchRandomWord()
     }
     
     @objc func viewFavoritesButtonTapped() {
@@ -175,6 +193,7 @@ class HomeViewController: UIViewController {
 extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return words.count
+//        return viewModel?.numberOfRowsInSection ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -182,9 +201,12 @@ extension HomeViewController : UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
             return UITableViewCell()
         }
-        
+//        let wordDetail = viewModel.words
         let wordForRow = words[indexPath.row]
-        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
+        
+        cell.viewModel = WordCellViewModel(wordDetail: wordForRow)
+        
+//        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         
         return cell
         
@@ -218,10 +240,11 @@ extension HomeViewController: UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        tableViewSpinner.startAnimating()
         searchBar.endEditing(true)
         wordsTableView.isUserInteractionEnabled = false
         if let searchedWord = searchBar.searchTextField.text  {
-            wordManager.fetchInputWord(inputWord: searchedWord.lowercased(), spinner: tableViewSpinner)
+            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
         }
         
     }
@@ -235,9 +258,8 @@ extension HomeViewController: WordManegerDelegate {
             self.wordLabel.isHidden = false
             self.definitionLabel.isHidden = false
             self.categoryImageView.isHidden = false
-            if !self.noWordFoundInRandomCard.isHidden {
-                self.noWordFoundInRandomCard.isHidden = true
-            }
+            self.noWordFoundInRandomCard.isHidden = true
+            
             self.refreshCard(word: word)
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
@@ -245,18 +267,17 @@ extension HomeViewController: WordManegerDelegate {
     }
     
     func didUpdateTableView(_ wordManager: WordManager, word: Word) {
-        words = [SingleResult]()
+       words = [SingleResult]()
+        if let results = word.results {
+            for result in results {
+                self.words.append(SingleResult(word: word.word, result: result))
+            }
+        }  else {
+            self.words.append(SingleResult(word: word.word, result: nil))
+        }
         DispatchQueue.main.async {
-            if let results = word.results {
-                for result in results {
-                    self.words.append(SingleResult(word: word.word, result: result))
-                }
-            }  else {
-                self.words.append(SingleResult(word: word.word, result: nil))
-            }
-            if !self.noWordFoundInTableView.isHidden {
-                self.noWordFoundInTableView.isHidden = true
-            }
+//            self.viewModel?.wordToSingleResults(from: word)
+            self.noWordFoundInTableView.isHidden = true
             self.wordsTableView.reloadData()
             self.tableViewSpinner.stopAnimating()
             self.wordsTableView.isUserInteractionEnabled = true

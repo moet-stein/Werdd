@@ -78,9 +78,7 @@ extension FavoritesViewController : UITableViewDataSource {
         }
         
         let wordForRow = favorites[indexPath.row]
-        cell.setupCellContent(image: wordForRow.partOfSpeech, word: wordForRow.word, definition: wordForRow.definition)
-        cell.backgroundColor = UIColor(named: "ViewLightYellow")
-        tableView.separatorStyle = .none
+        cell.favViewModel = FavWordCellViewModel(favWordDetail: wordForRow)
         
         return cell
     }

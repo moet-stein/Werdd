@@ -26,6 +26,7 @@ class FavoritesView: UIView {
         tableView.layer.cornerRadius = 20
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+        tableView.separatorStyle = .none
         return tableView
     }()
     

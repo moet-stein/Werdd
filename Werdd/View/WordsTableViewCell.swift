@@ -10,6 +10,44 @@ import UIKit
 class WordsTableViewCell: UITableViewCell {
     static let identifier = "WordsTableViewCell"
     
+    var viewModel: WordCellViewModel! {
+        didSet {
+            wordLabel.text = viewModel.wordName
+            
+            if let partOfSpeech = viewModel.partOfSpeech {
+                categoryImage.isHidden = false
+                categoryImage.image = UIImage(named: partOfSpeech)
+            } else {
+                categoryImage.isHidden = true
+            }
+            
+            if let definition = viewModel.definition {
+                definitionLabel.text = definition
+            } else {
+                definitionLabel.text = ""
+            }
+        }
+    }
+    
+    var favViewModel: FavWordCellViewModel! {
+        didSet {
+            wordLabel.text = favViewModel.wordName
+            
+            if let partOfSpeech = favViewModel.partOfSpeech {
+                categoryImage.isHidden = false
+                categoryImage.image = UIImage(named: partOfSpeech)
+            } else {
+                categoryImage.isHidden = true
+            }
+            
+            if let definition = favViewModel.definition {
+                definitionLabel.text = definition
+            } else {
+                definitionLabel.text = ""
+            }
+        }
+    }
+    
     private let roundedView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -76,23 +114,23 @@ class WordsTableViewCell: UITableViewCell {
     }
     
     
-    func setupCellContent(image: String?, word: String, definition: String?) {
-        if let partOfSpeech = image {
-            categoryImage.isHidden = false
-            categoryImage.image = UIImage(named: partOfSpeech)
-        } else {
-            categoryImage.isHidden = true
-        }
-        
-        wordLabel.text = word
-        
-        if let definition = definition {
-            definitionLabel.text = definition
-        } else {
-            definitionLabel.text = ""
-        }
-        
-    }
+//    func setupCellContent(image: String?, word: String, definition: String?) {
+//        if let partOfSpeech = image {
+//            categoryImage.isHidden = false
+//            categoryImage.image = UIImage(named: partOfSpeech)
+//        } else {
+//            categoryImage.isHidden = true
+//        }
+//
+//        wordLabel.text = word
+//
+//        if let definition = definition {
+//            definitionLabel.text = definition
+//        } else {
+//            definitionLabel.text = ""
+//        }
+//
+//    }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

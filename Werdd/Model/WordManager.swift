@@ -21,22 +21,22 @@ struct WordManager {
     
     var delegate: WordManegerDelegate?
     
-    func fetchInputWord(inputWord: String, spinner: UIActivityIndicatorView) {
+    func fetchInputWord(inputWord: String) {
         let trimmed = inputWord.trimmingCharacters(in: .whitespacesAndNewlines)
         let convertedUrlQuery = trimmed.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(convertedUrlQuery)"
         
-        performRequest(with: urlString, random: false, spinner: spinner)
+        performRequest(with: urlString, random: false)
     }
     
-    func fetchRandomWord(spinner: UIActivityIndicatorView) {
+    func fetchRandomWord() {
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions"
         
-        performRequest(with: urlString, random: true, spinner: spinner)
+        performRequest(with: urlString, random: true)
     }
 
     
-    func performRequest(with urlString: String, random: Bool, spinner: UIActivityIndicatorView) {
+    func performRequest(with urlString: String, random: Bool) {
         if let url = URL(string: urlString) {
             
             let apiKey = WORDSAPI_KEY
@@ -46,7 +46,7 @@ struct WordManager {
             urlRequest.setValue("wordsapiv1.p.rapidapi.com", forHTTPHeaderField: "X-RapidAPI-Host")
             urlRequest.setValue(apiKey, forHTTPHeaderField: "X-RapidAPI-Key")
             
-            spinner.startAnimating()
+//            spinner.startAnimating()
             
             URLSession.shared.dataTask(with: urlRequest) { data, response, error in
                 guard let data = data, error == nil else {
