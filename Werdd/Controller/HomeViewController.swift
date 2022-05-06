@@ -186,8 +186,6 @@ extension HomeViewController : UITableViewDataSource {
         let wordForRow = words[indexPath.row]
         cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         
-        tableView.separatorStyle = .none
-        
         return cell
         
     }

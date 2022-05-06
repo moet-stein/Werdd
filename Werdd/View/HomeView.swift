@@ -116,10 +116,10 @@ class HomeView: UIView {
     let wordsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.layer.cornerRadius = 20
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+        tableView.separatorStyle = .none
         return tableView
     }()
     
