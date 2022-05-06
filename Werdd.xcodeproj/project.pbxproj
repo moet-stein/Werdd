@@ -98,17 +98,12 @@
 		60142F4427D7503700F1B845 /* Werdd */ = {
 			isa = PBXGroup;
 			children = (
-				6051AB1E281304CB002E9CF6 /* FavWord */,
 				605C805B27E1EC37002EB0BA /* Model */,
 				605C808627E21ED3002EB0BA /* View */,
+				6039996228251E1C00B6535E /* ViewModel */,
 				605C808927E21F0F002EB0BA /* Controller */,
-				60142FA127DD0EDD00F1B845 /* LeagueSpartan */,
-				60142F4527D7503700F1B845 /* AppDelegate.swift */,
-				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
-				60142F4E27D7503900F1B845 /* Assets.xcassets */,
-				60142F5327D7503900F1B845 /* Info.plist */,
-				605104B628081E1100AB9DEC /* Constants.swift */,
 				6051AB27281306D8002E9CF6 /* Werdd_Data.xcdatamodeld */,
+				6039996328251E5A00B6535E /* Supporting Files */,
 			);
 			path = Werdd;
 			sourceTree = "<group>";
@@ -124,6 +119,26 @@
 			path = LeagueSpartan;
 			sourceTree = "<group>";
 		};
+		6039996228251E1C00B6535E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		6039996328251E5A00B6535E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				60142FA127DD0EDD00F1B845 /* LeagueSpartan */,
+				605104B628081E1100AB9DEC /* Constants.swift */,
+				60142F4527D7503700F1B845 /* AppDelegate.swift */,
+				60142F4727D7503700F1B845 /* SceneDelegate.swift */,
+				60142F4E27D7503900F1B845 /* Assets.xcassets */,
+				60142F5327D7503900F1B845 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		6051AB1E281304CB002E9CF6 /* FavWord */ = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +151,7 @@
 		605C805B27E1EC37002EB0BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6051AB1E281304CB002E9CF6 /* FavWord */,
 				605C805C27E1EC54002EB0BA /* Words.swift */,
 				605104B82808441E00AB9DEC /* WordManager.swift */,
 				6051AB2E28131F60002E9CF6 /* DataManager.swift */,
@@ -333,6 +349,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Werdd/Supportings/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -388,6 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Werdd/Supportings/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -407,7 +425,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XX56C8Q5GR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Werdd/Info.plist;
+				INFOPLIST_FILE = "Werdd/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -434,7 +452,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = XX56C8Q5GR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Werdd/Info.plist;
+				INFOPLIST_FILE = "Werdd/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
