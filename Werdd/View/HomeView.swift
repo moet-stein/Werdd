@@ -68,6 +68,7 @@ class HomeView: UIView {
     let categoryImageView: CategoryImage = {
         let imageView = CategoryImage(size: 36)
         imageView.addBorder()
+        imageView.isHidden = true
         return imageView
     }()
     
@@ -120,6 +121,8 @@ class HomeView: UIView {
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
         tableView.separatorStyle = .none
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     

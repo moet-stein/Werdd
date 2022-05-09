@@ -47,20 +47,6 @@ class DataManager {
         completion(nil)
     }
     
-//    static func fetchFavWord(usingId id: UUID, completion: (FavWord?) -> Void) {
-//        let fetchRequest = NSFetchRequest<FavWord>(entityName: "FavWord")
-//        fetchRequest.predicate = NSPredicate(format: "uuid == %@", id as CVarArg)
-//
-//        do {
-//            let favWord = try managedObjectContext.fetch(fetchRequest)
-//            completion(favWord.first)
-//        } catch {
-//            print("Could not fetch due to error: \(error.localizedDescription)")
-//        }
-//
-//        completion(nil)
-//    }
-    
     static func fetchFavWord(usingWord word: String, completion: (FavWord?) -> Void) {
         let fetchRequest = NSFetchRequest<FavWord>(entityName: "FavWord")
         fetchRequest.predicate = NSPredicate(format: "word == %@", word as CVarArg)
@@ -90,11 +76,6 @@ class DataManager {
         completion(nil)
     }
     
-    
-    // MARK: - UPDATE?
-    static func updateFavWord() {
-        
-    }
     
     // MARK: - DELETE
     static func deleteFavWord(usingID id: UUID) {

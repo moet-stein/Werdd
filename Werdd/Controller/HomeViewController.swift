@@ -15,11 +15,10 @@ class HomeViewController: UIViewController {
 //    private var viewModel: WordsViewModel?
     
     private var fetchedWord = SingleResult(word: "")
-    //**//
     private var words = [SingleResult]()
     
+    // MARK: - views
     private var contentView: HomeView!
-    
     private var viewFavoritesButton: IconButton!
     
     private var cardSpinner: UIActivityIndicatorView!
@@ -59,8 +58,6 @@ class HomeViewController: UIViewController {
         }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-
     }
     
     override func viewDidLoad() {
@@ -79,7 +76,6 @@ class HomeViewController: UIViewController {
         wordLabel = contentView.wordLabel
         categoryImageView = contentView.categoryImageView
         definitionLabel = contentView.definitionLabel
-        categoryImageView.isHidden = true
         
         randomWordButton = contentView.randomWordButton
         seeDetailsButton = contentView.seeDetailsButton
@@ -87,9 +83,7 @@ class HomeViewController: UIViewController {
         wordsTableView = contentView.wordsTableView
         wordsTableView.delegate = self
         wordsTableView.dataSource = self
-        
-        wordsTableView.estimatedRowHeight = 100
-        wordsTableView.rowHeight = UITableView.automaticDimension
+
         
         searchBar = contentView.searchBar
         searchBar.delegate = self
