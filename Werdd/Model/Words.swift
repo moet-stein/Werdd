@@ -86,7 +86,6 @@ struct SingleResult {
 struct Word: Codable {
     var word: String
     var results: [Result]?
-    var frequency: Double?
 }
 
 struct Result: Codable {

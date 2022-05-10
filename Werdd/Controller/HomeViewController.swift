@@ -14,7 +14,8 @@ class HomeViewController: UIViewController {
     
 //    private var viewModel: WordsViewModel?
     
-    private var fetchedWord = SingleResult(word: "")
+//    private var fetchedWord = SingleResult(word: "")
+    private var fetchedWord: SingleResult?
     private var words = [SingleResult]()
     
     // MARK: - views
@@ -38,6 +39,15 @@ class HomeViewController: UIViewController {
     private var noWordFoundInRandomCard: NoWordFoundView!
     
     private var noInternetView: UIView!
+    
+//    init(fetchedWord: SingleResult?) {
+//        self.fetchedWord = fetchedWord
+//        super.init(nibName: nil, bundle: nil)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
     
 //    init(viewModel: WordsViewModel?) {
 ////        self.viewModel = viewModel
@@ -138,17 +148,16 @@ class HomeViewController: UIViewController {
         wordLabel.text = word.word
         
         let randomResult = word.results?.randomElement()
-        let singleResult = SingleResult(word: word.word, result: randomResult)
-        fetchedWord = singleResult
+        fetchedWord = SingleResult(word: word.word, result: randomResult)
         
-        if let category = singleResult.result?.partOfSpeech {
+        if let category = fetchedWord?.result?.partOfSpeech {
             categoryImageView.isHidden = false
             categoryImageView.image = UIImage(named: category)
         } else {
             categoryImageView.isHidden = true
         }
         
-        if let definition =  singleResult.result?.definition {
+        if let definition =  fetchedWord?.result?.definition {
             definitionLabel.text = definition
         } else {
             definitionLabel.text = "No definition found for this word"
