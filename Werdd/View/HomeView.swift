@@ -9,12 +9,11 @@ import UIKit
 
 class HomeView: UIView {
     
-//    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
-    
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "LightGreen")
+        
         return scrollView
     }()
     
@@ -36,151 +35,57 @@ class HomeView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
-//    private let cardView: UIView = {
-//        let roundedView = UIView()
-//        roundedView.translatesAutoresizingMaskIntoConstraints = false
-//        roundedView.backgroundColor = UIColor(named: "ViewLightYellow")
-//        roundedView.layer.cornerRadius = 20
-//        return roundedView
-//    }()
-//    
-//    let cardSpinner: UIActivityIndicatorView = {
-//        let spinner = UIActivityIndicatorView(style: .large)
-//        spinner.translatesAutoresizingMaskIntoConstraints = false
-//        return spinner
-//    }()
-//    
-//    // MARK: - Components Inside the car
-//    
-//    let wordLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.textAlignment = .left
-//        label.font = UIFont(name: "LeagueSpartan-Bold", size: 30)
-//        label.textColor = UIColor(named: "DarkGreen")
-//        label.lineBreakMode = .byWordWrapping
-//        label.numberOfLines = 0
-//        return label
-//    }()
-//    
-//    
-//    let categoryImageView: CategoryImage = {
-//        let imageView = CategoryImage(size: 36)
-//        imageView.addBorder()
-//        imageView.isHidden = true
-//        return imageView
-//    }()
-//    
-//    let definitionLabel: UILabel = {
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = UIFont(name: "LeagueSpartan-Light", size: 19)
-//        label.textColor = UIColor(named: "DarkGreen")
-//        label.lineBreakMode = .byTruncatingTail
-//        label.numberOfLines = 4
-//        label.textAlignment = .left
-//        return label
-//    }()
-//    
-//    
-//     let randomWordButton: IconButton = {
-//        let button = IconButton(
-//            size: 35,
-//            systemName: "arrow.clockwise.circle",
-//            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
-//        )
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.rotateButton()
-//        return button
-//    }()
-//    
-//    let seeDetailsButton: IconButton = {
-//        let button = IconButton(
-//            size: 35,
-//            systemName: "eyes",
-//            iconColor: UIColor(red: 0.40, green: 0.50, blue: 0.42, alpha: 1.00)
-//        )
-//        button.translatesAutoresizingMaskIntoConstraints = false
-//        button.zoomInButton()
-//        return button
-//    }()
-//    
-//    let noWordFoundInRandomCard: NoWordFoundView = {
-//        let view = NoWordFoundView(labelText: "No Random Word Generated")
-//        view.isHidden = true
-//        return view
-//    }()
-    
-    // MARK: - TableView
-    
-//    let wordsTableView: UITableView = {
-//        let tableView = UITableView()
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.layer.cornerRadius = 20
-//        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
-//        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
-//        tableView.separatorStyle = .none
-//        tableView.estimatedRowHeight = 100
-//        tableView.rowHeight = UITableView.automaticDimension
-//        return tableView
-//    }()
-//
-//    let tableViewSpinner: UIActivityIndicatorView = {
-//        let spinner = UIActivityIndicatorView(style: .large)
-//        spinner.translatesAutoresizingMaskIntoConstraints = false
-//        return spinner
-//    }()
-//
-//    let noWordFoundInTableView: NoWordFoundView = {
-//        let view = NoWordFoundView(labelText: "No Word Found")
-//        view.isHidden = true
-//        return view
-//    }()
-//
+
     let noInternetView: NotFoundWithImageView = {
        let view = NotFoundWithImageView(title: "No Internet Connection", imageName: "NoInternet")
         return view
     }()
+    
+    private let containerStackView: UIStackView = {
+       let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.backgroundColor = .darkGray
+        stackView.axis = .vertical
+        stackView.spacing = 40
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
+    
+    let topContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .yellow
+        return view
+    }()
+    
+    let bottomContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .blue
+        return view
+    }()
 //
-//    let searchBar: UISearchBar = {
-//        let searchBar = UISearchBar()
-//        searchBar.searchBarStyle = UISearchBar.Style.default
-//        searchBar.placeholder = " Search..."
-//        searchBar.sizeToFit()
-//        searchBar.isTranslucent = false
-//        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
-//        searchBar.layer.borderWidth = 1
-//        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
-//        return searchBar
-//    }()
+//    init() {
+//        super.init(frame: .zero)
+////        scrollView.contentSize = frame.size
 //
-    init() {
-        super.init(frame: .zero)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+    
+    override func layoutSubviews() {
         setUpUI()
     }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    
+
     private func setUpUI() {
-        createOuterComponents()
-//        createCardInsideView()
-    }
-    
-    private func createOuterComponents() {
         addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(viewFavoritesButton)
-//        scrollView.addSubview(cardView)
-//        scrollView.addSubview(wordsTableView)
-        
-//        cardView.addSubview(cardSpinner)
-//        cardView.addSubview(noWordFoundInRandomCard)
-//        wordsTableView.addSubview(tableViewSpinner)
-//        wordsTableView.addSubview(noWordFoundInTableView)
+        scrollView.addSubview(containerStackView)
+        containerStackView.addArrangedSubview(topContainerView)
+        containerStackView.addArrangedSubview(bottomContainerView)
         
         scrollView.addSubview(noInternetView)
         
@@ -197,67 +102,22 @@ class HomeView: UIView {
             
             viewFavoritesButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             viewFavoritesButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
-//            
-//            cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-//            cardView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            cardView.widthAnchor.constraint(equalToConstant: 350),
-//            cardView.heightAnchor.constraint(equalToConstant: 200),
-//            
-//            cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-//            cardSpinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
-//            
-//            noWordFoundInRandomCard.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
-//            noWordFoundInRandomCard.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
-//            noWordFoundInRandomCard.widthAnchor.constraint(equalToConstant: 250),
-//            noWordFoundInRandomCard.heightAnchor.constraint(equalToConstant: 100),
             
-//            wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-//            wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
-//            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-//            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
-//            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            
-//            tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-//            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
-//            
-//            noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-//            noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
-//            noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
-//            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100),
-//            
+            containerStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            containerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            containerStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            containerStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            topContainerView.heightAnchor.constraint(equalToConstant: 200),
+            bottomContainerView.heightAnchor.constraint(equalToConstant: 420),
+          
             noInternetView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             noInternetView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             noInternetView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             noInternetView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-//            
+          
         ])
     }
     
-//    private func createCardInsideView() {
-//        cardView.addSubview(wordLabel)
-//        cardView.addSubview(categoryImageView)
-//        cardView.addSubview(definitionLabel)
-//        cardView.addSubview(randomWordButton)
-//        cardView.addSubview(seeDetailsButton)
-//        
-//        NSLayoutConstraint.activate([
-//            wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
-//            wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
-//            wordLabel.widthAnchor.constraint(equalToConstant: 250),
-//            
-//            categoryImageView.centerYAnchor.constraint(equalTo: wordLabel.centerYAnchor),
-//            categoryImageView.leadingAnchor.constraint(equalTo: wordLabel.trailingAnchor, constant: 20),
-//            
-//            definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
-//            definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
-//            definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
-//            
-//            seeDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
-//            seeDetailsButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10),
-//            
-//            randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
-//            randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
-//        ])
-//    }
 }

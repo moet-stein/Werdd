@@ -102,8 +102,8 @@ class RandomWordView: UIView {
         cardView.addSubview(noWordFoundInRandomCard)
         
         NSLayoutConstraint.activate([
-            cardView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            cardView.centerXAnchor.constraint(equalTo: centerXAnchor),
+            cardView.topAnchor.constraint(equalTo: topAnchor),
+            cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
             cardView.widthAnchor.constraint(equalToConstant: 350),
             cardView.heightAnchor.constraint(equalToConstant: 200),
             
