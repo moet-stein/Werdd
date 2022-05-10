@@ -10,54 +10,35 @@ import Network
 
 class HomeViewController: UIViewController {
     let monitor = NWPathMonitor()
-    var wordManager = WordManager()
+//    var wordManager = WordManager()
     
 //    private var viewModel: WordsViewModel?
     
 //    private var fetchedWord = SingleResult(word: "")
-    private var fetchedWord: SingleResult?
+//    private var fetchedWord: SingleResult?
     private var words = [SingleResult]()
     
     // MARK: - views
     private var contentView: HomeView!
     private var viewFavoritesButton: IconButton!
     
-    private var cardSpinner: UIActivityIndicatorView!
+//    private var cardSpinner: UIActivityIndicatorView!
     private var tableViewSpinner: UIActivityIndicatorView!
     
-    private var wordLabel: UILabel!
-    private var categoryImageView: CategoryImage!
-    private var definitionLabel: UILabel!
+//    private var wordLabel: UILabel!
+//    private var categoryImageView: CategoryImage!
+//    private var definitionLabel: UILabel!
     
-    private var randomWordButton: IconButton!
-    private var seeDetailsButton: IconButton!
+//    private var randomWordButton: IconButton!
+//    private var seeDetailsButton: IconButton!
     private var wordsTableView: UITableView!
     
     private var searchBar:UISearchBar!
     
     private var noWordFoundInTableView: NoWordFoundView!
-    private var noWordFoundInRandomCard: NoWordFoundView!
+//    private var noWordFoundInRandomCard: NoWordFoundView!
     
     private var noInternetView: UIView!
-    
-//    init(fetchedWord: SingleResult?) {
-//        self.fetchedWord = fetchedWord
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
-//    init(viewModel: WordsViewModel?) {
-////        self.viewModel = viewModel
-//
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,15 +61,15 @@ class HomeViewController: UIViewController {
         
         viewFavoritesButton = contentView.viewFavoritesButton
         
-        cardSpinner = contentView.cardSpinner
+//        cardSpinner = contentView.cardSpinner
         tableViewSpinner = contentView.tableViewSpinner
         
-        wordLabel = contentView.wordLabel
-        categoryImageView = contentView.categoryImageView
-        definitionLabel = contentView.definitionLabel
-        
-        randomWordButton = contentView.randomWordButton
-        seeDetailsButton = contentView.seeDetailsButton
+//        wordLabel = contentView.wordLabel
+//        categoryImageView = contentView.categoryImageView
+//        definitionLabel = contentView.definitionLabel
+//
+//        randomWordButton = contentView.randomWordButton
+//        seeDetailsButton = contentView.seeDetailsButton
         
         wordsTableView = contentView.wordsTableView
         wordsTableView.delegate = self
@@ -100,15 +81,15 @@ class HomeViewController: UIViewController {
         wordsTableView.tableHeaderView = searchBar
         
         noWordFoundInTableView = contentView.noWordFoundInTableView
-        noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
+//        noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
         
         noInternetView = contentView.noInternetView
         
         
         tableViewSpinner.startAnimating()
-        cardSpinner.startAnimating()
+//        cardSpinner.startAnimating()
         wordManager.fetchInputWord(inputWord: "grateful")
-        wordManager.fetchRandomWord()
+//        wordManager.fetchRandomWord()
         
         addButtonsTarget()
         
@@ -138,50 +119,50 @@ class HomeViewController: UIViewController {
     }
     
     private func addButtonsTarget() {
-        randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
+//        randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
         viewFavoritesButton.addTarget(self, action: #selector(viewFavoritesButtonTapped), for: .touchUpInside)
-        seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
+//        seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
     }
-    
-    private func refreshCard(word: Word) {
-        let word = word
-        wordLabel.text = word.word
-        
-        let randomResult = word.results?.randomElement()
-        fetchedWord = SingleResult(word: word.word, result: randomResult)
-        
-        if let category = fetchedWord?.result?.partOfSpeech {
-            categoryImageView.isHidden = false
-            categoryImageView.image = UIImage(named: category)
-        } else {
-            categoryImageView.isHidden = true
-        }
-        
-        if let definition =  fetchedWord?.result?.definition {
-            definitionLabel.text = definition
-        } else {
-            definitionLabel.text = "No definition found for this word"
-        }
-        
-        wordLabel.zoomIn(duration: 0.5)
-        categoryImageView.zoomIn(duration: 0.5)
-        definitionLabel.zoomIn(duration: 0.5)
-    }
+//
+//    private func refreshCard(word: Word) {
+//        let word = word
+//        wordLabel.text = word.word
+//
+//        let randomResult = word.results?.randomElement()
+//        fetchedWord = SingleResult(word: word.word, result: randomResult)
+//
+//        if let category = fetchedWord?.result?.partOfSpeech {
+//            categoryImageView.isHidden = false
+//            categoryImageView.image = UIImage(named: category)
+//        } else {
+//            categoryImageView.isHidden = true
+//        }
+//
+//        if let definition =  fetchedWord?.result?.definition {
+//            definitionLabel.text = definition
+//        } else {
+//            definitionLabel.text = "No definition found for this word"
+//        }
+//
+//        wordLabel.zoomIn(duration: 0.5)
+//        categoryImageView.zoomIn(duration: 0.5)
+//        definitionLabel.zoomIn(duration: 0.5)
+//    }
     
 
-    @objc func randomWordButtonTapped() {
-        cardSpinner.startAnimating()
-        randomWordButton.isUserInteractionEnabled = false
-        wordManager.fetchRandomWord()
-    }
+//    @objc func randomWordButtonTapped() {
+//        cardSpinner.startAnimating()
+//        randomWordButton.isUserInteractionEnabled = false
+//        wordManager.fetchRandomWord()
+//    }
     
     @objc func viewFavoritesButtonTapped() {
         navigationController?.pushViewController(FavoritesViewController(), animated: true)
     }
     
-    @objc func seeDetailsButtonTapped() {
-        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: fetchedWord), animated: true)
-    }
+//    @objc func seeDetailsButtonTapped() {
+//        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: fetchedWord), animated: true)
+//    }
 }
 
 
