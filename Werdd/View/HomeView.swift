@@ -114,47 +114,47 @@ class HomeView: UIView {
     
     // MARK: - TableView
     
-    let wordsTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.layer.cornerRadius = 20
-        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
-        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
-        tableView.separatorStyle = .none
-        tableView.estimatedRowHeight = 100
-        tableView.rowHeight = UITableView.automaticDimension
-        return tableView
-    }()
-    
-    let tableViewSpinner: UIActivityIndicatorView = {
-        let spinner = UIActivityIndicatorView(style: .large)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
-        return spinner
-    }()
-    
-    let noWordFoundInTableView: NoWordFoundView = {
-        let view = NoWordFoundView(labelText: "No Word Found")
-        view.isHidden = true
-        return view
-    }()
-    
+//    let wordsTableView: UITableView = {
+//        let tableView = UITableView()
+//        tableView.translatesAutoresizingMaskIntoConstraints = false
+//        tableView.layer.cornerRadius = 20
+//        tableView.backgroundColor = UIColor(named: "ViewLightYellow")
+//        tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
+//        tableView.separatorStyle = .none
+//        tableView.estimatedRowHeight = 100
+//        tableView.rowHeight = UITableView.automaticDimension
+//        return tableView
+//    }()
+//
+//    let tableViewSpinner: UIActivityIndicatorView = {
+//        let spinner = UIActivityIndicatorView(style: .large)
+//        spinner.translatesAutoresizingMaskIntoConstraints = false
+//        return spinner
+//    }()
+//
+//    let noWordFoundInTableView: NoWordFoundView = {
+//        let view = NoWordFoundView(labelText: "No Word Found")
+//        view.isHidden = true
+//        return view
+//    }()
+//
     let noInternetView: NotFoundWithImageView = {
        let view = NotFoundWithImageView(title: "No Internet Connection", imageName: "NoInternet")
         return view
     }()
-    
-    let searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = " Search..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
-        searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
-        return searchBar
-    }()
-    
+//
+//    let searchBar: UISearchBar = {
+//        let searchBar = UISearchBar()
+//        searchBar.searchBarStyle = UISearchBar.Style.default
+//        searchBar.placeholder = " Search..."
+//        searchBar.sizeToFit()
+//        searchBar.isTranslucent = false
+//        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
+//        searchBar.layer.borderWidth = 1
+//        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+//        return searchBar
+//    }()
+//
     init() {
         super.init(frame: .zero)
         setUpUI()
@@ -175,12 +175,12 @@ class HomeView: UIView {
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(viewFavoritesButton)
 //        scrollView.addSubview(cardView)
-        scrollView.addSubview(wordsTableView)
+//        scrollView.addSubview(wordsTableView)
         
 //        cardView.addSubview(cardSpinner)
 //        cardView.addSubview(noWordFoundInRandomCard)
-        wordsTableView.addSubview(tableViewSpinner)
-        wordsTableView.addSubview(noWordFoundInTableView)
+//        wordsTableView.addSubview(tableViewSpinner)
+//        wordsTableView.addSubview(noWordFoundInTableView)
         
         scrollView.addSubview(noInternetView)
         
@@ -211,26 +211,26 @@ class HomeView: UIView {
 //            noWordFoundInRandomCard.widthAnchor.constraint(equalToConstant: 250),
 //            noWordFoundInRandomCard.heightAnchor.constraint(equalToConstant: 100),
             
-            wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
-            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
-            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            
-            tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
-            
-            noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-            noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
-            noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
-            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100),
-            
+//            wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+//            wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
+//            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+//            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+//            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
+//            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+//            
+//            tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
+//            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
+//            
+//            noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
+//            noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
+//            noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
+//            noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100),
+//            
             noInternetView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             noInternetView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             noInternetView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             noInternetView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            
+//            
         ])
     }
     
