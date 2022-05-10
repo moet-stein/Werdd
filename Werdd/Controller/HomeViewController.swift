@@ -16,14 +16,14 @@ class HomeViewController: UIViewController {
     
 //    private var fetchedWord = SingleResult(word: "")
 //    private var fetchedWord: SingleResult?
-    private var words = [SingleResult]()
+//    private var words = [SingleResult]()
     
     // MARK: - views
     private var contentView: HomeView!
     private var viewFavoritesButton: IconButton!
     
 //    private var cardSpinner: UIActivityIndicatorView!
-    private var tableViewSpinner: UIActivityIndicatorView!
+//    private var tableViewSpinner: UIActivityIndicatorView!
     
 //    private var wordLabel: UILabel!
 //    private var categoryImageView: CategoryImage!
@@ -31,11 +31,11 @@ class HomeViewController: UIViewController {
     
 //    private var randomWordButton: IconButton!
 //    private var seeDetailsButton: IconButton!
-    private var wordsTableView: UITableView!
-    
-    private var searchBar:UISearchBar!
-    
-    private var noWordFoundInTableView: NoWordFoundView!
+//    private var wordsTableView: UITableView!
+//
+//    private var searchBar:UISearchBar!
+//
+//    private var noWordFoundInTableView: NoWordFoundView!
 //    private var noWordFoundInRandomCard: NoWordFoundView!
     
     private var noInternetView: UIView!
@@ -44,9 +44,9 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let index = self.wordsTableView.indexPathForSelectedRow{
-            self.wordsTableView.deselectRow(at: index, animated: true)
-        }
+//        if let index = self.wordsTableView.indexPathForSelectedRow{
+//            self.wordsTableView.deselectRow(at: index, animated: true)
+//        }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
@@ -54,7 +54,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        wordManager.delegate = self
+//        wordManager.delegate = self
         
         contentView = HomeView()
         view = contentView
@@ -62,7 +62,7 @@ class HomeViewController: UIViewController {
         viewFavoritesButton = contentView.viewFavoritesButton
         
 //        cardSpinner = contentView.cardSpinner
-        tableViewSpinner = contentView.tableViewSpinner
+//        tableViewSpinner = contentView.tableViewSpinner
         
 //        wordLabel = contentView.wordLabel
 //        categoryImageView = contentView.categoryImageView
@@ -70,25 +70,25 @@ class HomeViewController: UIViewController {
 //
 //        randomWordButton = contentView.randomWordButton
 //        seeDetailsButton = contentView.seeDetailsButton
+//
+//        wordsTableView = contentView.wordsTableView
+//        wordsTableView.delegate = self
+//        wordsTableView.dataSource = self
+//
+//
+//        searchBar = contentView.searchBar
+//        searchBar.delegate = self
+//        wordsTableView.tableHeaderView = searchBar
         
-        wordsTableView = contentView.wordsTableView
-        wordsTableView.delegate = self
-        wordsTableView.dataSource = self
-
-        
-        searchBar = contentView.searchBar
-        searchBar.delegate = self
-        wordsTableView.tableHeaderView = searchBar
-        
-        noWordFoundInTableView = contentView.noWordFoundInTableView
+//        noWordFoundInTableView = contentView.noWordFoundInTableView
 //        noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
         
         noInternetView = contentView.noInternetView
         
         
-        tableViewSpinner.startAnimating()
+//        tableViewSpinner.startAnimating()
 //        cardSpinner.startAnimating()
-        wordManager.fetchInputWord(inputWord: "grateful")
+//        wordManager.fetchInputWord(inputWord: "grateful")
 //        wordManager.fetchRandomWord()
         
         addButtonsTarget()
@@ -167,121 +167,121 @@ class HomeViewController: UIViewController {
 
 
 
-extension HomeViewController : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return words.count
-//        return viewModel?.numberOfRowsInSection ?? 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
-            return UITableViewCell()
-        }
-//        let wordDetail = viewModel.words
-        let wordForRow = words[indexPath.row]
-        
-        cell.viewModel = WordCellViewModel(wordDetail: wordForRow)
-        
-//        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
-        
-        return cell
-        
-    }
-}
+//extension HomeViewController : UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return words.count
+////        return viewModel?.numberOfRowsInSection ?? 1
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        
+//        guard let cell = tableView.dequeueReusableCell(withIdentifier: WordsTableViewCell.identifier, for: indexPath) as? WordsTableViewCell else {
+//            return UITableViewCell()
+//        }
+////        let wordDetail = viewModel.words
+//        let wordForRow = words[indexPath.row]
+//        
+//        cell.viewModel = WordCellViewModel(wordDetail: wordForRow)
+//        
+////        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
+//        
+//        return cell
+//        
+//    }
+//}
+//
+//extension HomeViewController : UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let selectedWord = words[indexPath.row]
+//        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: selectedWord), animated: true)
+//    }
+//}
+//
+//
+//extension HomeViewController: UISearchBarDelegate {
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        searchBar.setShowsCancelButton(true, animated: true)
+//        
+//    }
+//    
+//    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//        searchBar.setShowsCancelButton(false, animated: true)
+//        
+//    }
+//    
+//    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+//        searchBar.text = ""
+//        searchBar.endEditing(true)
+//        searchBar.setShowsCancelButton(false, animated: true)
+//    
+//    }
+//    
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        tableViewSpinner.startAnimating()
+//        searchBar.endEditing(true)
+//        wordsTableView.isUserInteractionEnabled = false
+//        if let searchedWord = searchBar.searchTextField.text  {
+//            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
+//        }
+//        
+//    }
+//
+//}
 
-extension HomeViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWord = words[indexPath.row]
-        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: selectedWord), animated: true)
-    }
-}
-
-
-extension HomeViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(true, animated: true)
-        
-    }
-    
-    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        searchBar.setShowsCancelButton(false, animated: true)
-        
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
-        searchBar.endEditing(true)
-        searchBar.setShowsCancelButton(false, animated: true)
-    
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        tableViewSpinner.startAnimating()
-        searchBar.endEditing(true)
-        wordsTableView.isUserInteractionEnabled = false
-        if let searchedWord = searchBar.searchTextField.text  {
-            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
-        }
-        
-    }
-
-}
-
-extension HomeViewController: WordManegerDelegate {
-    
-    func didUpdateWord(_ wordManager: WordManager, word: Word) {
-        DispatchQueue.main.async {
-            self.wordLabel.isHidden = false
-            self.definitionLabel.isHidden = false
-            self.categoryImageView.isHidden = false
-            self.noWordFoundInRandomCard.isHidden = true
-            
-            self.refreshCard(word: word)
-            self.cardSpinner.stopAnimating()
-            self.randomWordButton.isUserInteractionEnabled = true
-        }
-    }
-    
-    func didUpdateTableView(_ wordManager: WordManager, word: Word) {
-       words = [SingleResult]()
-        if let results = word.results {
-            for result in results {
-                self.words.append(SingleResult(word: word.word, result: result))
-            }
-        }  else {
-            self.words.append(SingleResult(word: word.word, result: nil))
-        }
-        DispatchQueue.main.async {
-//            self.viewModel?.wordToSingleResults(from: word)
-            self.noWordFoundInTableView.isHidden = true
-            self.wordsTableView.reloadData()
-            self.tableViewSpinner.stopAnimating()
-            self.wordsTableView.isUserInteractionEnabled = true
-        }
-    }
-    
-    func didFailWithError(error: Error?, random: Bool) {
-        DispatchQueue.main.async {
-            if random {
-                self.wordLabel.isHidden = true
-                self.definitionLabel.isHidden = true
-                self.categoryImageView.isHidden = true
-                self.noWordFoundInRandomCard.isHidden = false
-                self.cardSpinner.stopAnimating()
-                self.randomWordButton.isUserInteractionEnabled = true
-            } else {
-                self.words = []
-                self.wordsTableView.reloadData()
-                self.noWordFoundInTableView.isHidden = false
-                self.tableViewSpinner.stopAnimating()
-                self.wordsTableView.isUserInteractionEnabled = true
-            }
-            
-        }
-        if let error = error {
-            print(error)
-        }
-    }
-    
-}
+//extension HomeViewController: WordManegerDelegate {
+//    
+//    func didUpdateWord(_ wordManager: WordManager, word: Word) {
+//        DispatchQueue.main.async {
+//            self.wordLabel.isHidden = false
+//            self.definitionLabel.isHidden = false
+//            self.categoryImageView.isHidden = false
+//            self.noWordFoundInRandomCard.isHidden = true
+//            
+//            self.refreshCard(word: word)
+//            self.cardSpinner.stopAnimating()
+//            self.randomWordButton.isUserInteractionEnabled = true
+//        }
+//    }
+//    
+//    func didUpdateTableView(_ wordManager: WordManager, word: Word) {
+//       words = [SingleResult]()
+//        if let results = word.results {
+//            for result in results {
+//                self.words.append(SingleResult(word: word.word, result: result))
+//            }
+//        }  else {
+//            self.words.append(SingleResult(word: word.word, result: nil))
+//        }
+//        DispatchQueue.main.async {
+////            self.viewModel?.wordToSingleResults(from: word)
+//            self.noWordFoundInTableView.isHidden = true
+//            self.wordsTableView.reloadData()
+//            self.tableViewSpinner.stopAnimating()
+//            self.wordsTableView.isUserInteractionEnabled = true
+//        }
+//    }
+//    
+//    func didFailWithError(error: Error?, random: Bool) {
+//        DispatchQueue.main.async {
+//            if random {
+//                self.wordLabel.isHidden = true
+//                self.definitionLabel.isHidden = true
+//                self.categoryImageView.isHidden = true
+//                self.noWordFoundInRandomCard.isHidden = false
+//                self.cardSpinner.stopAnimating()
+//                self.randomWordButton.isUserInteractionEnabled = true
+//            } else {
+//                self.words = []
+//                self.wordsTableView.reloadData()
+//                self.noWordFoundInTableView.isHidden = false
+//                self.tableViewSpinner.stopAnimating()
+//                self.wordsTableView.isUserInteractionEnabled = true
+//            }
+//            
+//        }
+//        if let error = error {
+//            print(error)
+//        }
+//    }
+//    
+//}
