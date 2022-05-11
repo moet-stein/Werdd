@@ -11,6 +11,18 @@ class WordsTableViewController: UIViewController {
     var wordManager = WordManager()
     private var words = [SingleResult]()
     
+    let topContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let bottomContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     private var contentView: WordsTableView!
     private var tableViewSpinner: UIActivityIndicatorView!
 
@@ -25,13 +37,17 @@ class WordsTableViewController: UIViewController {
         if let index = self.wordsTableView.indexPathForSelectedRow{
             self.wordsTableView.deselectRow(at: index, animated: true)
         }
+        
     }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         wordManager.delegate = self
         wordManager.fetchInputWord(inputWord: "grateful")
         
+        contentView = WordsTableView()
+        view = contentView
         tableViewSpinner = contentView.tableViewSpinner
         tableViewSpinner.startAnimating()
         
@@ -44,6 +60,8 @@ class WordsTableViewController: UIViewController {
         wordsTableView.tableHeaderView = searchBar
         
         noWordFoundInTableView = contentView.noWordFoundInTableView
+        
+        print("viewDidLoad WordsTableViewController")
         
     }
 

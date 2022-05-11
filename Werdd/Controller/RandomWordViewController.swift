@@ -24,14 +24,23 @@ class RandomWordViewController: UIViewController {
     private var seeDetailsButton: IconButton!
 
     private var noWordFoundInRandomCard: NoWordFoundView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         wordManager.delegate = self
         wordManager.fetchRandomWord()
         
         contentView = RandomWordView()
         view = contentView
+//        view.isUserInteractionEnabled = true
         
         cardSpinner = contentView.cardSpinner
         cardSpinner.startAnimating()
@@ -44,12 +53,16 @@ class RandomWordViewController: UIViewController {
         seeDetailsButton = contentView.seeDetailsButton
 
         noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
-
-        wordManager.fetchRandomWord()
-        
         addButtonsTarget()
+        
+        print("viewDidLoad RandomWordViewController")
+        
     }
     
+    override func viewDidLayoutSubviews() {
+        addButtonsTarget()
+        
+    }
 
     private func addButtonsTarget() {
         randomWordButton.addTarget(self, action: #selector(randomWordButtonTapped), for: .touchUpInside)
@@ -83,8 +96,9 @@ class RandomWordViewController: UIViewController {
     
     @objc func randomWordButtonTapped() {
         cardSpinner.startAnimating()
-        randomWordButton.isUserInteractionEnabled = false
+//        randomWordButton.isUserInteractionEnabled = false
         wordManager.fetchRandomWord()
+        print("randomWordButtonTapped")
     }
     
     @objc func viewFavoritesButtonTapped() {
@@ -100,6 +114,7 @@ class RandomWordViewController: UIViewController {
 extension RandomWordViewController: WordManegerDelegate {
     
     func didUpdateWord(_ wordManager: WordManager, word: Word) {
+        print("didUpdateWord")
         DispatchQueue.main.async {
             self.wordLabel.isHidden = false
             self.definitionLabel.isHidden = false
@@ -110,6 +125,7 @@ extension RandomWordViewController: WordManegerDelegate {
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
         }
+        
     }
     
     func didUpdateTableView(_ wordManager: WordManager, word: Word) {
@@ -139,13 +155,6 @@ extension RandomWordViewController: WordManegerDelegate {
                 self.cardSpinner.stopAnimating()
                 self.randomWordButton.isUserInteractionEnabled = true
             }
-//            else {
-//                self.words = []
-//                self.wordsTableView.reloadData()
-//                self.noWordFoundInTableView.isHidden = false
-//                self.tableViewSpinner.stopAnimating()
-//                self.wordsTableView.isUserInteractionEnabled = true
-//            }
             
         }
         if let error = error {

@@ -23,6 +23,8 @@ class HomeViewController: UIViewController {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        
+        view.isUserInteractionEnabled = true
     }
     
     override func viewDidLoad() {
@@ -35,17 +37,34 @@ class HomeViewController: UIViewController {
         noInternetView = contentView.noInternetView
         topContainerView = contentView.topContainerView
         bottomContainerView = contentView.bottomContainerView
-        setVCs()
+        
         addButtonsTarget()
         checkInternetConnection()
+        
+        setVCs()
+        
+        print("viewDidLoad HomeVC")
     }
+    
+    override func viewDidLayoutSubviews() {
+//        setVCs()
+    }
+    
     
     private func setVCs() {
         let randomWordVC = RandomWordViewController()
-        addChild(randomWordVC)
+        randomWordVC.view.translatesAutoresizingMaskIntoConstraints = false
         topContainerView.addSubview(randomWordVC.view)
+        addChild(randomWordVC)
         randomWordVC.didMove(toParent: self)
         randomWordVC.view.frame = topContainerView.frame
+        
+        let wordsTableVC = WordsTableViewController()
+        wordsTableVC.view.translatesAutoresizingMaskIntoConstraints = false
+        bottomContainerView.addSubview(wordsTableVC.view)
+        addChild(wordsTableVC)
+        wordsTableVC.didMove(toParent: self)
+        wordsTableVC.view.frame = bottomContainerView.frame
     }
 
     

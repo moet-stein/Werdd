@@ -87,12 +87,17 @@ class RandomWordView: UIView {
     
     init() {
         super.init(frame: .zero)
-        setUpUI()
-        createCardInsideView()
+//        setUpUI()
+//        createCardInsideView()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        setUpUI()
+        createCardInsideView()
     }
 
     private func setUpUI() {
@@ -101,9 +106,11 @@ class RandomWordView: UIView {
         cardView.addSubview(cardSpinner)
         cardView.addSubview(noWordFoundInRandomCard)
         
+        
         NSLayoutConstraint.activate([
             cardView.topAnchor.constraint(equalTo: topAnchor),
             cardView.leadingAnchor.constraint(equalTo: leadingAnchor),
+//            cardView.trailingAnchor.constraint(equalTo: trailingAnchor),
             cardView.widthAnchor.constraint(equalToConstant: 350),
             cardView.heightAnchor.constraint(equalToConstant: 200),
             

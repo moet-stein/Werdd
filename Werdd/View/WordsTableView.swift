@@ -35,6 +35,7 @@ class WordsTableView: UIView {
     
     let searchBar: UISearchBar = {
         let searchBar = UISearchBar()
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = " Search..."
         searchBar.sizeToFit()
@@ -47,23 +48,37 @@ class WordsTableView: UIView {
     
     init() {
         super.init(frame: .zero)
-        setUpUI()
+//        setUpUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func layoutSubviews() {
+        setUpUI()
+        print(frame.size.width)
+    }
+    
     private func setUpUI() {
         addSubview(wordsTableView)
+        addSubview(searchBar)
         wordsTableView.addSubview(tableViewSpinner)
         wordsTableView.addSubview(noWordFoundInTableView)
         
         NSLayoutConstraint.activate([
-            wordsTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            wordsTableView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
+            searchBar.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: leadingAnchor),
+            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            searchBar.trailingAnchor.constraint(equalTo: trailingAnchor),
             
+            wordsTableView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            wordsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            wordsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
+//            wordsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
+            wordsTableView.widthAnchor.constraint(equalToConstant: 390),
+            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
+
             tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
             tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
             

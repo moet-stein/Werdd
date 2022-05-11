@@ -13,7 +13,6 @@ class HomeView: UIView {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.backgroundColor = UIColor(named: "LightGreen")
-        
         return scrollView
     }()
     
@@ -41,27 +40,17 @@ class HomeView: UIView {
         return view
     }()
     
-    private let containerStackView: UIStackView = {
-       let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .darkGray
-        stackView.axis = .vertical
-        stackView.spacing = 40
-        stackView.distribution = .fillProportionally
-        return stackView
-    }()
-    
     let topContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .yellow
+        view.layer.cornerRadius = 20
         return view
     }()
     
     let bottomContainerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .blue
+
         return view
     }()
 //
@@ -83,9 +72,8 @@ class HomeView: UIView {
         addSubview(scrollView)
         scrollView.addSubview(titleLabel)
         scrollView.addSubview(viewFavoritesButton)
-        scrollView.addSubview(containerStackView)
-        containerStackView.addArrangedSubview(topContainerView)
-        containerStackView.addArrangedSubview(bottomContainerView)
+        scrollView.addSubview(topContainerView)
+        scrollView.addSubview(bottomContainerView)
         
         scrollView.addSubview(noInternetView)
         
@@ -103,14 +91,19 @@ class HomeView: UIView {
             viewFavoritesButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
             viewFavoritesButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
             
-            containerStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            containerStackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            containerStackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            containerStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
-            containerStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            topContainerView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            topContainerView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            topContainerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            topContainerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+            
+            bottomContainerView.topAnchor.constraint(equalTo: topContainerView.bottomAnchor, constant: 20),
+            bottomContainerView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            bottomContainerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            bottomContainerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            bottomContainerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             topContainerView.heightAnchor.constraint(equalToConstant: 200),
-            bottomContainerView.heightAnchor.constraint(equalToConstant: 420),
+//            bottomContainerView.heightAnchor.constraint(equalToConstant: 400),
           
             noInternetView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
             noInternetView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),

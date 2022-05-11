@@ -182,6 +182,7 @@
 			children = (
 				60537CD227F1B66100917B50 /* HomeView.swift */,
 				60BB1793282A688A00F5544C /* RandomWordView.swift */,
+				60BB1795282A6B4500F5544C /* WordsTableView.swift */,
 				6051048B27FB362300AB9DEC /* DetailsView.swift */,
 				6051AB3228158CE3002E9CF6 /* FavoritesView.swift */,
 				6051042C27F4572500AB9DEC /* WordsTableViewCell.swift */,
@@ -190,7 +191,6 @@
 				6051048D27FC3F1400AB9DEC /* DetailsCardView.swift */,
 				6051AAF6280C4DB9002E9CF6 /* NoWordFoundView.swift */,
 				6051AB8028214CE3002E9CF6 /* NotFoundWithImageView.swift */,
-				60BB1795282A6B4500F5544C /* WordsTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

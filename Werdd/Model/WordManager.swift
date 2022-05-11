@@ -17,6 +17,8 @@ protocol WordManegerDelegate {
 }
 
 
+
+
 struct WordManager {
     
     var delegate: WordManegerDelegate?
