@@ -40,7 +40,7 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("debug")
         if let index = self.wordsTableView.indexPathForSelectedRow{
             self.wordsTableView.deselectRow(at: index, animated: true)
         }
