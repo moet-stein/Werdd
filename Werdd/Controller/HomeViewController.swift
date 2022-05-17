@@ -63,7 +63,6 @@ class HomeViewController: UIViewController {
         cardSpinner = contentView.cardSpinner
         tableViewSpinner = contentView.tableViewSpinner
         
-<<<<<<< Updated upstream
         wordLabel = contentView.wordLabel
         categoryImageView = contentView.categoryImageView
         definitionLabel = contentView.definitionLabel
@@ -78,7 +77,6 @@ class HomeViewController: UIViewController {
         
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
-=======
         setVCs()
     }
     
@@ -88,13 +86,13 @@ class HomeViewController: UIViewController {
     
     
     private func setVCs() {
-        let randomWordVC = RandomWordViewController()
-        randomWordVC.view.translatesAutoresizingMaskIntoConstraints = false
-        topContainerView.addSubview(randomWordVC.view)
-        addChild(randomWordVC)
-        randomWordVC.didMove(toParent: self)
-        randomWordVC.view.frame = topContainerView.frame
->>>>>>> Stashed changes
+//        let randomWordVC = RandomWordViewController()
+//        randomWordVC.view.translatesAutoresizingMaskIntoConstraints = false
+//        topContainerView.addSubview(randomWordVC.view)
+//        addChild(randomWordVC)
+//        randomWordVC.didMove(toParent: self)
+//        randomWordVC.view.frame = topContainerView.frame
+
         
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = " Search..."
