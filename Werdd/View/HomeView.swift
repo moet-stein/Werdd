@@ -111,6 +111,7 @@ class HomeView: UIView {
         return view
     }()
     
+<<<<<<< Updated upstream
     // MARK: - TableView
     
     let wordsTableView: UITableView = {
@@ -132,6 +133,13 @@ class HomeView: UIView {
     let noWordFoundInTableView: NoWordFoundView = {
         let view = NoWordFoundView(labelText: "No Word Found")
         view.isHidden = true
+=======
+    let topContainerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
+        view.isUserInteractionEnabled = true
+>>>>>>> Stashed changes
         return view
     }()
     
