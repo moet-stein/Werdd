@@ -36,10 +36,15 @@ class DataManager {
     }
     
     // MARK: - READ
-    static func fetchFavWords(completion: ([FavWord]?) -> Void) {
+    static func fetchFavWords(completion: ([SingleResult]?) -> Void) {
         do {
             let favWords = try managedObjectContext.fetch(FavWord.createFetchRequest())
-            completion(favWords)
+            var singleResults = [SingleResult]()
+            for fav in favWords {
+                let newSingleResult = SingleResult(uuid: fav.uuid, word: fav.word, result: Result(definition: fav.definition, partOfSpeech: fav.partOfSpeech, synonyms: fav.synonyms, antonyms: fav.antonyms, examples: fav.examples))
+                singleResults.append(newSingleResult)
+            }
+            completion(singleResults)
         } catch {
             print("Fetch FavWords failed")
         }

@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol WordManegerDelegate {
-    func didUpdateWord(_ wordManager: WordManager, word: Word)
+    func didUpdateWord(_ wordManager: WordManager, word: SingleResult)
     func didUpdateTableView(_ wordManager: WordManager, word: Word)
     func didFailWithError(error: Error?, random: Bool)
 }
@@ -55,7 +55,10 @@ struct WordManager {
                 
                 do {
                     let word = try JSONDecoder().decode(Word.self, from: data)
-                    random ? self.delegate?.didUpdateWord(self, word: word) : self.delegate?.didUpdateTableView(self, word: word)
+                    let randomResult = word.results?.randomElement()
+                    let singleResult = SingleResult(uuid: UUID(), word: word.word, result: randomResult)
+
+                    random ? self.delegate?.didUpdateWord(self, word: singleResult) : self.delegate?.didUpdateTableView(self, word: word)
                 } catch {
                     random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
                     print("Failed to convert \(error.localizedDescription)")

@@ -79,6 +79,7 @@ import Foundation
 //}
 
 struct SingleResult {
+    var uuid: UUID
     var word: String
     var result: Result?
 }
@@ -86,7 +87,6 @@ struct SingleResult {
 struct Word: Codable {
     var word: String
     var results: [Result]?
-    var frequency: Double?
 }
 
 struct Result: Codable {

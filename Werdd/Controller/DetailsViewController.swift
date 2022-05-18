@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsViewController: UIViewController {
-    private var passedFavWord: FavWord?
+    private var passedFavWord: SingleResult?
     
     private var contentView: DetailsView!
     private var selectedWord: SingleResult?
@@ -40,7 +40,7 @@ class DetailsViewController: UIViewController {
         setUpContent()
     }
     
-    init(passedFavWord: FavWord?, selectedWord: SingleResult?) {
+    init(passedFavWord: SingleResult?, selectedWord: SingleResult?) {
         self.passedFavWord = passedFavWord
         self.selectedWord = selectedWord
         super.init(nibName: nil, bundle: nil)
@@ -62,25 +62,38 @@ class DetailsViewController: UIViewController {
             let definition = selectedWord.result?.definition ?? ""
             definitionLabel.text = definition
             
-            antonymsCard.insertWords(words: selectedWord.result?.antonyms ?? nil)
-            synonymsCard.insertWords(words: selectedWord.result?.synonyms ?? nil)
-            usageCard.insertUsages(usages: selectedWord.result?.examples ?? nil)
+            if let antonyms = selectedWord.result?.antonyms {
+                antonymsCard.insertWords(words: antonyms)
+            } else {
+                antonymsCard.isHidden = true
+            }
             
+            if let synonyms = selectedWord.result?.synonyms {
+                synonymsCard.insertWords(words: synonyms)
+            } else {
+                synonymsCard.isHidden = true
+            }
+            
+            if let examples = selectedWord.result?.examples {
+                usageCard.insertUsages(usages: examples)
+            } else {
+                usageCard.isHidden = true
+            }
             checkWordFavInCoreData(word: selectedWord.word, definition: definition)
         }
-        
-        if let passedFavWord = passedFavWord {
-            wordLabel.text = passedFavWord.word
-            categoryLabel.text = passedFavWord.partOfSpeech ?? ""
-            definitionLabel.text = passedFavWord.definition ?? ""
-            
-            antonymsCard.insertWords(words: passedFavWord.antonyms ?? nil)
-            synonymsCard.insertWords(words: passedFavWord.synonyms ?? nil)
-            usageCard.insertUsages(usages: passedFavWord.examples ?? nil)
-            
-            favoriteButton.isSelected = true
-            favoriteButton.toggleFavorite()
-        }
+//
+//        if let passedFavWord = passedFavWord {
+//            wordLabel.text = passedFavWord.word
+//            categoryLabel.text = passedFavWord.partOfSpeech ?? ""
+//            definitionLabel.text = passedFavWord.definition ?? ""
+//
+//            antonymsCard.insertWords(words: passedFavWord.antonyms ?? nil)
+//            synonymsCard.insertWords(words: passedFavWord.synonyms ?? nil)
+//            usageCard.insertUsages(usages: passedFavWord.examples ?? nil)
+//
+//            favoriteButton.isSelected = true
+//            favoriteButton.toggleFavorite()
+//        }
         
         if let wordText = wordLabel.text {
             if wordText.count > 14 {
@@ -139,20 +152,20 @@ class DetailsViewController: UIViewController {
             }
         }
         
-        if let passedFavWord = passedFavWord {
-            if sender.isSelected {
-                let word = passedFavWord.word
-                let definition = passedFavWord.definition
-                let partOfSpeech = passedFavWord.partOfSpeech
-                let synonyms = passedFavWord.synonyms
-                let antonyms = passedFavWord.antonyms
-                let examples = passedFavWord.examples
-                
-                DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
-            } else {
-                DataManager.deleteFavWord(word: passedFavWord)
-            }
-        }
+//        if let passedFavWord = passedFavWord {
+//            if sender.isSelected {
+//                let word = passedFavWord.word
+//                let definition = passedFavWord.definition
+//                let partOfSpeech = passedFavWord.partOfSpeech
+//                let synonyms = passedFavWord.synonyms
+//                let antonyms = passedFavWord.antonyms
+//                let examples = passedFavWord.examples
+//
+//                DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
+//            } else {
+//                DataManager.deleteFavWord(word: passedFavWord)
+//            }
+//        }
         
     }
 }

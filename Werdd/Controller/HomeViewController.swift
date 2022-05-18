@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     let monitor = NWPathMonitor()
     var wordManager = WordManager()
     
-    private var fetchedWord = SingleResult(word: "")
+    private var fetchedWord: SingleResult?
     private var words = [SingleResult]()
     
     private var contentView: HomeView!
@@ -40,7 +40,6 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("debug")
         if let index = self.wordsTableView.indexPathForSelectedRow{
             self.wordsTableView.deselectRow(at: index, animated: true)
         }
@@ -86,14 +85,6 @@ class HomeViewController: UIViewController {
     
     
     private func setVCs() {
-//        let randomWordVC = RandomWordViewController()
-//        randomWordVC.view.translatesAutoresizingMaskIntoConstraints = false
-//        topContainerView.addSubview(randomWordVC.view)
-//        addChild(randomWordVC)
-//        randomWordVC.didMove(toParent: self)
-//        randomWordVC.view.frame = topContainerView.frame
-
-        
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = " Search..."
         searchBar.sizeToFit()
@@ -145,22 +136,18 @@ class HomeViewController: UIViewController {
         seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
     }
     
-    private func refreshCard(word: Word) {
-        let word = word
+    private func refreshCard(word: SingleResult) {
+        fetchedWord = word
         wordLabel.text = word.word
         
-        let randomResult = word.results?.randomElement()
-        let singleResult = SingleResult(word: word.word, result: randomResult)
-        fetchedWord = singleResult
-        
-        if let category = singleResult.result?.partOfSpeech {
+        if let category = word.result?.partOfSpeech {
             categoryImageView.isHidden = false
             categoryImageView.image = UIImage(named: category)
         } else {
             categoryImageView.isHidden = true
         }
         
-        if let definition =  singleResult.result?.definition {
+        if let definition =  word.result?.definition {
             definitionLabel.text = definition
         } else {
             definitionLabel.text = "No definition found for this word"
@@ -182,6 +169,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func seeDetailsButtonTapped() {
+        print(fetchedWord)
         navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: fetchedWord), animated: true)
     }
 }
@@ -248,7 +236,7 @@ extension HomeViewController: UISearchBarDelegate {
 
 extension HomeViewController: WordManegerDelegate {
     
-    func didUpdateWord(_ wordManager: WordManager, word: Word) {
+    func didUpdateWord(_ wordManager: WordManager, word: SingleResult) {
         DispatchQueue.main.async {
             self.wordLabel.isHidden = false
             self.definitionLabel.isHidden = false
@@ -267,10 +255,10 @@ extension HomeViewController: WordManegerDelegate {
         DispatchQueue.main.async {
             if let results = word.results {
                 for result in results {
-                    self.words.append(SingleResult(word: word.word, result: result))
+                    self.words.append(SingleResult(uuid: UUID(), word: word.word, result: result))
                 }
             }  else {
-                self.words.append(SingleResult(word: word.word, result: nil))
+                self.words.append(SingleResult(uuid: UUID(), word: word.word, result: nil))
             }
             if !self.noWordFoundInTableView.isHidden {
                 self.noWordFoundInTableView.isHidden = true

@@ -8,7 +8,7 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-    private var favorites = [FavWord]()
+    private var favorites = [SingleResult]()
     
     private var contentView: FavoritesView!
     
@@ -36,7 +36,7 @@ class FavoritesViewController: UIViewController {
                 }
                 
                 favorites = favs
-                
+    
                 DispatchQueue.main.async { [weak self] in
                     self?.favsTableView.reloadData()
                 }
@@ -78,7 +78,7 @@ extension FavoritesViewController : UITableViewDataSource {
         }
         
         let wordForRow = favorites[indexPath.row]
-        cell.setupCellContent(image: wordForRow.partOfSpeech, word: wordForRow.word, definition: wordForRow.definition)
+        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.separatorStyle = .none
         
