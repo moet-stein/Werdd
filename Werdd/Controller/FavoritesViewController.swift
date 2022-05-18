@@ -110,6 +110,6 @@ extension FavoritesViewController : UITableViewDataSource {
 extension FavoritesViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = favorites[indexPath.row]
-        navigationController?.pushViewController(DetailsViewController(passedFavWord: selectedWord, selectedWord: nil), animated: true)
+        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }

@@ -169,8 +169,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func seeDetailsButtonTapped() {
-        print(fetchedWord)
-        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: fetchedWord), animated: true)
+        navigationController?.pushViewController(DetailsViewController(selectedWord: fetchedWord), animated: true)
     }
 }
 
@@ -200,7 +199,7 @@ extension HomeViewController : UITableViewDataSource {
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = words[indexPath.row]
-        navigationController?.pushViewController(DetailsViewController(passedFavWord: nil, selectedWord: selectedWord), animated: true)
+        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }
 
