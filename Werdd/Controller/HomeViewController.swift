@@ -80,7 +80,6 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("viewDidLayoutSubviews")
 //        setVCs()
     }
     
