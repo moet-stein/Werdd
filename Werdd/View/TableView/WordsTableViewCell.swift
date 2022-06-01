@@ -94,25 +94,6 @@ class WordsTableViewCell: UITableViewCell {
         ])
     }
     
-    
-    func setupCellContent(image: String?, word: String, definition: String?) {
-//        if let partOfSpeech = image {
-//            categoryImage.isHidden = false
-//            categoryImage.image = UIImage(named: partOfSpeech)
-//        } else {
-//            categoryImage.isHidden = true
-//        }
-        
-//        wordLabel.text = word
-        
-//        if let definition = definition {
-//            definitionLabel.text = definition
-//        } else {
-//            definitionLabel.text = ""
-//        }
-        
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
     private var seeDetailsButton: IconButton!
     private var wordsTableView: UITableView!
     
-    private let searchBar:UISearchBar = UISearchBar()
+    private var searchBar: UISearchBar!
     
     private var noWordFoundInTableView: NoWordFoundView!
     private var noWordFoundInRandomCard: NoWordFoundView!
@@ -82,6 +82,8 @@ class HomeViewController: UIViewController {
         wordsTableView.delegate = self
         wordsTableView.dataSource = self
         
+        searchBar = contentView.searchBar
+        
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
         setVCs()
@@ -95,14 +97,7 @@ class HomeViewController: UIViewController {
     private func setVCs() {
         cardSpinner.startAnimating()
         tableViewSpinner.startAnimating()
-        
-        searchBar.searchBarStyle = UISearchBar.Style.default
-        searchBar.placeholder = " Search..."
-        searchBar.sizeToFit()
-        searchBar.isTranslucent = false
-        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
-        searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+
         searchBar.delegate = self
         
         wordsTableView.tableHeaderView = searchBar
@@ -174,13 +169,13 @@ class HomeViewController: UIViewController {
                         for result in results {
                             self.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
                         }
+                        self.noWordFoundInTableView.isHidden = true
+                        
                     }  else {
-                        self.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: nil)))
+                        self.wordVM = []
+                        self.noWordFoundInTableView.isHidden = false
                     }
                     
-                    if !self.noWordFoundInTableView.isHidden {
-                        self.noWordFoundInTableView.isHidden = true
-                    }
                     self.wordsTableView.reloadData()
                     self.tableViewSpinner.stopAnimating()
                     self.wordsTableView.isUserInteractionEnabled = true

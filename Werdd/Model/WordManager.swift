@@ -90,11 +90,9 @@ class WordManager: NetWorkingProtocol {
             }
             do {
                 let word = try JSONDecoder().decode(Word.self, from: data)
-                completion(.success(word))
-
+                    completion(.success(word))
             } catch {
                 completion(.failure(error))
-//                self.delegate?.didFailWithError(error: error, random: true)
                 print("Failed to convert \(error.localizedDescription)")
             }
         }.resume()

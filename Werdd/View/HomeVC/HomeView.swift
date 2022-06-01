@@ -108,7 +108,6 @@ class HomeView: UIView {
     let wordsTableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.layer.cornerRadius = 20
         tableView.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.register(WordsTableViewCell.self, forCellReuseIdentifier: WordsTableViewCell.identifier)
@@ -121,21 +120,24 @@ class HomeView: UIView {
         return spinner
     }()
     
+    let searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = UISearchBar.Style.default
+        searchBar.placeholder = " Search..."
+        searchBar.sizeToFit()
+        searchBar.isTranslucent = false
+        searchBar.barTintColor = UIColor(named: "ViewLightYellow")
+        searchBar.layer.borderWidth = 1
+        searchBar.layer.borderColor = UIColor(named: "ViewLightYellow")?.cgColor
+        return searchBar
+    }()
+    
     let noWordFoundInTableView: NoWordFoundView = {
         let view = NoWordFoundView(labelText: "No Word Found")
         view.isHidden = true
         return view
     }()
-    
-    let topContainerView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
-        view.isUserInteractionEnabled = true
 
-        return view
-    }()
-    
     let noInternetView: NotFoundWithImageView = {
        let view = NotFoundWithImageView(title: "No Internet Connection", imageName: "NoInternet")
         return view
@@ -192,11 +194,9 @@ class HomeView: UIView {
             noWordFoundInRandomCard.widthAnchor.constraint(equalToConstant: 250),
             noWordFoundInRandomCard.heightAnchor.constraint(equalToConstant: 100),
             
-            wordsTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
             wordsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             wordsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            wordsTableView.heightAnchor.constraint(equalToConstant: 500),
             wordsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
