@@ -9,15 +9,6 @@ import UIKit
 
 class HomeView: UIView {
     
-//    private let words = Words().words.sorted(by: {$0.word.lowercased() < $1.word.lowercased()})
-    
-    private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.backgroundColor = UIColor(named: "LightGreen")
-        return scrollView
-    }()
-    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -153,6 +144,7 @@ class HomeView: UIView {
     init() {
         super.init(frame: .zero)
         setUpUI()
+        backgroundColor = UIColor(named: "LightGreen")
     }
     
     required init?(coder: NSCoder) {
@@ -166,35 +158,29 @@ class HomeView: UIView {
     }
     
     private func createOuterComponents() {
-        addSubview(scrollView)
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(viewFavoritesButton)
-        scrollView.addSubview(cardView)
-        scrollView.addSubview(wordsTableView)
+        addSubview(titleLabel)
+        addSubview(viewFavoritesButton)
+        addSubview(cardView)
+        addSubview(wordsTableView)
         
         cardView.addSubview(cardSpinner)
         cardView.addSubview(noWordFoundInRandomCard)
         wordsTableView.addSubview(tableViewSpinner)
         wordsTableView.addSubview(noWordFoundInTableView)
         
-        scrollView.addSubview(noInternetView)
+        addSubview(noInternetView)
         
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: topAnchor),
-            scrollView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            scrollView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            titleLabel.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 50),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             titleLabel.widthAnchor.constraint(equalToConstant: 350),
             titleLabel.heightAnchor.constraint(equalToConstant: 60),
             
             viewFavoritesButton.topAnchor.constraint(equalTo: titleLabel.topAnchor),
-            viewFavoritesButton.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -30),
+            viewFavoritesButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
             
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
-            cardView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            cardView.centerXAnchor.constraint(equalTo: centerXAnchor),
             cardView.widthAnchor.constraint(equalToConstant: 350),
             cardView.heightAnchor.constraint(equalToConstant: 200),
             
@@ -206,12 +192,12 @@ class HomeView: UIView {
             noWordFoundInRandomCard.widthAnchor.constraint(equalToConstant: 250),
             noWordFoundInRandomCard.heightAnchor.constraint(equalToConstant: 100),
             
-            wordsTableView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            wordsTableView.centerXAnchor.constraint(equalTo: centerXAnchor),
             wordsTableView.topAnchor.constraint(equalTo: cardView.bottomAnchor, constant: 40),
-            wordsTableView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            wordsTableView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            wordsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            wordsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             wordsTableView.heightAnchor.constraint(equalToConstant: 500),
-            wordsTableView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            wordsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
             tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
@@ -222,9 +208,9 @@ class HomeView: UIView {
             noWordFoundInTableView.heightAnchor.constraint(equalToConstant: 100),
             
             noInternetView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            noInternetView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            noInternetView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            noInternetView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            noInternetView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            noInternetView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            noInternetView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
         ])
     }
