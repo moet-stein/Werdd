@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     private var contentView: DetailsView!
-    private var selectedWord: SearchedWordViewModel?
+    private var wordVM: WordViewModel?
     
     private var favoriteButton: IconButton!
     
@@ -23,7 +23,7 @@ class DetailsViewController: UIViewController {
     private var favWordID = UUID()
     
     override func loadView() {
-        contentView = DetailsView(selectedWord: selectedWord)
+        contentView = DetailsView(selectedWord: wordVM)
         view = contentView
         
         favoriteButton = contentView.favoriteButton
@@ -38,8 +38,8 @@ class DetailsViewController: UIViewController {
         setUpContent()
     }
     
-    init(selectedWord: SearchedWordViewModel?) {
-        self.selectedWord = selectedWord
+    init(selectedWord: WordViewModel?) {
+        self.wordVM = selectedWord
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -53,7 +53,7 @@ class DetailsViewController: UIViewController {
     }
     
     private func setUpContent() {
-        if let selectedWord = selectedWord {
+        if let selectedWord = wordVM {
             wordLabel.text = selectedWord.word
             categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
             let definition = selectedWord.result?.definition ?? ""
@@ -121,7 +121,7 @@ class DetailsViewController: UIViewController {
         
         button.toggleFavorite()
         
-        if let selectedWord = selectedWord {
+        if let selectedWord = wordVM {
             if sender.isSelected {
                 let word = selectedWord.word
                 let definition = selectedWord.result?.definition

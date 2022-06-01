@@ -12,8 +12,8 @@ class HomeViewController: UIViewController {
     let monitor = NWPathMonitor()
     var wordManager = WordManager()
     
-    private var fetchedWord: SearchedWordViewModel?
-    private var searchedWordVM = [SearchedWordViewModel]()
+    private var fetchedWord: WordViewModel?
+    private var wordVM = [WordViewModel]()
     
     private var contentView: HomeView!
     
@@ -80,7 +80,6 @@ class HomeViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        print("hello")
 //        setVCs()
     }
     
@@ -137,7 +136,7 @@ class HomeViewController: UIViewController {
         seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
     }
     
-    private func refreshCard(word: SearchedWordViewModel) {
+    private func refreshCard(word: WordViewModel) {
         fetchedWord = word
         wordLabel.text = word.word
         
@@ -178,7 +177,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchedWordVM.count
+        return wordVM.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,7 +186,7 @@ extension HomeViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let searchedWordVM = searchedWordVM[indexPath.row]
+        let searchedWordVM = wordVM[indexPath.row]
         cell.searchedWordVM = searchedWordVM
 //        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
@@ -200,7 +199,7 @@ extension HomeViewController : UITableViewDataSource {
 
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWord = searchedWordVM[indexPath.row]
+        let selectedWord = wordVM[indexPath.row]
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }
@@ -245,7 +244,7 @@ extension HomeViewController: WordManegerDelegate {
             if !self.noWordFoundInRandomCard.isHidden {
                 self.noWordFoundInRandomCard.isHidden = true
             }
-            self.refreshCard(word: SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: word.result)))
+            self.refreshCard(word: WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: word.result)))
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
         }
@@ -253,16 +252,16 @@ extension HomeViewController: WordManegerDelegate {
     
     func didUpdateTableView(_ wordManager: WordManager, word: Word) {
         
-        self.searchedWordVM = [SearchedWordViewModel]()
+        self.wordVM = [WordViewModel]()
         
         DispatchQueue.main.async {
             if let results = word.results {
                 for result in results {
-                    self.searchedWordVM.append(SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: result)))
+                    self.wordVM.append(WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: result)))
 //                    self.searchedWordVM.append(SingleResult(uuid: UUID(), word: word.word, result: result))
                 }
             }  else {
-                self.searchedWordVM.append(SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: nil)))
+                self.wordVM.append(WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: nil)))
             }
             
             if !self.noWordFoundInTableView.isHidden {
@@ -284,7 +283,7 @@ extension HomeViewController: WordManegerDelegate {
                 self.cardSpinner.stopAnimating()
                 self.randomWordButton.isUserInteractionEnabled = true
             } else {
-                self.searchedWordVM = []
+                self.wordVM = []
                 self.wordsTableView.reloadData()
                 self.noWordFoundInTableView.isHidden = false
                 self.tableViewSpinner.stopAnimating()

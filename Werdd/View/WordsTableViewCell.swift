@@ -10,7 +10,7 @@ import UIKit
 class WordsTableViewCell: UITableViewCell {
     static let identifier = "WordsTableViewCell"
     
-    var searchedWordVM: SearchedWordViewModel! {
+    var searchedWordVM: WordViewModel! {
         didSet {
             wordLabel.text = searchedWordVM.word
             

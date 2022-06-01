@@ -38,11 +38,9 @@ class IconButton: UIButton {
         if isSelected {
             let heartSF = UIImage(systemName: "heart.fill", withConfiguration: config)
             setImage(heartSF, for: .selected)
-            print("isselected")
         } else {
             let heartSF = UIImage(systemName: "heart", withConfiguration: config)
             setImage(heartSF, for: .normal)
-            print("isNOTselected")
         }
     }
     
