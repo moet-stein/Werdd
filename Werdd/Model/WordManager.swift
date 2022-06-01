@@ -9,13 +9,6 @@ import Foundation
 import UIKit
 import Combine
 
-
-
-//protocol WordManegerDelegate {
-//    func didUpdateWord(_ wordManager: WordManager, word: SingleResult)
-//    func didUpdateTableView(_ wordManager: WordManager, word: Word)
-//    func didFailWithError(error: Error?, random: Bool)
-//}
 enum NetworkError: Error {
     case badURL
 }
@@ -27,13 +20,10 @@ protocol NetWorkingProtocol {
 
 
 class WordManager: NetWorkingProtocol {
-    
-//    var delegate: WordManegerDelegate?
     let apiKey = WORDSAPI_KEY
     
     typealias completeClosure = ( _ data: Data?, _ error: Error?)->Void
     
-//    private var cancellable: AnyCancellable?
     let session: URLSession
     
     init(urlSession: URLSession = .shared) {
@@ -96,26 +86,5 @@ class WordManager: NetWorkingProtocol {
                 print("Failed to convert \(error.localizedDescription)")
             }
         }.resume()
-        
-//        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-//            guard let data = data, error == nil else {
-//                return
-//            }
-//
-//            do {
-//                let word = try JSONDecoder().decode(Word.self, from: data)
-//
-//                if let _ = word.results {
-//                    self.delegate?.didUpdateTableView(self, word: word)
-//                } else {
-//                    self.delegate?.didFailWithError(error: error, random: false)
-//                }
-//
-//
-//            } catch {
-//                self.delegate?.didFailWithError(error: error, random: false)
-//                print("Failed to convert \(error.localizedDescription)")
-//            }
-//        }.resume()
     }
 }

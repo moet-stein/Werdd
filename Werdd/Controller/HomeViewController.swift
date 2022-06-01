@@ -62,6 +62,24 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setViews()
+        
+        wordsTableView.delegate = self
+        wordsTableView.dataSource = self
+        searchBar.delegate = self
+        
+        fetchRandom()
+        fetchSearchedWords(inputWord: "grateful")
+        addButtonsTarget()
+        checkInternetConnection()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+    
+    private func setViews() {
         contentView = HomeView()
         view = contentView
         
@@ -69,6 +87,8 @@ class HomeViewController: UIViewController {
         
         cardSpinner = contentView.cardSpinner
         tableViewSpinner = contentView.tableViewSpinner
+        cardSpinner.startAnimating()
+        tableViewSpinner.startAnimating()
         
         wordLabel = contentView.wordLabel
         categoryImageView = contentView.categoryImageView
@@ -79,41 +99,18 @@ class HomeViewController: UIViewController {
         seeDetailsButton = contentView.seeDetailsButton
         
         wordsTableView = contentView.wordsTableView
-        wordsTableView.delegate = self
-        wordsTableView.dataSource = self
-        
-        searchBar = contentView.searchBar
-        
         wordsTableView.estimatedRowHeight = 100
         wordsTableView.rowHeight = UITableView.automaticDimension
-        setVCs()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-    
-    private func setVCs() {
-        cardSpinner.startAnimating()
-        tableViewSpinner.startAnimating()
-
-        searchBar.delegate = self
         
+        searchBar = contentView.searchBar
         wordsTableView.tableHeaderView = searchBar
         
         noWordFoundInTableView = contentView.noWordFoundInTableView
         noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
         
         noInternetView = contentView.noInternetView
-        
-        fetchRandom()
-        fetchSearchedWords(inputWord: "grateful")
-        
-        addButtonsTarget()
-        
-        checkInternetConnection()
     }
+
     
     private func checkInternetConnection() {
         monitor.pathUpdateHandler = { [weak self] path in
