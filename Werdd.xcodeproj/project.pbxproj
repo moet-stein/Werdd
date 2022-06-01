@@ -128,7 +128,6 @@
 		60142F4427D7503700F1B845 /* Werdd */ = {
 			isa = PBXGroup;
 			children = (
-				6051AB1E281304CB002E9CF6 /* FavWord */,
 				605C805B27E1EC37002EB0BA /* Model */,
 				605C808627E21ED3002EB0BA /* View */,
 				609369AE2847678000C5B4E9 /* ViewModel */,
@@ -163,6 +162,7 @@
 		605C805B27E1EC37002EB0BA /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6051AB1E281304CB002E9CF6 /* FavWord */,
 				605C805C27E1EC54002EB0BA /* Word.swift */,
 				605104B82808441E00AB9DEC /* WordManager.swift */,
 				6051AB2E28131F60002E9CF6 /* DataManager.swift */,

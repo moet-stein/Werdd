@@ -17,6 +17,11 @@ class FavoritesViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        if let index = self.favsTableView.indexPathForSelectedRow{
+            self.favsTableView.deselectRow(at: index, animated: true)
+        }
+        
         self.navigationItem.title = "FAVORITES"
         let attrs = [
             NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen")!,
@@ -25,6 +30,18 @@ class FavoritesViewController: UIViewController {
 
         self.navigationController?.navigationBar.titleTextAttributes = attrs
         self.navigationController?.navigationBar.backItem?.title = "Home"
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView = FavoritesView()
+        view = contentView
+        
+        favsTableView = contentView.favsTableView
+        favsTableView.delegate = self
+        favsTableView.dataSource = self
+        
+        noFavFoundView = contentView.noFavFoundView
         
         DataManager.fetchFavWords { favs in
             if let favs = favs {
@@ -42,18 +59,6 @@ class FavoritesViewController: UIViewController {
                 }
             }
         }
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        contentView = FavoritesView()
-        view = contentView
-        
-        favsTableView = contentView.favsTableView
-        favsTableView.delegate = self
-        favsTableView.dataSource = self
-        
-        noFavFoundView = contentView.noFavFoundView
     }
     
     init() {
