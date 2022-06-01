@@ -58,7 +58,17 @@ struct WordManager {
                     let randomResult = word.results?.randomElement()
                     let singleResult = SingleResult(uuid: UUID(), word: word.word, result: randomResult)
 
-                    random ? self.delegate?.didUpdateWord(self, word: singleResult) : self.delegate?.didUpdateTableView(self, word: word)
+                    if random {
+                            self.delegate?.didUpdateWord(self, word: singleResult)
+                    } else {
+                        if let _ = singleResult.result {
+                            self.delegate?.didUpdateTableView(self, word: word)
+                        } else {
+                            self.delegate?.didFailWithError(error: error, random: false)
+                        }
+                    }
+                    
+                    print(singleResult)
                 } catch {
                     random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
                     print("Failed to convert \(error.localizedDescription)")

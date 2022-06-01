@@ -35,7 +35,7 @@ class FavoritesViewController: UIViewController {
                     }
                 }
                 
-                wordVM = favs.map({return WordViewModel(words: $0)})
+                wordVM = favs.map({return WordViewModel(word: $0)})
     
                 DispatchQueue.main.async { [weak self] in
                     self?.favsTableView.reloadData()

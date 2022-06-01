@@ -244,7 +244,7 @@ extension HomeViewController: WordManegerDelegate {
             if !self.noWordFoundInRandomCard.isHidden {
                 self.noWordFoundInRandomCard.isHidden = true
             }
-            self.refreshCard(word: WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: word.result)))
+            self.refreshCard(word: WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: word.result)))
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
         }
@@ -257,11 +257,11 @@ extension HomeViewController: WordManegerDelegate {
         DispatchQueue.main.async {
             if let results = word.results {
                 for result in results {
-                    self.wordVM.append(WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: result)))
+                    self.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
 //                    self.searchedWordVM.append(SingleResult(uuid: UUID(), word: word.word, result: result))
                 }
             }  else {
-                self.wordVM.append(WordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: nil)))
+                self.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: nil)))
             }
             
             if !self.noWordFoundInTableView.isHidden {

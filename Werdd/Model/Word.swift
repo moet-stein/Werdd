@@ -1,5 +1,5 @@
 //
-//  Words.swift
+//  Word.swift
 //  Werdd
 //
 //  Created by Moe Steinmueller on 16.03.22.

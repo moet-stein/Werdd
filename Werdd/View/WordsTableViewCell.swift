@@ -13,23 +13,20 @@ class WordsTableViewCell: UITableViewCell {
     var searchedWordVM: WordViewModel! {
         didSet {
             wordLabel.text = searchedWordVM.word
-            
-            guard let result = searchedWordVM.result else {return}
-            
-            if let partOfSpeech = result.partOfSpeech {
-                categoryImage.isHidden = false
-                categoryImage.image = UIImage(named: partOfSpeech)
-            } else {
-                categoryImage.isHidden = true
+            if let result = searchedWordVM.result {
+                if let partOfSpeech = searchedWordVM.partOfSpeech {
+                    categoryImage.isHidden = false
+                    categoryImage.image = UIImage(named: partOfSpeech)
+                } else {
+                    categoryImage.isHidden = true
+                }
+                
+                if let definition = searchedWordVM.definition {
+                    definitionLabel.text = definition
+                } else {
+                    definitionLabel.text = ""
+                }
             }
-            
-            if let definition = result.definition {
-                definitionLabel.text = definition
-            } else {
-                definitionLabel.text = ""
-            }
-            
-            
         }
     }
     

@@ -14,23 +14,14 @@ struct WordViewModel {
     let definition: String?
     let partOfSpeech: String?
 
-    init(words: SingleResult) {
-        self.uuid = words.uuid
-        self.word = words.word
-        self.result = words.result
+    init(word: SingleResult) {
+        self.uuid = word.uuid
+        self.word = word.word
+        self.result = word.result
         
         if let result = result {
-            if let pOSpeech = result.partOfSpeech {
-                partOfSpeech = pOSpeech
-            } else {
-                partOfSpeech = ""
-            }
-            
-            if let def = result.definition {
-                definition = def
-            } else {
-                definition = ""
-            }
+            partOfSpeech = result.partOfSpeech
+            definition = result.definition
         } else {
             partOfSpeech = nil
             definition = nil
