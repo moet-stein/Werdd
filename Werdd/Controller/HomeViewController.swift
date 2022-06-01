@@ -13,7 +13,7 @@ class HomeViewController: UIViewController {
     var wordManager = WordManager()
     
     private var fetchedWord: SingleResult?
-    private var words = [SingleResult]()
+    private var searchedWordVM = [SearchedWordViewModel]()
     
     private var contentView: HomeView!
     
@@ -178,7 +178,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return words.count
+        return searchedWordVM.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -187,8 +187,9 @@ extension HomeViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let wordForRow = words[indexPath.row]
-        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
+        let searchedWordVM = searchedWordVM[indexPath.row]
+        cell.searchedWordVM = searchedWordVM
+//        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.separatorStyle = .none
         
@@ -199,8 +200,8 @@ extension HomeViewController : UITableViewDataSource {
 
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWord = words[indexPath.row]
-        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
+        let selectedWord = searchedWordVM[indexPath.row]
+//        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }
 
@@ -251,15 +252,19 @@ extension HomeViewController: WordManegerDelegate {
     }
     
     func didUpdateTableView(_ wordManager: WordManager, word: Word) {
-        words = [SingleResult]()
+        
+        self.searchedWordVM = [SearchedWordViewModel]()
+        
         DispatchQueue.main.async {
             if let results = word.results {
                 for result in results {
-                    self.words.append(SingleResult(uuid: UUID(), word: word.word, result: result))
+                    self.searchedWordVM.append(SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: result)))
+//                    self.searchedWordVM.append(SingleResult(uuid: UUID(), word: word.word, result: result))
                 }
             }  else {
-                self.words.append(SingleResult(uuid: UUID(), word: word.word, result: nil))
+                self.searchedWordVM.append(SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: nil)))
             }
+            
             if !self.noWordFoundInTableView.isHidden {
                 self.noWordFoundInTableView.isHidden = true
             }
@@ -279,7 +284,7 @@ extension HomeViewController: WordManegerDelegate {
                 self.cardSpinner.stopAnimating()
                 self.randomWordButton.isUserInteractionEnabled = true
             } else {
-                self.words = []
+                self.searchedWordVM = []
                 self.wordsTableView.reloadData()
                 self.noWordFoundInTableView.isHidden = false
                 self.tableViewSpinner.stopAnimating()

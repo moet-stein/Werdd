@@ -10,6 +10,29 @@ import UIKit
 class WordsTableViewCell: UITableViewCell {
     static let identifier = "WordsTableViewCell"
     
+    var searchedWordVM: SearchedWordViewModel! {
+        didSet {
+            wordLabel.text = searchedWordVM.word
+            
+            guard let result = searchedWordVM.result else {return}
+            
+            if let partOfSpeech = result.partOfSpeech {
+                categoryImage.isHidden = false
+                categoryImage.image = UIImage(named: partOfSpeech)
+            } else {
+                categoryImage.isHidden = true
+            }
+            
+            if let definition = result.definition {
+                definitionLabel.text = definition
+            } else {
+                definitionLabel.text = ""
+            }
+            
+            
+        }
+    }
+    
     private let roundedView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -76,20 +99,20 @@ class WordsTableViewCell: UITableViewCell {
     
     
     func setupCellContent(image: String?, word: String, definition: String?) {
-        if let partOfSpeech = image {
-            categoryImage.isHidden = false
-            categoryImage.image = UIImage(named: partOfSpeech)
-        } else {
-            categoryImage.isHidden = true
-        }
+//        if let partOfSpeech = image {
+//            categoryImage.isHidden = false
+//            categoryImage.image = UIImage(named: partOfSpeech)
+//        } else {
+//            categoryImage.isHidden = true
+//        }
         
-        wordLabel.text = word
+//        wordLabel.text = word
         
-        if let definition = definition {
-            definitionLabel.text = definition
-        } else {
-            definitionLabel.text = ""
-        }
+//        if let definition = definition {
+//            definitionLabel.text = definition
+//        } else {
+//            definitionLabel.text = ""
+//        }
         
     }
     
