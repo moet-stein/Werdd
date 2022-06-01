@@ -7,8 +7,10 @@
 
 import Foundation
 
-//struct SearchedWordViewModel {
-//    let word: String
-//
-//    init(n)
-//}
+struct SearchedWordViewModel {
+    let word: String
+
+    init(words: SingleResult) {
+        self.word = words.word
+    }
+}
