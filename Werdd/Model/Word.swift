@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SingleResult {
+struct SingleResult: Codable {
     var uuid: UUID
     var word: String
     var result: Result?

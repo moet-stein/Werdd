@@ -13,7 +13,7 @@ class WordsTableViewCell: UITableViewCell {
     var searchedWordVM: WordViewModel! {
         didSet {
             wordLabel.text = searchedWordVM.word
-            if let result = searchedWordVM.result {
+            if let _ = searchedWordVM.result {
                 if let partOfSpeech = searchedWordVM.partOfSpeech {
                     categoryImage.isHidden = false
                     categoryImage.image = UIImage(named: partOfSpeech)
