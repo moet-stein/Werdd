@@ -25,5 +25,15 @@ class WerddTests: XCTestCase {
 
         XCTAssertEqual(singleResult.word, wordViewModel.word)
         XCTAssertEqual(singleResult.result?.definition, wordViewModel.result?.definition)
+        XCTAssertEqual(singleResult.result?.partOfSpeech, wordViewModel.result?.partOfSpeech)
+        
+    }
+    
+    func testWordViewModelNoResult() {
+        let singleResult = SingleResult(uuid: UUID(), word: "lala", result: nil)
+        let wordViewModel = WordViewModel(word: singleResult)
+        
+        XCTAssertEqual(singleResult.result, wordViewModel.result)
+        XCTAssertNil(wordViewModel.result)
     }
 }

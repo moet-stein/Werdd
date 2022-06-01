@@ -67,8 +67,6 @@ struct WordManager {
                             self.delegate?.didFailWithError(error: error, random: false)
                         }
                     }
-                    
-                    print(singleResult)
                 } catch {
                     random ? self.delegate?.didFailWithError(error: error, random: true) : self.delegate?.didFailWithError(error: error, random: false)
                     print("Failed to convert \(error.localizedDescription)")

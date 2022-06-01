@@ -18,7 +18,7 @@ struct Word: Codable {
     var results: [Result]?
 }
 
-struct Result: Codable {
+struct Result: Codable, Equatable {
     var definition: String?
     var partOfSpeech: String?
     var synonyms: [String]?
