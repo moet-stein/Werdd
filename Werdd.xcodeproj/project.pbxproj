@@ -34,7 +34,7 @@
 		605C805D27E1EC54002EB0BA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Word.swift */; };
 		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
 		609369B02847679200C5B4E9 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369AF2847679200C5B4E9 /* WordViewModel.swift */; };
-		609369BC28478CE800C5B4E9 /* WerddTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369BB28478CE800C5B4E9 /* WerddTests.swift */; };
+		609369BC28478CE800C5B4E9 /* WordViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369BB28478CE800C5B4E9 /* WordViewModelTests.swift */; };
 		60FD4FA02833FBCE004B9403 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FD4F9F2833FBCE004B9403 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,7 +79,7 @@
 		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		609369AF2847679200C5B4E9 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
 		609369B928478CE800C5B4E9 /* WerddTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WerddTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		609369BB28478CE800C5B4E9 /* WerddTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WerddTests.swift; sourceTree = "<group>"; };
+		609369BB28478CE800C5B4E9 /* WordViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModelTests.swift; sourceTree = "<group>"; };
 		60FD4F9F2833FBCE004B9403 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -206,7 +206,7 @@
 		609369BA28478CE800C5B4E9 /* WerddTests */ = {
 			isa = PBXGroup;
 			children = (
-				609369BB28478CE800C5B4E9 /* WerddTests.swift */,
+				609369BB28478CE800C5B4E9 /* WordViewModelTests.swift */,
 			);
 			path = WerddTests;
 			sourceTree = "<group>";
@@ -344,7 +344,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				609369BC28478CE800C5B4E9 /* WerddTests.swift in Sources */,
+				609369BC28478CE800C5B4E9 /* WordViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

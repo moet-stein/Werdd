@@ -85,6 +85,9 @@ class HomeViewController: UIViewController {
     
     
     private func setVCs() {
+        cardSpinner.startAnimating()
+        tableViewSpinner.startAnimating()
+        
         searchBar.searchBarStyle = UISearchBar.Style.default
         searchBar.placeholder = " Search..."
         searchBar.sizeToFit()
@@ -101,8 +104,9 @@ class HomeViewController: UIViewController {
         
         noInternetView = contentView.noInternetView
         
-        wordManager.fetchRandomWord(spinner: cardSpinner)
-        wordManager.fetchInputWord(inputWord: "grateful", spinner: tableViewSpinner)
+        wordManager.fetchRandomWord()
+        
+        wordManager.fetchInputWord(inputWord: "grateful")
         addButtonsTarget()
         
         checkInternetConnection()
@@ -161,7 +165,8 @@ class HomeViewController: UIViewController {
 
     @objc func randomWordButtonTapped() {
         randomWordButton.isUserInteractionEnabled = false
-        wordManager.fetchRandomWord(spinner: cardSpinner)
+        cardSpinner.startAnimating()
+        wordManager.fetchRandomWord()
     }
     
     @objc func viewFavoritesButtonTapped() {
@@ -226,8 +231,9 @@ extension HomeViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
         wordsTableView.isUserInteractionEnabled = false
+        tableViewSpinner.startAnimating()
         if let searchedWord = searchBar.searchTextField.text  {
-            wordManager.fetchInputWord(inputWord: searchedWord.lowercased(), spinner: tableViewSpinner)
+            wordManager.fetchInputWord(inputWord: searchedWord.lowercased())
         }
         
     }

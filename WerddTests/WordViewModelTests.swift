@@ -1,6 +1,6 @@
 //
-//  WerddTests.swift
-//  WerddTests
+//  WordViewModelTests.swift
+//  WordViewModelTests
 //
 //  Created by Moe Steinmueller on 01.06.22.
 //
@@ -8,7 +8,7 @@
 import XCTest
 @testable import Werdd
 
-class WerddTests: XCTestCase {
+class WordViewModelTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
