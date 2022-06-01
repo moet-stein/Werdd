@@ -23,7 +23,6 @@ class WordMangerTests: XCTestCase {
     }
     
     func testFetchedRandomWordSuccess() {
-        
         homeVC.wordManager.fetchRandomWord(completion: { result in
             switch result {
             case .success(let word):
