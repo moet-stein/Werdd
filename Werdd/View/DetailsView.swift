@@ -8,7 +8,7 @@
 import UIKit
 
 class DetailsView: UIView {
-    private var selectedWord: SingleResult?
+    private var selectedWord: SearchedWordViewModel?
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -103,7 +103,7 @@ class DetailsView: UIView {
     
     
     
-    init(selectedWord: SingleResult?) {
+    init(selectedWord: SearchedWordViewModel?) {
         self.selectedWord = selectedWord
         super.init(frame: .zero)
         

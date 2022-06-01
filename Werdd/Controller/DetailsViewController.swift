@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     private var contentView: DetailsView!
-    private var selectedWord: SingleResult?
+    private var selectedWord: SearchedWordViewModel?
     
     private var favoriteButton: IconButton!
     
@@ -38,7 +38,7 @@ class DetailsViewController: UIViewController {
         setUpContent()
     }
     
-    init(selectedWord: SingleResult?) {
+    init(selectedWord: SearchedWordViewModel?) {
         self.selectedWord = selectedWord
         super.init(nibName: nil, bundle: nil)
     }

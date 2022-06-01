@@ -8,12 +8,14 @@
 import Foundation
 
 struct SearchedWordViewModel {
+    let uuid: UUID
     let word: String
     let result: Result?
     let definition: String?
     let partOfSpeech: String?
 
     init(words: SingleResult) {
+        self.uuid = words.uuid
         self.word = words.word
         self.result = words.result
         

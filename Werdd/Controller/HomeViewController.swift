@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
     let monitor = NWPathMonitor()
     var wordManager = WordManager()
     
-    private var fetchedWord: SingleResult?
+    private var fetchedWord: SearchedWordViewModel?
     private var searchedWordVM = [SearchedWordViewModel]()
     
     private var contentView: HomeView!
@@ -137,7 +137,7 @@ class HomeViewController: UIViewController {
         seeDetailsButton.addTarget(self, action: #selector(seeDetailsButtonTapped), for: .touchUpInside)
     }
     
-    private func refreshCard(word: SingleResult) {
+    private func refreshCard(word: SearchedWordViewModel) {
         fetchedWord = word
         wordLabel.text = word.word
         
@@ -201,7 +201,7 @@ extension HomeViewController : UITableViewDataSource {
 extension HomeViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedWord = searchedWordVM[indexPath.row]
-//        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
+        navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }
 
@@ -245,7 +245,7 @@ extension HomeViewController: WordManegerDelegate {
             if !self.noWordFoundInRandomCard.isHidden {
                 self.noWordFoundInRandomCard.isHidden = true
             }
-            self.refreshCard(word: word)
+            self.refreshCard(word: SearchedWordViewModel(words: SingleResult(uuid: UUID(), word: word.word, result: word.result)))
             self.cardSpinner.stopAnimating()
             self.randomWordButton.isUserInteractionEnabled = true
         }

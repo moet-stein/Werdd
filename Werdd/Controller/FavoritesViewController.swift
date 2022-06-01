@@ -8,7 +8,7 @@
 import UIKit
 
 class FavoritesViewController: UIViewController {
-    private var favorites = [SingleResult]()
+    private var searchedWordVM = [SearchedWordViewModel]()
     
     private var contentView: FavoritesView!
     
@@ -35,7 +35,7 @@ class FavoritesViewController: UIViewController {
                     }
                 }
                 
-                favorites = favs
+                searchedWordVM = favs.map({return SearchedWordViewModel(words: $0)})
     
                 DispatchQueue.main.async { [weak self] in
                     self?.favsTableView.reloadData()
@@ -68,7 +68,7 @@ class FavoritesViewController: UIViewController {
 
 extension FavoritesViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favorites.count
+        return searchedWordVM.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -77,8 +77,10 @@ extension FavoritesViewController : UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let wordForRow = favorites[indexPath.row]
-        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
+        let searchedWordVM = searchedWordVM[indexPath.row]
+        cell.searchedWordVM = searchedWordVM
+//        let wordForRow = favorites[indexPath.row]
+//        cell.setupCellContent(image: wordForRow.result?.partOfSpeech, word: wordForRow.word, definition: wordForRow.result?.definition)
         cell.backgroundColor = UIColor(named: "ViewLightYellow")
         tableView.separatorStyle = .none
         
@@ -92,13 +94,13 @@ extension FavoritesViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             tableView.beginUpdates()
-            let id = favorites[indexPath.row].uuid
+            let id = searchedWordVM[indexPath.row].uuid
             DataManager.deleteFavWord(usingID: id)
-            favorites.remove(at: indexPath.row)
+            searchedWordVM.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             tableView.endUpdates()
             
-            if favorites.count == 0 {
+            if searchedWordVM.count == 0 {
                 noFavFoundView.isHidden = false
             }
         }
@@ -109,7 +111,7 @@ extension FavoritesViewController : UITableViewDataSource {
 
 extension FavoritesViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedWord = favorites[indexPath.row]
+        let selectedWord = searchedWordVM[indexPath.row]
         navigationController?.pushViewController(DetailsViewController(selectedWord: selectedWord), animated: true)
     }
 }
