@@ -43,12 +43,12 @@ class FavoritesViewController: UIViewController {
         
         noFavFoundView = contentView.noFavFoundView
         
-        DataManager.fetchFavWords { favs in
+        DataManager.fetchFavWords { [weak self] favs in
             if let favs = favs {
                 
                 if favs.isEmpty{
                     DispatchQueue.main.async {
-                        self.noFavFoundView.isHidden = false
+                        self?.noFavFoundView.isHidden = false
                     }
                 }
                 
