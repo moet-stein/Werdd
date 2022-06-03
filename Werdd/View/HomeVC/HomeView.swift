@@ -68,8 +68,8 @@ class HomeView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Light", size: 19)
         label.textColor = UIColor(named: "DarkGreen")
-        label.lineBreakMode = .byTruncatingTail
-        label.numberOfLines = 4
+        label.lineBreakMode = .byWordWrapping
+        label.numberOfLines = 0
         label.textAlignment = .left
         return label
     }()
