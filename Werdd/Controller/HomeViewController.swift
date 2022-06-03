@@ -22,7 +22,7 @@ class HomeViewController: UIViewController {
     
     private var cardSpinner: UIActivityIndicatorView!
     private var tableViewSpinner: UIActivityIndicatorView!
-    
+
     private var wordLabel: UILabel!
     private var categoryImageView: CategoryImage!
     private var definitionLabel: UILabel!
@@ -111,6 +111,7 @@ class HomeViewController: UIViewController {
         noInternetView = contentView.noInternetView
     }
 
+
     
     private func checkInternetConnection() {
         monitor.pathUpdateHandler = { [weak self] path in
@@ -195,6 +196,8 @@ class HomeViewController: UIViewController {
     private func refreshCard(word: WordViewModel) {
         fetchedWord = word
         wordLabel.text = word.word
+        
+        
         
         if let category = word.result?.partOfSpeech {
             categoryImageView.isHidden = false

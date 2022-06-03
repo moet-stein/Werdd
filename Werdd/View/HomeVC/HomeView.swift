@@ -33,6 +33,7 @@ class HomeView: UIView {
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(named: "ViewLightYellow")
         roundedView.layer.cornerRadius = 20
+//        roundedView.isHidden = true
         return roundedView
     }()
     
@@ -184,7 +185,7 @@ class HomeView: UIView {
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             cardView.centerXAnchor.constraint(equalTo: centerXAnchor),
             cardView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
-            cardView.heightAnchor.constraint(equalToConstant: 200),
+            cardView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0),
             
             cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
             cardSpinner.centerYAnchor.constraint(equalTo: cardView.centerYAnchor),
@@ -227,12 +228,13 @@ class HomeView: UIView {
             wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             wordLabel.widthAnchor.constraint(equalToConstant: 250),
             
-            categoryImageView.topAnchor.constraint(equalTo: wordLabel.topAnchor),
+            categoryImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 5),
             categoryImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
             
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
             definitionLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
+            definitionLabel.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -60),
             
             seeDetailsButton.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             seeDetailsButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10),
