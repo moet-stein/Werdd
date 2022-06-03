@@ -77,7 +77,7 @@ class WordsTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             roundedView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             roundedView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            roundedView.widthAnchor.constraint(equalToConstant: 350),
+            roundedView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
             roundedView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             
             wordLabel.topAnchor.constraint(equalTo: roundedView.topAnchor, constant: 15),

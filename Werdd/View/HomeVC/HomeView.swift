@@ -183,7 +183,7 @@ class HomeView: UIView {
             
             cardView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             cardView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            cardView.widthAnchor.constraint(equalToConstant: 350),
+            cardView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.9),
             cardView.heightAnchor.constraint(equalToConstant: 200),
             
             cardSpinner.centerXAnchor.constraint(equalTo: cardView.centerXAnchor),
@@ -227,8 +227,8 @@ class HomeView: UIView {
             wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
             wordLabel.widthAnchor.constraint(equalToConstant: 250),
             
-            categoryImageView.centerYAnchor.constraint(equalTo: wordLabel.centerYAnchor),
-            categoryImageView.leadingAnchor.constraint(equalTo: wordLabel.trailingAnchor, constant: 20),
+            categoryImageView.topAnchor.constraint(equalTo: wordLabel.topAnchor),
+            categoryImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
             
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 20),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),

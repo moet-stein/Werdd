@@ -224,7 +224,6 @@
 		609369CE2848035900C5B4E9 /* TableView */ = {
 			isa = PBXGroup;
 			children = (
-				6051042E27F47C4500AB9DEC /* CategoryImage.swift */,
 				6051042C27F4572500AB9DEC /* WordsTableViewCell.swift */,
 			);
 			path = TableView;
@@ -250,6 +249,7 @@
 		609369D1284803B300C5B4E9 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				6051042E27F47C4500AB9DEC /* CategoryImage.swift */,
 				6068CAD627E4C96600DC30E3 /* IconButton.swift */,
 				6051AB8028214CE3002E9CF6 /* NotFoundWithImageView.swift */,
 			);
