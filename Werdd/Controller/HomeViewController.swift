@@ -72,6 +72,7 @@ class HomeViewController: UIViewController {
         fetchSearchedWords(inputWord: "grateful")
         addButtonsTarget()
         checkInternetConnection()
+        addKeyBoardNotificationCenter()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -250,6 +251,29 @@ class HomeViewController: UIViewController {
     
     @objc func seeDetailsButtonTapped() {
         navigationController?.pushViewController(DetailsViewController(selectedWord: fetchedWord), animated: true)
+    }
+    
+    private func addKeyBoardNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            
+            if self.view.bounds.origin.y == 0 {
+                print(keyboardSize.height)
+                self.view.bounds.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.bounds.origin.y != 0 {
+                self.view.bounds.origin.y -= keyboardSize.height
+            }
+        }
     }
 }
 
