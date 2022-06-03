@@ -87,7 +87,7 @@ class WordsTableViewCell: UITableViewCell {
             definitionLabel.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 3),
             definitionLabel.leadingAnchor.constraint(equalTo: wordLabel.leadingAnchor),
             definitionLabel.bottomAnchor.constraint(equalTo: roundedView.bottomAnchor, constant: -5),
-            definitionLabel.widthAnchor.constraint(equalToConstant: 250),
+            definitionLabel.widthAnchor.constraint(equalTo: roundedView.widthAnchor, multiplier: 0.8),
             
             categoryImage.centerYAnchor.constraint(equalTo: roundedView.centerYAnchor),
             categoryImage.trailingAnchor.constraint(equalTo: roundedView.trailingAnchor, constant: -20),
