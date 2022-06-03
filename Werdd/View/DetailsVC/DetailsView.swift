@@ -47,21 +47,22 @@ class DetailsView: UIView {
         view.axis = .vertical
         view.alignment = .center
         view.spacing = 30
+        view.distribution = .fillProportionally
         return view
     }()
     
     let definitionCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "LightGreen",
-            cardHeight: 180,
             bottomLabelText: "Definition")
+        view.sizeToFit()
+        view.layoutIfNeeded()
         return view
     }()
     
     let synonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "DarkGreen",
-            cardHeight: 120,
             bottomLabelText: "Synonyms")
         return view
     }()
@@ -69,7 +70,6 @@ class DetailsView: UIView {
     let antonymsCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "SoftBrown",
-            cardHeight: 120,
             bottomLabelText: "Antonyms")
         return view
     }()
@@ -77,7 +77,6 @@ class DetailsView: UIView {
     let usageCard: DetailsCardView = {
         let view = DetailsCardView(
             bgColorName: "MatchaGreen",
-            cardHeight: 180,
             bottomLabelText: "Example Usage")
         return view
     }()
@@ -123,6 +122,11 @@ class DetailsView: UIView {
         contentView.addSubview(favoriteButton)
         contentView.addSubview(outerStackView)
         
+        outerStackView.addArrangedSubview(definitionCard)
+        outerStackView.addArrangedSubview(synonymsCard)
+        outerStackView.addArrangedSubview(antonymsCard)
+        outerStackView.addArrangedSubview(usageCard)
+        
         let scrollFrameGuide = scrollView.frameLayoutGuide
         let scrollContentGuide = scrollView.contentLayoutGuide
         
@@ -149,13 +153,9 @@ class DetailsView: UIView {
             
             outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 10),
             outerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            outerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            outerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
         
-        outerStackView.addArrangedSubview(definitionCard)
-        outerStackView.addArrangedSubview(synonymsCard)
-        outerStackView.addArrangedSubview(antonymsCard)
-        outerStackView.addArrangedSubview(usageCard)
     }
     
     private func setUpDefinitionCard() {
@@ -167,9 +167,10 @@ class DetailsView: UIView {
             categoryLabel.leadingAnchor.constraint(equalTo: definitionCard.leadingAnchor, constant: 20),
             categoryLabel.widthAnchor.constraint(equalToConstant: 100),
             
-            definitionLabel.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
-            definitionLabel.leadingAnchor.constraint(equalTo: categoryLabel.leadingAnchor),
-            definitionLabel.widthAnchor.constraint(equalToConstant: 270),
+            definitionLabel.topAnchor.constraint(equalTo: definitionCard.topAnchor, constant: 50),
+            definitionLabel.leadingAnchor.constraint(equalTo: definitionCard.leadingAnchor, constant: 10),
+            definitionLabel.trailingAnchor.constraint(equalTo: definitionCard.trailingAnchor, constant: -10),
+            definitionLabel.bottomAnchor.constraint(equalTo: definitionCard.bottomAnchor, constant: -50)
             
         ])
     }

@@ -9,7 +9,6 @@ import UIKit
 
 class DetailsCardView: UIView {
     var bgColorName: String
-    var cardHeight: CGFloat
     var bottomLabelText: String
     
     private let bottomLabel: UILabel = {
@@ -21,9 +20,8 @@ class DetailsCardView: UIView {
     }()
 
     
-    init(bgColorName: String, cardHeight: CGFloat, bottomLabelText: String, frame: CGRect = .zero) {
+    init(bgColorName: String, bottomLabelText: String, frame: CGRect = .zero) {
         self.bgColorName = bgColorName
-        self.cardHeight = cardHeight
         self.bottomLabelText = bottomLabelText
         super.init(frame: frame)
         self.setUpUI()
@@ -37,7 +35,7 @@ class DetailsCardView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         backgroundColor = UIColor(named: bgColorName)
-        heightAnchor.constraint(equalToConstant: cardHeight).isActive = true
+        heightAnchor.constraint(greaterThanOrEqualToConstant: 0).isActive = true
         bottomLabel.text = bottomLabelText
         
         layer.cornerRadius = 20
@@ -45,7 +43,7 @@ class DetailsCardView: UIView {
         
         addSubview(bottomLabel)
         NSLayoutConstraint.activate([
-            heightAnchor.constraint(equalToConstant: cardHeight),
+//            heightAnchor.constraint(equalToConstant: cardHeight),
             bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
@@ -69,7 +67,8 @@ class DetailsCardView: UIView {
             NSLayoutConstraint.activate([
                 label.topAnchor.constraint(equalTo: topAnchor, constant: 20),
                 label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-                label.widthAnchor.constraint(equalToConstant: 270),
+                label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+                label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
             ])
         }
         
@@ -90,7 +89,8 @@ class DetailsCardView: UIView {
         NSLayoutConstraint.activate([
             verticalStackView.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             verticalStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            verticalStackView.widthAnchor.constraint(equalToConstant: 270),
+            verticalStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            verticalStackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40),
         ])
         
         if let usages = usages {
