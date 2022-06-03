@@ -138,6 +138,21 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchRandom() {
+//        wordManager.fetchGenericData(urlString: "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions", type: Word.self) { [weak self] result in
+//            switch result {
+//            case .success(let word):
+//                let randomResult = word.results?.randomElement()
+//                let singleResult = SingleResult(uuid: UUID(), word: word.word, result: randomResult)
+//                DispatchQueue.main.async {
+//                    self?.refreshCard(word: WordViewModel(word: SingleResult(uuid: UUID(), word: singleResult.word, result: singleResult.result)))
+//                }
+//            case .failure:
+//                DispatchQueue.main.async {
+//                    self?.showRandomWordNotFound()
+//                }
+//            }
+//        }
+        
         wordManager.fetchRandomWord { [weak self] result in
             switch result {
             case .success(let word):
@@ -147,20 +162,44 @@ class HomeViewController: UIViewController {
             case .failure:
                 DispatchQueue.main.async {
                     self?.showRandomWordNotFound()
-                    //                        self?.wordLabel.isHidden = true
-                    //                        self?.definitionLabel.isHidden = true
-                    //                        self?.categoryImageView.isHidden = true
-                    //                        self?.noWordFoundInRandomCard.isHidden = false
-                    //                        self?.cardSpinner.stopAnimating()
-                    //                        self?.randomWordButton.isUserInteractionEnabled = true
                 }
             }
-            
+
         }
     }
     
     private func fetchSearchedWords(inputWord: String) {
         self.wordVM = [WordViewModel]()
+//
+//        let trimmed = inputWord.trimmingCharacters(in: .whitespacesAndNewlines)
+//        let convertedUrlQuery = trimmed.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
+//        let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(convertedUrlQuery)"
+        
+//        wordManager.fetchGenericData(urlString: urlString, type: Word.self) { [weak self] result in
+//            switch result {
+//            case .success(let word):
+//                DispatchQueue.main.async {
+//                    if let results = word.results {
+//                        for result in results {
+//                            self?.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
+//                        }
+//                        self?.noWordFoundInTableView.isHidden = true
+//
+//                    }  else {
+//                        self?.wordVM = []
+//                        self?.noWordFoundInTableView.isHidden = false
+//                    }
+//
+//                    self?.wordsTableView.reloadData()
+//                    self?.tableViewSpinner.stopAnimating()
+//                    self?.wordsTableView.isUserInteractionEnabled = true
+//                }
+//            case .failure:
+//                DispatchQueue.main.async {
+//                    self?.showSearchedWordNoWordFound()
+//                }
+//            }
+//        }
         wordManager.fetchInputWord(inputWord: inputWord) { [weak self] result in
             switch result {
             case .success(let word):
@@ -170,12 +209,12 @@ class HomeViewController: UIViewController {
                             self?.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
                         }
                         self?.noWordFoundInTableView.isHidden = true
-                        
+
                     }  else {
                         self?.wordVM = []
                         self?.noWordFoundInTableView.isHidden = false
                     }
-                    
+
                     self?.wordsTableView.reloadData()
                     self?.tableViewSpinner.stopAnimating()
                     self?.wordsTableView.isUserInteractionEnabled = true
@@ -183,14 +222,9 @@ class HomeViewController: UIViewController {
             case .failure:
                 DispatchQueue.main.async {
                     self?.showSearchedWordNoWordFound()
-//                    self?.wordVM = []
-//                    self?.wordsTableView.reloadData()
-//                    self?.noWordFoundInTableView.isHidden = false
-//                    self?.tableViewSpinner.stopAnimating()
-//                    self?.wordsTableView.isUserInteractionEnabled = true
                 }
             }
-            
+
         }
     }
     
