@@ -33,7 +33,6 @@ class HomeView: UIView {
         roundedView.translatesAutoresizingMaskIntoConstraints = false
         roundedView.backgroundColor = UIColor(named: "ViewLightYellow")
         roundedView.layer.cornerRadius = 20
-//        roundedView.isHidden = true
         return roundedView
     }()
     
@@ -226,7 +225,7 @@ class HomeView: UIView {
         NSLayoutConstraint.activate([
             wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
-            wordLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -20),
+            wordLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -60),
             
             categoryImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 5),
             categoryImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),

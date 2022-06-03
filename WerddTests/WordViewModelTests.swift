@@ -29,11 +29,12 @@ class WordViewModelTests: XCTestCase {
         
     }
     
-    func testWordViewModelNoResult() {
+    func testWordViewModelNilResult() {
         let singleResult = SingleResult(uuid: UUID(), word: "lala", result: nil)
         let wordViewModel = WordViewModel(word: singleResult)
         
         XCTAssertEqual(singleResult.result, wordViewModel.result)
         XCTAssertNil(wordViewModel.result)
     }
+    
 }

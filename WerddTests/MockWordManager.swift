@@ -10,6 +10,12 @@ import XCTest
 
 @testable import Werdd
 
+enum NetworkError: Error {
+    case badURL
+    case noDataReturned
+}
+
+
 final class MockWordManager: NetWorkingProtocol {
     
     func fetchRandomWord(completion: @escaping (Swift.Result<SingleResult, Error>) -> Void) {
@@ -32,7 +38,13 @@ final class MockWordManager: NetWorkingProtocol {
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
                 let decodedObject = try JSONDecoder().decode(Word.self, from: data)
-                completion(.success(decodedObject))
+                
+                if decodedObject.word == inputWord {
+                    completion(.success(decodedObject))
+                } else {
+                    completion(.failure(NetworkError.noDataReturned))
+                }
+                
             } catch {
                 completion(.failure(error))
                 print("Failed to convert \(error.localizedDescription)")

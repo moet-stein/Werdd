@@ -43,7 +43,6 @@ class DetailsCardView: UIView {
         
         addSubview(bottomLabel)
         NSLayoutConstraint.activate([
-//            heightAnchor.constraint(equalToConstant: cardHeight),
             bottomLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             bottomLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
