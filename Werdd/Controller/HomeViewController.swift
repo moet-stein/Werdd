@@ -144,12 +144,13 @@ class HomeViewController: UIViewController {
                 }
             case .failure:
                 DispatchQueue.main.async {
-                    self?.wordLabel.isHidden = true
-                    self?.definitionLabel.isHidden = true
-                    self?.categoryImageView.isHidden = true
-                    self?.noWordFoundInRandomCard.isHidden = false
-                    self?.cardSpinner.stopAnimating()
-                    self?.randomWordButton.isUserInteractionEnabled = true
+                    self?.showRandomWordNotFound()
+                    //                        self?.wordLabel.isHidden = true
+                    //                        self?.definitionLabel.isHidden = true
+                    //                        self?.categoryImageView.isHidden = true
+                    //                        self?.noWordFoundInRandomCard.isHidden = false
+                    //                        self?.cardSpinner.stopAnimating()
+                    //                        self?.randomWordButton.isUserInteractionEnabled = true
                 }
             }
             
@@ -179,11 +180,12 @@ class HomeViewController: UIViewController {
                 }
             case .failure:
                 DispatchQueue.main.async {
-                    self?.wordVM = []
-                    self?.wordsTableView.reloadData()
-                    self?.noWordFoundInTableView.isHidden = false
-                    self?.tableViewSpinner.stopAnimating()
-                    self?.wordsTableView.isUserInteractionEnabled = true
+                    self?.showSearchedWordNoWordFound()
+//                    self?.wordVM = []
+//                    self?.wordsTableView.reloadData()
+//                    self?.noWordFoundInTableView.isHidden = false
+//                    self?.tableViewSpinner.stopAnimating()
+//                    self?.wordsTableView.isUserInteractionEnabled = true
                 }
             }
             
@@ -213,6 +215,23 @@ class HomeViewController: UIViewController {
         
         self.cardSpinner.stopAnimating()
         self.randomWordButton.isUserInteractionEnabled = true
+    }
+    
+    private func showRandomWordNotFound() {
+        wordLabel.isHidden = true
+        definitionLabel.isHidden = true
+        categoryImageView.isHidden = true
+        noWordFoundInRandomCard.isHidden = false
+        cardSpinner.stopAnimating()
+        randomWordButton.isUserInteractionEnabled = true
+    }
+    
+    private func showSearchedWordNoWordFound() {
+        wordVM = []
+        wordsTableView.reloadData()
+        noWordFoundInTableView.isHidden = false
+        tableViewSpinner.stopAnimating()
+        wordsTableView.isUserInteractionEnabled = true
     }
     
 

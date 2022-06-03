@@ -11,6 +11,7 @@ import Combine
 
 enum NetworkError: Error {
     case badURL
+    case noDataReturned
 }
 
 protocol NetWorkingProtocol {
@@ -34,6 +35,7 @@ class WordManager: NetWorkingProtocol {
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions"
         
         guard let url = URL(string: urlString)  else {
+            completion(.failure(NetworkError.badURL))
             return
         }
         
@@ -44,8 +46,10 @@ class WordManager: NetWorkingProtocol {
         
         session.dataTask(with: urlRequest) { data, response, error in
             guard let data = data, error == nil else {
+                completion(.failure(NetworkError.noDataReturned))
                 return
             }
+    
             do {
                 let word = try JSONDecoder().decode(Word.self, from: data)
                 let randomResult = word.results?.randomElement()
