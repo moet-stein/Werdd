@@ -226,7 +226,7 @@ class HomeView: UIView {
         NSLayoutConstraint.activate([
             wordLabel.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 15),
             wordLabel.leadingAnchor.constraint(equalTo: cardView.leadingAnchor, constant: 15),
-            wordLabel.widthAnchor.constraint(equalToConstant: 250),
+            wordLabel.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -20),
             
             categoryImageView.topAnchor.constraint(equalTo: cardView.topAnchor, constant: 5),
             categoryImageView.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -10),
