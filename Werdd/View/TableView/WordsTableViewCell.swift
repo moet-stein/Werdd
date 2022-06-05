@@ -14,18 +14,9 @@ class WordsTableViewCell: UITableViewCell {
         didSet {
             wordLabel.text = searchedWordVM.word
             if let _ = searchedWordVM.result {
-                if let partOfSpeech = searchedWordVM.partOfSpeech {
-                    categoryImage.isHidden = false
-                    categoryImage.image = UIImage(named: partOfSpeech)
-                } else {
-                    categoryImage.isHidden = true
-                }
-                
-                if let definition = searchedWordVM.definition {
-                    definitionLabel.text = definition
-                } else {
-                    definitionLabel.text = ""
-                }
+                categoryImage.image = searchedWordVM.partOfSpeech
+                categoryImage.isHidden = searchedWordVM.hidePOS
+                definitionLabel.text = searchedWordVM.definition
             }
         }
     }

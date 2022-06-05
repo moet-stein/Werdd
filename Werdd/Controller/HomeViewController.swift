@@ -138,7 +138,8 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchRandom() {
-        wordManager.fetchGenericData(urlString: "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions", type: Word.self) { [weak self] result in
+        let randomURL = "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions"
+        wordManager.fetchGenericData(urlString: randomURL, type: Word.self) { [weak self] result in
             switch result {
             case .success(let word):
                 let randomResult = word.results?.randomElement()
@@ -192,8 +193,6 @@ class HomeViewController: UIViewController {
         fetchedWord = word
         wordLabel.text = word.word
         
-        
-        
         if let category = word.result?.partOfSpeech {
             categoryImageView.isHidden = false
             categoryImageView.image = UIImage(named: category)
@@ -201,11 +200,7 @@ class HomeViewController: UIViewController {
             categoryImageView.isHidden = true
         }
         
-        if let definition =  word.result?.definition {
-            definitionLabel.text = definition
-        } else {
-            definitionLabel.text = "No definition found for this word"
-        }
+        definitionLabel.text = word.definition
         
         wordLabel.zoomIn(duration: 0.5)
         categoryImageView.zoomIn(duration: 0.5)
