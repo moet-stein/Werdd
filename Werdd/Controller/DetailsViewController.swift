@@ -56,8 +56,8 @@ class DetailsViewController: UIViewController {
         if let selectedWord = wordVM {
             wordLabel.text = selectedWord.word
             categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
-            let definition = selectedWord.result?.definition ?? ""
-            definitionLabel.text = definition
+            
+            definitionLabel.text = selectedWord.definition
             
             if let antonyms = selectedWord.result?.antonyms {
                 antonymsCard.insertWords(words: antonyms)
@@ -76,7 +76,8 @@ class DetailsViewController: UIViewController {
             } else {
                 usageCard.isHidden = true
             }
-            checkWordFavInCoreData(word: selectedWord.word, definition: definition)
+            
+            checkWordFavInCoreData(word: selectedWord.word, definition: selectedWord.definition)
         }
         
         if let wordText = wordLabel.text {
@@ -124,7 +125,7 @@ class DetailsViewController: UIViewController {
         if let selectedWord = wordVM {
             if sender.isSelected {
                 let word = selectedWord.word
-                let definition = selectedWord.result?.definition
+                let definition = selectedWord.definition
                 let partOfSpeech = selectedWord.result?.partOfSpeech
                 let synonyms = selectedWord.result?.synonyms
                 let antonyms = selectedWord.result?.antonyms
