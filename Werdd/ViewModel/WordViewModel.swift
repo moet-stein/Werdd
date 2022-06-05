@@ -12,7 +12,7 @@ struct WordViewModel {
     let uuid: UUID
     let word: String
     let result: Result?
-    let definition: String //no optional
+    let definition: String
     let partOfSpeech: UIImage?
     let hidePOS: Bool
 

@@ -193,13 +193,8 @@ class HomeViewController: UIViewController {
         fetchedWord = word
         wordLabel.text = word.word
         
-        if let category = word.result?.partOfSpeech {
-            categoryImageView.isHidden = false
-            categoryImageView.image = UIImage(named: category)
-        } else {
-            categoryImageView.isHidden = true
-        }
-        
+        categoryImageView.image = word.partOfSpeech
+        categoryImageView.isHidden = word.hidePOS
         definitionLabel.text = word.definition
         
         wordLabel.zoomIn(duration: 0.5)
