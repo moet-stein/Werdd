@@ -44,7 +44,7 @@ class HomeView: UIView {
     
     // MARK: - Components Inside the car
     
-    let wordLabel: UILabel = {
+    private let wordLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
@@ -56,13 +56,14 @@ class HomeView: UIView {
     }()
     
     
-    let categoryImageView: CategoryImage = {
+    private let categoryImageView: CategoryImage = {
         let imageView = CategoryImage(size: 36)
         imageView.addBorder()
+        imageView.isHidden = true
         return imageView
     }()
     
-    let definitionLabel: UILabel = {
+    private let definitionLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont(name: "LeagueSpartan-Light", size: 19)
@@ -96,7 +97,7 @@ class HomeView: UIView {
         return button
     }()
     
-    let noWordFoundInRandomCard: NoWordFoundView = {
+    private let noWordFoundInRandomCard: NoWordFoundView = {
         let view = NoWordFoundView(labelText: "No Random Word Generated")
         view.isHidden = true
         return view
@@ -132,13 +133,13 @@ class HomeView: UIView {
         return searchBar
     }()
     
-    let noWordFoundInTableView: NoWordFoundView = {
+    private let noWordFoundInTableView: NoWordFoundView = {
         let view = NoWordFoundView(labelText: "No Word Found")
         view.isHidden = true
         return view
     }()
 
-    let noInternetView: NotFoundWithImageView = {
+    private let noInternetView: NotFoundWithImageView = {
        let view = NotFoundWithImageView(title: "No Internet Connection", imageName: "NoInternet")
         return view
     }()
@@ -241,5 +242,37 @@ class HomeView: UIView {
             randomWordButton.trailingAnchor.constraint(equalTo: cardView.trailingAnchor, constant: -15),
             randomWordButton.bottomAnchor.constraint(equalTo: cardView.bottomAnchor, constant: -10)
         ])
+    }
+    
+    func refreshCard(word: WordViewModel) {
+        wordLabel.text = word.word
+        
+        categoryImageView.image = word.partOfSpeech
+        categoryImageView.isHidden = word.hidePOS
+        definitionLabel.text = word.definition
+        
+        wordLabel.zoomIn(duration: 0.5)
+        categoryImageView.zoomIn(duration: 0.5)
+        definitionLabel.zoomIn(duration: 0.5)
+        
+        self.cardSpinner.stopAnimating()
+        self.randomWordButton.isUserInteractionEnabled = true
+    }
+    
+    func showRandomWordNotFound() {
+        wordLabel.isHidden = true
+        definitionLabel.isHidden = true
+        categoryImageView.isHidden = true
+        noWordFoundInRandomCard.isHidden = false
+        cardSpinner.stopAnimating()
+        randomWordButton.isUserInteractionEnabled = true
+    }
+    
+    func toggleNoInternetView(internet: Bool) {
+        noInternetView.isHidden = internet
+    }
+    
+    func toggleNoWordFoundInTableView(wordExisted: Bool) {
+        noWordFoundInTableView.isHidden = wordExisted
     }
 }

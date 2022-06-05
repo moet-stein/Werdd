@@ -22,22 +22,12 @@ class HomeViewController: UIViewController {
     
     private var cardSpinner: UIActivityIndicatorView!
     private var tableViewSpinner: UIActivityIndicatorView!
-
-    private var wordLabel: UILabel!
-    private var categoryImageView: CategoryImage!
-    private var definitionLabel: UILabel!
     
     private var randomWordButton: IconButton!
     private var seeDetailsButton: IconButton!
     private var wordsTableView: UITableView!
     
     private var searchBar: UISearchBar!
-    
-    private var noWordFoundInTableView: NoWordFoundView!
-    private var noWordFoundInRandomCard: NoWordFoundView!
-    
-    private var noInternetView: UIView!
-
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,8 +36,6 @@ class HomeViewController: UIViewController {
         }
         
         navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-
     }
     
     init(wordManager: NetWorkingProtocol) {
@@ -91,11 +79,6 @@ class HomeViewController: UIViewController {
         cardSpinner.startAnimating()
         tableViewSpinner.startAnimating()
         
-        wordLabel = contentView.wordLabel
-        categoryImageView = contentView.categoryImageView
-        definitionLabel = contentView.definitionLabel
-        categoryImageView.isHidden = true
-        
         randomWordButton = contentView.randomWordButton
         seeDetailsButton = contentView.seeDetailsButton
         
@@ -105,11 +88,6 @@ class HomeViewController: UIViewController {
         
         searchBar = contentView.searchBar
         wordsTableView.tableHeaderView = searchBar
-        
-        noWordFoundInTableView = contentView.noWordFoundInTableView
-        noWordFoundInRandomCard = contentView.noWordFoundInRandomCard
-        
-        noInternetView = contentView.noInternetView
     }
 
 
@@ -118,11 +96,11 @@ class HomeViewController: UIViewController {
         monitor.pathUpdateHandler = { [weak self] path in
             if path.status == .satisfied {
                 DispatchQueue.main.async {
-                    self?.noInternetView.isHidden = true
+                    self?.contentView.toggleNoInternetView(internet: true)
                 }
             } else {
                 DispatchQueue.main.async {
-                    self?.noInternetView.isHidden = false
+                    self?.contentView.toggleNoInternetView(internet: false)
                 }
             }
         }
@@ -144,12 +122,16 @@ class HomeViewController: UIViewController {
             case .success(let word):
                 let randomResult = word.results?.randomElement()
                 let singleResult = SingleResult(uuid: UUID(), word: word.word, result: randomResult)
-                DispatchQueue.main.async {
-                    self?.refreshCard(word: WordViewModel(word: SingleResult(uuid: UUID(), word: singleResult.word, result: singleResult.result)))
+                let createdWordVM = WordViewModel(word: singleResult)
+                self?.fetchedWord = createdWordVM
+                
+                DispatchQueue.main.async { [weak self] in
+                    self?.contentView.refreshCard(word: createdWordVM)
                 }
+                
             case .failure:
-                DispatchQueue.main.async {
-                    self?.showRandomWordNotFound()
+                DispatchQueue.main.async { [weak self] in
+                    self?.contentView.showRandomWordNotFound()
                 }
             }
         }
@@ -170,11 +152,10 @@ class HomeViewController: UIViewController {
                         for result in results {
                             self?.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
                         }
-                        self?.noWordFoundInTableView.isHidden = true
+                        self?.contentView.toggleNoWordFoundInTableView(wordExisted: true)
 
                     }  else {
-                        self?.wordVM = []
-                        self?.noWordFoundInTableView.isHidden = false
+                        self?.showSearchedWordNoWordFound()
                     }
 
                     self?.wordsTableView.reloadData()
@@ -189,35 +170,10 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func refreshCard(word: WordViewModel) {
-        fetchedWord = word
-        wordLabel.text = word.word
-        
-        categoryImageView.image = word.partOfSpeech
-        categoryImageView.isHidden = word.hidePOS
-        definitionLabel.text = word.definition
-        
-        wordLabel.zoomIn(duration: 0.5)
-        categoryImageView.zoomIn(duration: 0.5)
-        definitionLabel.zoomIn(duration: 0.5)
-        
-        self.cardSpinner.stopAnimating()
-        self.randomWordButton.isUserInteractionEnabled = true
-    }
-    
-    private func showRandomWordNotFound() {
-        wordLabel.isHidden = true
-        definitionLabel.isHidden = true
-        categoryImageView.isHidden = true
-        noWordFoundInRandomCard.isHidden = false
-        cardSpinner.stopAnimating()
-        randomWordButton.isUserInteractionEnabled = true
-    }
-    
     private func showSearchedWordNoWordFound() {
         wordVM = []
         wordsTableView.reloadData()
-        noWordFoundInTableView.isHidden = false
+        contentView.toggleNoWordFoundInTableView(wordExisted: false)
         tableViewSpinner.stopAnimating()
         wordsTableView.isUserInteractionEnabled = true
     }
