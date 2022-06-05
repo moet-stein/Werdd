@@ -11,7 +11,7 @@ struct WordViewModel {
     let uuid: UUID
     let word: String
     let result: Result?
-    let definition: String?
+    let definition: String? //no optional
     let partOfSpeech: String?
 
     init(word: SingleResult) {
