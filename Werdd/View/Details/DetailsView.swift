@@ -148,10 +148,10 @@ class DetailsView: UIView {
             favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             
             wordLabel.topAnchor.constraint(equalTo: favoriteButton.bottomAnchor),
-            wordLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            wordLabel.widthAnchor.constraint(equalToConstant: 300),
-            
-            outerStackView.topAnchor.constraint(equalTo: wordLabel.bottomAnchor, constant: 10),
+            wordLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            wordLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            wordLabel.bottomAnchor.constraint(equalTo: outerStackView.topAnchor, constant: -10),
+
             outerStackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             outerStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
