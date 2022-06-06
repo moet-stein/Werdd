@@ -1,6 +1,8 @@
 # Werdd
 iOS mobile app to find a random word and search words' definitions! Using WordsAPI, you can find a wide range of new words!
 Created with Swift and ProgrammaticUI as a part of Hanko Academy's program project💮
+# Used skills
+### Swift, UIKit, Core Data, Networking, Unit Test, Table View, Customised cell
 
 # How does this app look like?
 ##### 🟡 Generate a random word 🔄 and see the details 👀
