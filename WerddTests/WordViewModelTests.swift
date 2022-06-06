@@ -37,4 +37,36 @@ class WordViewModelTests: XCTestCase {
         XCTAssertNil(wordViewModel.result)
     }
     
+    
+    func testWordViewModelDefinition() {
+        let result = Result(definition: "light-sensitive paper on which photograph can be printed", partOfSpeech: "noun", synonyms: nil, antonyms: nil, examples: nil)
+        let singleResult = SingleResult(uuid: UUID(), word: "photographic paper", result: result)
+        let wordViewModel = WordViewModel(word: singleResult)
+        
+        XCTAssertEqual(wordViewModel.definition, "light-sensitive paper on which photograph can be printed", "light-sensitive paper on which photograph can be printed")
+    }
+    
+    func testWordViewModelNoDefinition() {
+        let result = Result(definition: nil, partOfSpeech: nil, synonyms: nil, antonyms: nil, examples: nil)
+        let singleResult = SingleResult(uuid: UUID(), word: "bahaha", result: result)
+        let wordViewModel = WordViewModel(word: singleResult)
+        
+        XCTAssertEqual(wordViewModel.definition, "", "wordViewModel expected empty string but failed")
+    }
+    
+    func testWordViewModelPartOfSpeechUIImage() {
+        let result = Result(definition: "light-sensitive paper on which photograph can be printed", partOfSpeech: "noun", synonyms: nil, antonyms: nil, examples: nil)
+        let singleResult = SingleResult(uuid: UUID(), word: "photographic paper", result: result)
+        let wordViewModel = WordViewModel(word: singleResult)
+        
+        XCTAssertEqual(wordViewModel.partOfSpeech, UIImage(named: "noun"), "not expected UIImage for wordViewMode")
+    }
+    
+    func testWordViewModelPartOfSpeechUIImageNoImageFound() {
+        let result = Result(definition: "light-sensitive paper on which photograph can be printed", partOfSpeech: "notRecognized", synonyms: nil, antonyms: nil, examples: nil)
+        let singleResult = SingleResult(uuid: UUID(), word: "photographic paper", result: result)
+        let wordViewModel = WordViewModel(word: singleResult)
+        
+        XCTAssertNil(wordViewModel.partOfSpeech)
+    }
 }
