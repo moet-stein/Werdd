@@ -13,13 +13,6 @@ class DetailsViewController: UIViewController {
     
     private var favoriteButton: IconButton!
     
-    private var wordLabel: UILabel!
-    private var definitionLabel: UILabel!
-    private var categoryLabel: UILabel!
-    private var synonymsCard: DetailsCardView!
-    private var antonymsCard: DetailsCardView!
-    private var usageCard: DetailsCardView!
-    
     private var favWordID = UUID()
     
     override func loadView() {
@@ -27,12 +20,6 @@ class DetailsViewController: UIViewController {
         view = contentView
         
         favoriteButton = contentView.favoriteButton
-        wordLabel = contentView.wordLabel
-        categoryLabel = contentView.categoryLabel
-        definitionLabel = contentView.definitionLabel
-        synonymsCard = contentView.synonymsCard
-        antonymsCard = contentView.antonymsCard
-        usageCard = contentView.usageCard
         
         addButtonTarget()
         setUpContent()
@@ -54,29 +41,7 @@ class DetailsViewController: UIViewController {
     
     private func setUpContent() {
         if let selectedWord = wordVM {
-            wordLabel.text = selectedWord.word
-            categoryLabel.text = selectedWord.result?.partOfSpeech ?? ""
-            
-            definitionLabel.text = selectedWord.definition
-            
-            if let antonyms = selectedWord.result?.antonyms {
-                antonymsCard.insertWords(words: antonyms)
-            } else {
-                antonymsCard.isHidden = true
-            }
-            
-            if let synonyms = selectedWord.result?.synonyms {
-                synonymsCard.insertWords(words: synonyms)
-            } else {
-                synonymsCard.isHidden = true
-            }
-            
-            if let examples = selectedWord.result?.examples {
-                usageCard.insertUsages(usages: examples)
-            } else {
-                usageCard.isHidden = true
-            }
-            
+            contentView.setUpDetailsViewContent(word: selectedWord)
             checkWordFavInCoreData(word: selectedWord.word, definition: selectedWord.definition)
         }
     }

@@ -174,4 +174,20 @@ class DetailsView: UIView {
             
         ])
     }
+    
+    func setUpDetailsViewContent(word: WordViewModel) {
+        wordLabel.text = word.word
+        categoryLabel.text = word.result?.partOfSpeech ?? ""
+        
+        definitionLabel.text = word.definition
+        
+        antonymsCard.insertWords(words: word.antonyms)
+        antonymsCard.isHidden = word.hideAntonyms
+
+        synonymsCard.insertWords(words: word.synonyms)
+        synonymsCard.isHidden = word.hideSynonyms
+        
+        usageCard.insertUsages(usages: word.examples)
+        usageCard.isHidden = word.hideExamples
+    }
 }
