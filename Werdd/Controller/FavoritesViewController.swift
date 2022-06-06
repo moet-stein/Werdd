@@ -22,27 +22,6 @@ class FavoritesViewController: UIViewController {
             self.favsTableView.deselectRow(at: index, animated: true)
         }
         
-        self.navigationItem.title = "FAVORITES"
-        let attrs = [
-            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen")!,
-            NSAttributedString.Key.font: UIFont(name: "LeagueSpartan-Bold", size: 28)!
-        ]
-
-        self.navigationController?.navigationBar.titleTextAttributes = attrs
-        self.navigationController?.navigationBar.backItem?.title = "Home"
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        contentView = FavoritesView()
-        view = contentView
-        
-        favsTableView = contentView.favsTableView
-        favsTableView.delegate = self
-        favsTableView.dataSource = self
-        
-        noFavFoundView = contentView.noFavFoundView
-        
         DataManager.fetchFavWords { [weak self] favs in
             if let favs = favs {
                 
@@ -59,7 +38,30 @@ class FavoritesViewController: UIViewController {
                 }
             }
         }
+        
+        self.navigationItem.title = "FAVORITES"
+        let attrs = [
+            NSAttributedString.Key.foregroundColor: UIColor(named: "DarkGreen")!,
+            NSAttributedString.Key.font: UIFont(name: "LeagueSpartan-Bold", size: 28)!
+        ]
+
+        self.navigationController?.navigationBar.titleTextAttributes = attrs
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView = FavoritesView()
+        view = contentView
+        
+        favsTableView = contentView.favsTableView
+        favsTableView.delegate = self
+        favsTableView.dataSource = self
+        
+        noFavFoundView = contentView.noFavFoundView
+        
+
+    }
+
     
     init() {
         super.init(nibName: nil, bundle: nil)

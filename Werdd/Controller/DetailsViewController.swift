@@ -95,20 +95,22 @@ class DetailsViewController: UIViewController {
     private func checkWordFavInCoreData(word: String, definition: String?) {
         if let definition = definition {
             DataManager.fetchFavWord(usingDefinition: definition) { word in
-                if word != nil {
+                if let foundWord = word {
                     DispatchQueue.main.async { [weak self] in
                         self?.favoriteButton.isSelected = true
                         self?.favoriteButton.toggleFavorite()
                     }
+                    favWordID = foundWord.uuid
                 }
             }
         } else {
             DataManager.fetchFavWord(usingWord: word) { word in
-                if word != nil {
+                if let foundWord = word {
                     DispatchQueue.main.async { [weak self] in
                         self?.favoriteButton.isSelected = true
                         self?.favoriteButton.toggleFavorite()
                     }
+                    favWordID = foundWord.uuid
                 }
             }
         }
@@ -133,6 +135,7 @@ class DetailsViewController: UIViewController {
                 
                 DataManager.createFavWord(word: word, definition: definition, partOfSpeech: partOfSpeech, synonyms: synonyms, antonyms: antonyms, examples: examples, id: favWordID)
             } else {
+                print(favWordID)
                 DataManager.deleteFavWord(usingID: favWordID)
             }
         }
