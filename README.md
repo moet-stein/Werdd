@@ -16,8 +16,10 @@ Created with Swift and ProgrammaticUI as a part of Hanko Academy's program proje
 ##### 🟡 Go to the details for more information like synonyms, anotonyms, and usage
 - Here I learned how to customize TableView Cell, implement a search bar
 - In the details page, by clicking the heart icon, save and unsave favorite words in CoreData
+###
 ![Searching Word](https://media.giphy.com/media/5OaEqNjuNsAyebZ86q/giphy.gif)
 -------
 
 ##### 🟡  See your saved favorites words in the tableView and delete them with swipe
+###
 ![Favorites](https://media.giphy.com/media/uo6upiBtOyX4aCTfJi/giphy.gif)
