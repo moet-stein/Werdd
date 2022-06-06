@@ -7,6 +7,7 @@ Created with Swift and ProgrammaticUI as a part of Hanko Academy's program proje
 ##### 🟡 Fetching a word from WordsAPI
 - Using URLRequest with URLComponents to create HTTP request
 - Learned how to use Generics to create a method to fetch different endpoints, returning different types
+###
 ![Random Word](https://media.giphy.com/media/YWbT4JFeMVfUlFJyP9/giphy.gif)
 
 -------
