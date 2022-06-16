@@ -31,6 +31,7 @@
 		6051AB3328158CE3002E9CF6 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051AB3228158CE3002E9CF6 /* FavoritesView.swift */; };
 		6051AB8128214CE3002E9CF6 /* NotFoundWithImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6051AB8028214CE3002E9CF6 /* NotFoundWithImageView.swift */; };
 		60537CD327F1B66100917B50 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60537CD227F1B66100917B50 /* HomeView.swift */; };
+		6058B3C1285B31CE003E1450 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6058B3C0285B31CE003E1450 /* Extensions.swift */; };
 		605C805D27E1EC54002EB0BA /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 605C805C27E1EC54002EB0BA /* Word.swift */; };
 		6068CAD727E4C96600DC30E3 /* IconButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6068CAD627E4C96600DC30E3 /* IconButton.swift */; };
 		609369B02847679200C5B4E9 /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369AF2847679200C5B4E9 /* WordViewModel.swift */; };
@@ -78,6 +79,7 @@
 		6051AB3228158CE3002E9CF6 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 		6051AB8028214CE3002E9CF6 /* NotFoundWithImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotFoundWithImageView.swift; sourceTree = "<group>"; };
 		60537CD227F1B66100917B50 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		6058B3C0285B31CE003E1450 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		605C805C27E1EC54002EB0BA /* Word.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		6068CAD627E4C96600DC30E3 /* IconButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconButton.swift; sourceTree = "<group>"; };
 		609369AF2847679200C5B4E9 /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				60142F4E27D7503900F1B845 /* Assets.xcassets */,
 				60142F5327D7503900F1B845 /* Info.plist */,
 				60142FA127DD0EDD00F1B845 /* LeagueSpartan */,
+				6058B3C0285B31CE003E1450 /* Extensions.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -373,6 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6058B3C1285B31CE003E1450 /* Extensions.swift in Sources */,
 				6051AB3328158CE3002E9CF6 /* FavoritesView.swift in Sources */,
 				609369B02847679200C5B4E9 /* WordViewModel.swift in Sources */,
 				6051042D27F4572500AB9DEC /* WordsTableViewCell.swift in Sources */,

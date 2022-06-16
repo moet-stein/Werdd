@@ -61,6 +61,7 @@ class HomeViewController: UIViewController {
         addButtonsTarget()
         checkInternetConnection()
         addKeyBoardNotificationCenter()
+        self.dismissKeyboard()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -200,7 +201,6 @@ class HomeViewController: UIViewController {
     
     @objc func keyboardWillShow(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            
             if self.view.bounds.origin.y == 0 {
                 self.view.bounds.origin.y += keyboardSize.height - 20
             }
