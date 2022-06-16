@@ -202,8 +202,7 @@ class HomeViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             
             if self.view.bounds.origin.y == 0 {
-                print(keyboardSize.height)
-                self.view.bounds.origin.y += keyboardSize.height
+                self.view.bounds.origin.y += keyboardSize.height - 20
             }
         }
     }
@@ -211,7 +210,7 @@ class HomeViewController: UIViewController {
     @objc func keyboardWillHide(notification: Notification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if self.view.bounds.origin.y != 0 {
-                self.view.bounds.origin.y -= keyboardSize.height
+                self.view.bounds.origin.y -= keyboardSize.height - 20
             }
         }
     }
