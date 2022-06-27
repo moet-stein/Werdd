@@ -28,6 +28,7 @@ class HomeViewController: UIViewController {
     private var wordsTableView: UITableView!
     
     private var searchBar: UISearchBar!
+    private var loadingTableView: Bool = true
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,7 +79,6 @@ class HomeViewController: UIViewController {
         cardSpinner = contentView.cardSpinner
         tableViewSpinner = contentView.tableViewSpinner
         cardSpinner.startAnimating()
-        tableViewSpinner.startAnimating()
         
         randomWordButton = contentView.randomWordButton
         seeDetailsButton = contentView.seeDetailsButton
@@ -154,18 +154,19 @@ class HomeViewController: UIViewController {
                             self?.wordVM.append(WordViewModel(word: SingleResult(uuid: UUID(), word: word.word, result: result)))
                         }
                         self?.contentView.toggleNoWordFoundInTableView(wordExisted: true)
-
                     }  else {
                         self?.showSearchedWordNoWordFound()
                     }
 
                     self?.wordsTableView.reloadData()
                     self?.tableViewSpinner.stopAnimating()
+                    self?.loadingTableView = false
                     self?.wordsTableView.isUserInteractionEnabled = true
                 }
             case .failure:
                 DispatchQueue.main.async {
                     self?.showSearchedWordNoWordFound()
+                    self?.loadingTableView = false
                 }
             }
         }
@@ -220,6 +221,10 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if loadingTableView {
+            tableViewSpinner.startAnimating()
+            tableView.backgroundView = tableViewSpinner
+        }
         return wordVM.count
     }
     

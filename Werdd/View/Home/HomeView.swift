@@ -117,7 +117,6 @@ class HomeView: UIView {
     
     let tableViewSpinner: UIActivityIndicatorView = {
         let spinner = UIActivityIndicatorView(style: .large)
-        spinner.translatesAutoresizingMaskIntoConstraints = false
         return spinner
     }()
     
@@ -168,7 +167,6 @@ class HomeView: UIView {
         
         cardView.addSubview(cardSpinner)
         cardView.addSubview(noWordFoundInRandomCard)
-        wordsTableView.addSubview(tableViewSpinner)
         wordsTableView.addSubview(noWordFoundInTableView)
         
         addSubview(noInternetView)
@@ -199,10 +197,7 @@ class HomeView: UIView {
             wordsTableView.leadingAnchor.constraint(equalTo: leadingAnchor),
             wordsTableView.trailingAnchor.constraint(equalTo: trailingAnchor),
             wordsTableView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            
-            tableViewSpinner.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
-            tableViewSpinner.centerYAnchor.constraint(equalTo: wordsTableView.centerYAnchor),
-            
+
             noWordFoundInTableView.centerXAnchor.constraint(equalTo: wordsTableView.centerXAnchor),
             noWordFoundInTableView.topAnchor.constraint(equalTo: wordsTableView.topAnchor, constant: 100),
             noWordFoundInTableView.widthAnchor.constraint(equalToConstant: 250),
