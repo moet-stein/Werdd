@@ -39,6 +39,7 @@
 		609369C62847C4CD00C5B4E9 /* WordResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 609369C52847C4CD00C5B4E9 /* WordResponse.json */; };
 		609369C82847C58A00C5B4E9 /* MockWordManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369C72847C58A00C5B4E9 /* MockWordManager.swift */; };
 		609369CC2847C71D00C5B4E9 /* WordMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609369CB2847C71D00C5B4E9 /* WordMangerTests.swift */; };
+		609C3CB7286B8C8F0021AEA3 /* WordResponse.json in Resources */ = {isa = PBXBuildFile; fileRef = 609369C52847C4CD00C5B4E9 /* WordResponse.json */; };
 		60FD4FA02833FBCE004B9403 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60FD4F9F2833FBCE004B9403 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
@@ -360,6 +361,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609C3CB7286B8C8F0021AEA3 /* WordResponse.json in Resources */,
 				60142FA627DD0F4E00F1B845 /* LeagueSpartan-Bold.ttf in Resources */,
 				60142FA727DD0F5100F1B845 /* LeagueSpartan-ExtraLight.ttf in Resources */,
 				60142FA527DD0F4800F1B845 /* LeagueSpartan-Regular.ttf in Resources */,

@@ -18,7 +18,6 @@ class DetailsCardView: UIView {
         label.font = UIFont(name: "LeagueSpartan-Bold", size: 17)
         return label
     }()
-
     
     init(bgColorName: String, bottomLabelText: String, frame: CGRect = .zero) {
         self.bgColorName = bgColorName
