@@ -22,19 +22,7 @@ class WordMangerTests: XCTestCase {
         homeVC = nil
     }
     
-    func testFetchedRandomWordSuccess() {
-        homeVC.wordManager.fetchGenericData(urlString: "", type: Word.self) { result in
-            switch result {
-            case .success(let word):
-                XCTAssertEqual(word.word, "swift")
-                
-            case .failure:
-                print("fail")
-            }
-        }
-    }
-    
-    func testFetchedInputWordSuccess() {
+    func testFetchedWordShouldNotBeEmpty() {
         let expectation = self.expectation(description:  "testFetchedInputWordSuccess")
         var fetchedWord: [Word] = [Word]()
         
