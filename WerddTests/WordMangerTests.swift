@@ -52,4 +52,23 @@ class WordMangerTests: XCTestCase {
         
         XCTAssert(fetchedWord.count > 0, "word is empty")
     }
+    
+    func testWordCountShouldBeOne() {
+        let expectation = self.expectation(description:  "testFetchedInputWordSuccess")
+        var fetchedWord: [Word] = [Word]()
+        
+        homeVC.wordManager.fetchGenericData(urlString: "", type: [Word].self) { result in
+            switch result {
+            case .success(let word):
+                fetchedWord = word
+                expectation.fulfill()
+            case .failure(let error):
+                XCTFail("Expected rooms list, but failed \(error).")
+            }
+        }
+        
+        waitForExpectations(timeout: 5.0)
+        
+        XCTAssert(fetchedWord.count == 1, "word count is NOT one")
+    }
 }
