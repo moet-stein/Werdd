@@ -154,6 +154,30 @@
 			path = LeagueSpartan;
 			sourceTree = "<group>";
 		};
+		601A4CFE28819F680003B258 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				609369C72847C58A00C5B4E9 /* MockWordManager.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		601A4CFF28819F7E0003B258 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				609369BB28478CE800C5B4E9 /* WordViewModelTests.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		601A4D0028819F910003B258 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				609369CB2847C71D00C5B4E9 /* WordMangerTests.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		6051AB1E281304CB002E9CF6 /* FavWord */ = {
 			isa = PBXGroup;
 			children = (
@@ -215,9 +239,9 @@
 		609369BA28478CE800C5B4E9 /* WerddTests */ = {
 			isa = PBXGroup;
 			children = (
-				609369BB28478CE800C5B4E9 /* WordViewModelTests.swift */,
-				609369CB2847C71D00C5B4E9 /* WordMangerTests.swift */,
-				609369C72847C58A00C5B4E9 /* MockWordManager.swift */,
+				601A4CFE28819F680003B258 /* Mocks */,
+				601A4D0028819F910003B258 /* Network */,
+				601A4CFF28819F7E0003B258 /* Models */,
 				609369C52847C4CD00C5B4E9 /* WordResponse.json */,
 			);
 			path = WerddTests;
