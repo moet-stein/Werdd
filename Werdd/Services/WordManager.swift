@@ -21,6 +21,7 @@ protocol NetWorkingProtocol {
 
 class WordManager: NetWorkingProtocol {
     let apiKey = WORDSAPI_KEY
+    var successCount = 0
     
     typealias completeClosure = ( _ data: Data?, _ error: Error?)->Void
     
@@ -49,6 +50,7 @@ class WordManager: NetWorkingProtocol {
             }
 
             do {
+                self.successCount += 1
                 let obj = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(obj))
 
