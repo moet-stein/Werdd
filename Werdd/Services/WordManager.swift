@@ -57,6 +57,7 @@ class WordManager: NetWorkingProtocol {
                 completion(obj, nil)
 
             } catch {
+                self.failureCount += 1
                 completion(nil, NetworkError.noDataReturned)
                 print("Failed to convert \(error.localizedDescription)")
             }
