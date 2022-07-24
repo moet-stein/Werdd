@@ -118,9 +118,16 @@ class HomeViewController: UIViewController {
     
     private func fetchRandom() {
         let randomURL = "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions"
-        wordManager.fetchGenericData(urlString: randomURL, type: Word.self) { [weak self] result in
-            switch result {
-            case .success(let word):
+        wordManager.fetchGenericData(urlString: randomURL, type: Word.self) { [weak self] (result, error) in
+            
+            if let _ = error {
+                DispatchQueue.main.async { [weak self] in
+                    self?.contentView.showRandomWordNotFound()
+                }
+                return
+            }
+            
+            if let word = result {
                 let randomResult = word.results?.randomElement()
                 let singleResult = SingleResult(uuid: UUID(), word: word.word, result: randomResult)
                 let createdWordVM = WordViewModel(word: singleResult)
@@ -129,11 +136,7 @@ class HomeViewController: UIViewController {
                 DispatchQueue.main.async { [weak self] in
                     self?.contentView.refreshCard(word: createdWordVM)
                 }
-                
-            case .failure:
-                DispatchQueue.main.async { [weak self] in
-                    self?.contentView.showRandomWordNotFound()
-                }
+                return
             }
         }
     }
@@ -145,9 +148,16 @@ class HomeViewController: UIViewController {
         let convertedUrlQuery = trimmed.replacingOccurrences(of: " ", with: "%20", options: .literal, range: nil)
         let urlString = "https://wordsapiv1.p.rapidapi.com/words/\(convertedUrlQuery)"
         
-        wordManager.fetchGenericData(urlString: urlString, type: Word.self) { [weak self] result in
-            switch result {
-            case .success(let word):
+        wordManager.fetchGenericData(urlString: urlString, type: Word.self) { [weak self] (result, error) in
+            if let _ = error {
+                DispatchQueue.main.async {
+                    self?.showSearchedWordNoWordFound()
+                    self?.loadingTableView = false
+                }
+                return
+            }
+            
+            if let word = result {
                 DispatchQueue.main.async {
                     if let results = word.results {
                         for result in results {
@@ -163,11 +173,7 @@ class HomeViewController: UIViewController {
                     self?.loadingTableView = false
                     self?.wordsTableView.isUserInteractionEnabled = true
                 }
-            case .failure:
-                DispatchQueue.main.async {
-                    self?.showSearchedWordNoWordFound()
-                    self?.loadingTableView = false
-                }
+                return
             }
         }
     }

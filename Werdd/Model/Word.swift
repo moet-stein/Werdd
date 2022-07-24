@@ -13,7 +13,7 @@ struct SingleResult: Codable {
     var result: Result?
 }
 
-struct Word: Codable {
+struct Word: Codable, Equatable {
     var word: String
     var results: [Result]?
 }
