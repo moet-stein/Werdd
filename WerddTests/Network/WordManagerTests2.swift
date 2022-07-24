@@ -48,7 +48,7 @@ class WordManagerTests2: XCTestCase {
             //Assert
             XCTAssertEqual(error, NetworkError.badURL, "The fetchGenericData() method did not return an expected error for an badURL error")
             XCTAssertEqual(self.sut.failureCount, 1, "failureCount should equal to 1 but it did not match")
-//            XCTAssertNil(fetchresponse, "When an invalidRequestURLString takes place, the response model must be nil")
+            XCTAssertNil(fetchresponse, "When an invalidRequestURLString takes place, the response model must be nil")
             expectation.fulfill()
         }
 
