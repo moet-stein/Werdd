@@ -25,17 +25,34 @@ class WordManagerTests2: XCTestCase {
         MockURLProtocol.error = nil
     }
     
-    func testSignupWebService_WhenGivenSuccessfullResponse_ReturnsSuccess() {
+    func testWordManager_WhenGivenValidURL_ReturnsSuccess() {
         //Arrange
         let expectation = self.expectation(description: "Signup Web Service Response Expectation")
         
         //Act
-        sut.fetchGenericData(urlString: "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions", type: Word.self) { (fetchresponse) in
+        sut.fetchGenericData(urlString: "https://wordsapiv1.p.rapidapi.com/words/?random=true&hasDetails=definitions", type: Word.self) { (fetchresponse, error) in
             XCTAssertEqual(self.sut.successCount, 1, "SucessCount should equal to 1 but it did not match")
             expectation.fulfill()
         }
         
         self.wait(for: [expectation], timeout: 5)
+    }
+    
+    func testWordManager_WhenEmptyURLStringProvided_RetrunsError() {
+        //Arrange
+        let expectation = self.expectation(description: "An empty request URL string expectaion")
+        
+        //Act
+        sut.fetchGenericData(urlString: "", type: Word.self) { (fetchresponse, error) in
+            
+            //Assert
+            XCTAssertEqual(error, NetworkError.badURL, "The fetchGenericData() method did not return an expected error for an badURL error")
+            XCTAssertEqual(self.sut.failureCount, 1, "failureCount should equal to 1 but it did not match")
+//            XCTAssertNil(fetchresponse, "When an invalidRequestURLString takes place, the response model must be nil")
+            expectation.fulfill()
+        }
+
+        self.wait(for: [expectation], timeout: 2)
     }
 
 }

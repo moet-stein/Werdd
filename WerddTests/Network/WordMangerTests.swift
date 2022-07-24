@@ -26,14 +26,17 @@ class WordMangerTests: XCTestCase {
         let expectation = self.expectation(description:  "testFetchedInputWordSuccess")
         var fetchedWord: [Word] = [Word]()
         
-        homeVC.wordManager.fetchGenericData(urlString: "", type: [Word].self) { result in
-            switch result {
-            case .success(let word):
+        homeVC.wordManager.fetchGenericData(urlString: "", type: [Word].self) { (result, error) in
+            if let _ = error {
+                XCTFail("Expected rooms list, but failed \(String(describing: error)).")
+                return
+            }
+            
+            if let word = result {
                 fetchedWord = word
                 expectation.fulfill()
-            case .failure(let error):
-                XCTFail("Expected rooms list, but failed \(error).")
             }
+            
         }
         
         waitForExpectations(timeout: 5.0)
@@ -45,13 +48,16 @@ class WordMangerTests: XCTestCase {
         let expectation = self.expectation(description:  "testFetchedInputWordSuccess")
         var fetchedWord: [Word] = [Word]()
         
-        homeVC.wordManager.fetchGenericData(urlString: "", type: [Word].self) { result in
-            switch result {
-            case .success(let word):
+        homeVC.wordManager.fetchGenericData(urlString: "", type: [Word].self) { (result, error) in
+            
+            if let _ = error {
+                XCTFail("Expected word, but failed \(String(describing: error)).")
+                return
+            }
+            
+            if let word = result {
                 fetchedWord = word
                 expectation.fulfill()
-            case .failure(let error):
-                XCTFail("Expected rooms list, but failed \(error).")
             }
         }
         
